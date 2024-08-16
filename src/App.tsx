@@ -1,11 +1,10 @@
-
+import Header from "./Components/Header"
 
 const App = () => {
   return (
-    <div className="text-green-300 text-5xl">
-      Hello world
- 
-    </div>
+   <>
+   <Header/>
+   </>
   )
 }
 
