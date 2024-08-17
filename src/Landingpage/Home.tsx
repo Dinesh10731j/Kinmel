@@ -1,8 +1,8 @@
-
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import { Category } from "../Utils/category";
+import { UseGetProductsImages } from "../hooks/Usegetproductsimage";
 
 const Home = () => {
   const settings = {
@@ -13,7 +13,33 @@ const Home = () => {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 2000,
+    responsive: [
+      {
+        breakpoint: 1024, // Screens larger than 1024px
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        }
+      },
+      {
+        breakpoint: 768, // Screens between 768px and 1024px
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        }
+      },
+      {
+        breakpoint: 480, // Screens up to 480px
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        }
+      }
+    ]
   };
+
+  const { data: products } = UseGetProductsImages();
+
 
   return (
     <>
@@ -27,28 +53,16 @@ const Home = () => {
 
         {/* Slider Section */}
         <section className="md:w-2/3">
-          <Slider {...settings} className="cursor-pointer">
-            <div className="flex justify-center">
-              <img 
-                src="https://picsum.photos/id/237/800/400" 
-                alt="iPhone 14 Image 1" 
-                className="max-w-full h-auto object-cover" 
-              />
-            </div>
-            <div className="flex justify-center">
-              <img 
-                src="https://picsum.photos/seed/picsum/800/400" 
-                alt="iPhone 14 Image 2" 
-                className="max-w-full h-auto object-cover" 
-              />
-            </div>
-            <div className="flex justify-center">
-              <img 
-                src="https://picsum.photos/800/400.jpg" 
-                alt="iPhone 14 Image 3" 
-                className="max-w-full h-auto object-cover" 
-              />
-            </div>
+          <Slider {...settings} className="cursor-pointer items-center justify-center">
+            {products?.map((items: any, index: number) => (
+              <div key={index} className="flex items-center justify-center">
+                <img 
+                  src={items?.image} 
+                  alt={`Product ${index}`}
+                  className="max-w-full max-h-[500px] h-auto object-contain"
+                />
+              </div>
+            ))}
           </Slider>
         </section>
       </section>

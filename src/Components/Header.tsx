@@ -70,7 +70,7 @@ const Header = () => {
           <XIcon onClick={toggleSidebar} className="text-2xl cursor-pointer" />
         </div>
         <nav>
-          <ul className="flex flex-col p-4 gap-4">
+          <ul className="flex flex-col p-4 gap-4 ">
             <NavLink to={"/"} onClick={toggleSidebar} className={({ isActive }) => (isActive ? "font-bold" : "")}>
               Home
             </NavLink>
@@ -90,7 +90,7 @@ const Header = () => {
       {/* Overlay */}
       {isSidebarOpen && (
         <div
-          className="fixed inset-0 bg-black opacity-50 z-10 md:hidden"
+          className="fixed inset-0 bg-black opacity-50  md:hidden"
           onClick={() => setIsSidebarOpen(false)}
         ></div>
       )}
