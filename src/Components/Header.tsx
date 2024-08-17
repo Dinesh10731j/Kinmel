@@ -1,7 +1,7 @@
 import { useState } from "react";
 import KinMel_Logo from "../assets/Codynn_Logo.png";
 import { NavLink } from "react-router-dom";
-import { SearchIcon, HeartIcon, ShoppingCart, MenuIcon, XIcon } from "lucide-react";
+import { SearchIcon, HeartIcon, ShoppingCart, MenuIcon, XIcon,UserIcon } from "lucide-react";
 
 const Header = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -58,6 +58,7 @@ const Header = () => {
         <section className="flex flex-row gap-5">
           <HeartIcon />
           <ShoppingCart />
+          <UserIcon/>
         </section>
       </header>
 
