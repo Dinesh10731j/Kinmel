@@ -63,7 +63,7 @@ const Header = () => {
 
       {/* Sidebar */}
       <div
-        className={`fixed top-0 left-0 h-full z-10 w-64 bg-gray-800 text-white transform transition-transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:hidden`}
+        className={`fixed top-0 left-0 h-full z-10 w-64 bg-black text-white transform transition-transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:hidden`}
       >
         <div className="flex justify-between items-center p-4">
           <h2 className="text-xl">KinMel</h2>
