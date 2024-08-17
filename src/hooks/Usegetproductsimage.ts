@@ -4,7 +4,7 @@ const fetchproductImage = async ()=>{
     try{
 
         const response = await axios.get('https://fakestoreapi.com/products');
-
+console.log('This is the response from the products',response?.data);
         return response.data;
 
     }catch{
