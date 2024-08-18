@@ -54,7 +54,7 @@ const Home = () => {
 
   useEffect(() => {
     const targetDate = new Date();
-    targetDate.setDate(targetDate.getDate() + 3);
+    targetDate.setDate(targetDate.getDate() + 7);
 
     const updateTime = () => {
       const now = new Date().getTime();
@@ -106,7 +106,7 @@ const Home = () => {
   };
 
   const convertPriceToNRS = (price: any) => {
-    const conversionRate = 130; // Assuming 1 USD = 130 NRS, adjust as needed
+    const conversionRate = 130; 
     return (price * conversionRate).toFixed(2);
   };
 
@@ -115,14 +115,14 @@ const Home = () => {
       {/* Category and Slider Section */}
       <section className="flex flex-col md:flex-row gap-6  justify-between py-10 px-7">
         <section className="md:w-1/3 shadow-md">
-          {Category.map((categories) => (
-            <h1 key={categories.category} className="text-xl py-3 px-3">{categories.category}</h1>
+          {Category?.map((categories) => (
+            <h1 key={categories?.category} className="text-xl py-3 px-3">{categories?.category}</h1>
           ))}
         </section>
 
         <section className="md:w-2/3 ">
-          <Slider {...settings} className="cursor-pointer items-center justify-center">
-            {products?.map((items: any, index: number) => (
+          <Slider {...settings} className="cursor-pointer">
+            {products?.slice(0,7)?.map((items: any, index: number) => (
               <div key={index} className="flex items-center justify-center">
                 <img 
                   src={items?.image} 
@@ -170,7 +170,7 @@ const Home = () => {
       </section>
 
       {/* Product Scrolling Section */}
-      <section className="px-5 py-2 mt-7">
+      <section className="px-5 py-2 mt-10">
         <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow}>
           {products?.slice(0, 5).map((product: any, index: number) => (
             <div 
@@ -220,13 +220,61 @@ const Home = () => {
       <section className="px-4 py-5">
         <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow}>
           {BrowserByCategory.map((categories, index) => (
-            <div key={index} className="h-[270px] w-[270px] bg-white rounded-lg shadow-md flex flex-col items-center justify-center mx-2">
-              <categories.icon className="text-3xl text-[#DB4444] h-32 w-32" />
-              <h2 className="text-xl  font-medium mt-4">{categories?.name}</h2>
-            </div>
+            <section key={index} className="hover:text-[#FFFF] cursor-pointer hover:bg-[#DB4444] transition-all delay-100 h-[270px] w-[270px] bg-white rounded-lg shadow-md flex flex-col items-center justify-center mx-2">
+              <categories.icon className="text-3xl hover:text-[#FFFF] h-32 w-32 text-[#DB4444]"  />
+              <h2 className="text-xl font-medium mt-4 ">{categories?.name}</h2>
+            </section>
           ))}
         </ScrollMenu>
       </section>
+
+
+      <section className="py-2 px-3 before:border-l-8">
+       <h1 className="text-2xl text-[#DB4444]">This Month</h1>
+
+      </section>
+
+      <section className="flex justify-between">
+        <section className="px-3 py-2">
+<h1 className="text-2xl md:text-4xl font-medium">Best Selling Products</h1>
+        </section>
+        <section className="px-3 py-2">
+          <button className="py-2 px-7 md:py-4 md:px-12 bg-[#DB4444] text-[#FFFF] rounded-md">View All</button>
+        </section>
+      </section>
+
+
+      <section className="flex flex-wrap gap-7 justify-center px-3 py-2">
+  {products?.slice(5,9)?.map((bestSelling: any, index: number) => (
+    <section 
+      key={index} 
+      className="relative w-[350px] h-[480px]  bg-[#FFFFFF] shadow-md px-7 py-2 rounded-lg flex flex-col items-center overflow-hidden"
+    >
+      <img 
+        src={bestSelling?.image} 
+        alt={`Best Selling ${index}`} 
+        className="object-contain w-full h-3/4"
+      />
+      <section 
+        className="flex flex-col gap-6 absolute top-2 right-0 px-3 py-1"
+      >
+        <button className="text-gray-600 ">
+          <Heart />
+        </button>
+        <button className="text-gray-600">
+          <Eye />
+        </button>
+      </section>
+      <section className="px-3 py-2 flex flex-col gap-1">
+        <h1 className="font-medium">{bestSelling?.title}</h1>
+        <h1>रू {convertPriceToNRS(bestSelling?.price)}</h1>
+        <div className="flex  gap-1">{renderStars(bestSelling?.rating?.rate)}</div>
+      </section>
+ 
+    </section>
+  ))}
+</section>
+
     </>
   );
 };
