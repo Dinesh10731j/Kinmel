@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
-import { Category } from "../Utils/category";
+import { Category, BrowserByCategory } from "../Utils/category";
 import { UseGetProductsImages } from "../hooks/Usegetproductsimage";
 import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
 import "react-horizontal-scrolling-menu/dist/styles.css";
@@ -80,8 +80,8 @@ const Home = () => {
   const LeftArrow = () => {
     const { scrollPrev } = useContext(VisibilityContext);
     return (
-      <button onClick={() => scrollPrev()}>
-        <ChevronLeft />
+      <button onClick={() => scrollPrev()} className="flex items-center justify-center">
+        <ChevronLeft className="text-gray-600 h-8 w-8" />
       </button>
     );
   };
@@ -89,13 +89,13 @@ const Home = () => {
   const RightArrow = () => {
     const { scrollNext } = useContext(VisibilityContext);
     return (
-      <button onClick={() => scrollNext()}>
-        <ChevronRight />
+      <button onClick={() => scrollNext()} className="flex items-center justify-center">
+        <ChevronRight className="text-gray-600 h-8 w-8" />
       </button>
     );
   };
 
-  const renderStars = (rating:any) => {
+  const renderStars = (rating: any) => {
     const stars = [];
     for (let i = 0; i < 5; i++) {
       stars.push(
@@ -105,14 +105,14 @@ const Home = () => {
     return stars;
   };
 
-  const convertPriceToNRS = (price:any) => {
-    // Assuming 1 USD = 130 NRS, adjust as needed
-    const conversionRate = 130;
+  const convertPriceToNRS = (price: any) => {
+    const conversionRate = 130; // Assuming 1 USD = 130 NRS, adjust as needed
     return (price * conversionRate).toFixed(2);
   };
 
   return (
     <>
+      {/* Category and Slider Section */}
       <section className="flex flex-col md:flex-row gap-6  justify-between py-10 px-7">
         <section className="md:w-1/3 shadow-md">
           {Category.map((categories) => (
@@ -121,7 +121,7 @@ const Home = () => {
         </section>
 
         <section className="md:w-2/3 ">
-          <Slider {...settings} className="cursor-pointer items-center justify-center ">
+          <Slider {...settings} className="cursor-pointer items-center justify-center">
             {products?.map((items: any, index: number) => (
               <div key={index} className="flex items-center justify-center">
                 <img 
@@ -135,6 +135,7 @@ const Home = () => {
         </section>
       </section>
 
+      {/* Flash Sales Section */}
       <section className='before:border-l-8 px-5 before:bg-[#DB4444]'>
         <h1 className="text-[#DB4444] text-2xl font-medium">Today's</h1>
       </section>
@@ -168,9 +169,10 @@ const Home = () => {
         </section>
       </section>
 
+      {/* Product Scrolling Section */}
       <section className="px-5 py-2 mt-7">
         <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow}>
-          {products?.slice(0,5).map((product: any, index: number) => (
+          {products?.slice(0, 5).map((product: any, index: number) => (
             <div 
               key={index} 
               className="mx-2 shadow-md rounded-lg flex flex-col h-[400px] w-[300px]"
@@ -180,14 +182,7 @@ const Home = () => {
                 alt={`Product ${index}`}
                 className="w-full h-48 object-contain rounded-t-lg"
               />
-              <div className="p-4 flex-grow">
-                <h2 className="text-lg font-medium">{product.title}</h2>
-                <div className="flex items-center gap-1">
-                  {renderStars(product.rating.rate)}
-                </div>
-                <p className="text-lg font-bold mt-2">₹{convertPriceToNRS(product.price)}</p>
-              </div>
-              <div className="flex justify-between items-center p-4">
+                <div className="flex justify-between items-center p-4">
                 <button className="text-[#DB4444] hover:text-red-600">
                   <Heart />
                 </button>
@@ -199,15 +194,41 @@ const Home = () => {
                   Add to Cart
                 </button>
               </div>
+              <div className="p-4 flex-grow">
+                <h2 className="text-lg font-medium">{product.title}</h2>
+                <div className="flex items-center gap-1">
+                  {renderStars(product.rating.rate)}
+                </div>
+                <p className="text-lg font-bold mt-2">रू {convertPriceToNRS(product.price)}</p>
+              </div>
+            
             </div>
           ))}
         </ScrollMenu>
       </section>
+
       <section className="flex justify-center items-center px-3 py-2">
-        <button className="px-12 text-white py-3 bg-[#DB4444] rounded-md">View All Products</button>
+        <button className="px-7 py-2 md:px-12 text-white md:py-3 bg-[#DB4444] rounded-md">View All Products</button>
+      </section>
+
+      {/* This Month Section */}
+      <section className="before:border-l-8 px-3 py-3">
+        <h1 className="text-[#DB4444] text-2xl">Categories</h1>
+      </section>
+
+      {/* Browser By Category Section */}
+      <section className="px-4 py-5">
+        <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow}>
+          {BrowserByCategory.map((categories, index) => (
+            <div key={index} className="h-[270px] w-[270px] bg-white rounded-lg shadow-md flex flex-col items-center justify-center mx-2">
+              <categories.icon className="text-3xl text-[#DB4444] h-32 w-32" />
+              <h2 className="text-xl  font-medium mt-4">{categories?.name}</h2>
+            </div>
+          ))}
+        </ScrollMenu>
       </section>
     </>
   );
-}
+};
 
 export default Home;
