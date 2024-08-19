@@ -335,11 +335,36 @@ const Home = () => {
   <h1 className="text-2xl text-[#DB4444]">Our Products</h1>
 </section>
 <section className="py-2 px-3 ">
-  <h1 className="text-2xl md:text-6xl font-medium">Explore Our Products</h1>
+  <h1 className="text-2xl md:text-4xl font-medium">Explore Our Products</h1>
 </section>
+
+<section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 pb-4 mt-10">
+  {products?.slice(12, 20)?.map((ourproducts: any) => (
+    <div key={ourproducts.id} className="relative border rounded-lg shadow-md overflow-hidden">
+      {/* Image Section */}
+      <img src={ourproducts?.image} alt={ourproducts?.title} className="w-48 h-48 object-fit px-3 ml-24 py-2 md:5" />
+
+      {/* Icons on the right */}
+      <section className="flex flex-col absolute top-3 right-4 gap-2">
+        <button className="text-gray-600 hover:text-gray-800">
+          <Eye className="w-6 h-6" />
+        </button>
+        <button className="text-gray-600 hover:text-gray-800">
+          <Heart className="w-6 h-6" />
+        </button>
+      </section>
+
+      {/* Title Section */}
+      <h1 className="text-md font-semibold p-4 text-center truncate">{ourproducts?.title}</h1>
+      <h1 className="px-3 py-2 font-medium">रू {convertPriceToNRS(ourproducts?.price)}</h1>
+      <h1 className="flex pb-2 px-2">{renderStars(ourproducts?.rating?.rate)}</h1>
+    </div>
+  ))}
+</section>
+
 
     </>
   );
 };
 
-export default Home;
+export default Home; 
