@@ -143,8 +143,8 @@ const Home = () => {
           ))}
         </section>
 
-        <section className="md:w-2/3 ">
-          <Slider {...settings} className="cursor-pointer">
+        <section className="md:w-2/3  ">
+          <Slider {...settings} className="cursor-pointer ">
             {products?.slice(0, 7)?.map((items: any, index: number) => (
               <div key={index} className="flex items-center justify-center">
                 <img
@@ -193,12 +193,12 @@ const Home = () => {
       </section>
 
       {/* Product Scrolling Section */}
-      <section className="px-5 py-2 mt-10">
-        <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow}>
+      <section className="px-5 py-2 pb-4 mt-10 custom-scrollbar overflow-x-scroll">
+        <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow} itemClassName="pb-4">
           {products?.slice(0, 5).map((product: any, index: number) => (
             <div
               key={index}
-              className="mx-2 shadow-md rounded-lg flex flex-col h-[400px] w-[300px]"
+              className="mx-2 shadow-md rounded-lg flex flex-col h-[450px] w-[300px]"
             >
               <img
                 src={product.image}
@@ -220,10 +220,10 @@ const Home = () => {
               <div className="p-4 flex-grow">
                 <h2 className="text-lg font-medium">{product.title}</h2>
                 <div className="flex items-center gap-1">
-                  {renderStars(product.rating.rate)}
+                  {renderStars(product?.rating?.rate)}
                 </div>
                 <p className="text-lg font-bold mt-2">
-                  रू {convertPriceToNRS(product.price)}
+                  रू {convertPriceToNRS(product?.price)}
                 </p>
               </div>
             </div>
@@ -244,8 +244,8 @@ const Home = () => {
 
       {/* Browser By Category Section */}
       <section className="px-4 py-5">
-        <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow}>
-          {BrowserByCategory.map((categories, index) => (
+        <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow} itemClassName="pb-4">
+          {BrowserByCategory?.map((categories, index) => (
             <section
               key={index}
               className="hover:text-[#FFFF] cursor-pointer hover:bg-[#DB4444] transition-all delay-100 h-[270px] w-[270px] bg-white rounded-lg shadow-md flex flex-col items-center justify-center mx-2"
@@ -305,7 +305,7 @@ const Home = () => {
       </section>
 
 
-      <section className="flex flex-col md:flex-row gap-8 md:gap-12 ml-2 px-3 py-7 bg-black mb-4 rounded-md items-center md:items-start">
+      <section className="flex mt-10 flex-col md:flex-row gap-8 md:gap-12 ml-2 px-3 py-7 bg-black mb-4 rounded-md items-center md:items-start">
   <section className="text-center md:text-left">
     <h1 className="text-green-400 text-2xl px-2 py-4">Categories</h1>
     <h1 className="text-white text-3xl md:text-7xl px-2 py-4">Enhance Your Music Experience</h1>
@@ -330,6 +330,12 @@ const Home = () => {
       ))}
     </section>
   </section>
+</section>
+<section className="px-3 py-2 before:border-l-8">
+  <h1 className="text-2xl text-[#DB4444]">Our Products</h1>
+</section>
+<section className="py-2 px-3 ">
+  <h1 className="text-2xl md:text-6xl font-medium">Explore Our Products</h1>
 </section>
 
     </>
