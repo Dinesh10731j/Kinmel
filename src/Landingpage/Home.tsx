@@ -6,7 +6,11 @@ import { Category, BrowserByCategory } from "../Utils/category";
 import { UseGetProductsImages } from "../hooks/Usegetproductsimage";
 import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
 import "react-horizontal-scrolling-menu/dist/styles.css";
-import NewJblSpeaker from "../assets/JBL_BOOMBOX.png"
+import NewJblSpeaker from "../assets/JBL_BOOMBOX.png";
+import PlayStation from "../assets/PS5.png";
+import WomenWithHat from "../assets/Attractive-woman.png";
+import Speakers from "../assets/Speaker.png";
+import Perfume from "../assets/Perfume.png"
 import {
   Heart,
   Eye,
@@ -268,7 +272,7 @@ const Home = () => {
           </h1>
         </section>
         <section className="px-3 py-2">
-          <button className="py-2 px-7 md:py-4 md:px-12 bg-[#DB4444] text-[#FFFF] rounded-md">
+          <button className="py-1 px-4 md:py-3 md:px-10 bg-[#DB4444] text-[#FFFF] rounded-md">
             View All
           </button>
         </section>
@@ -362,6 +366,50 @@ const Home = () => {
   ))}
 </section>
 
+<section className="py-2 mt-5 px-3 flex flex-col items-center justify-center">
+ <button className="py-2 px-7 md:py-2 md:px-12 bg-[#DB4444] rounded-md text-[#FFFFFF]">View All Products</button> 
+  </section>
+{/* Featured Section */}
+
+  <section className="before:border-l-8 px-3 py-2">
+    <h1 className=" text-xl md:text-3xl text-[#DB4444]">Featured</h1>
+  </section>
+  <section  className="px-3 py-2">
+    <h1 className="text-xl md:text-4xl font-medium">New Arrival</h1>
+  </section>
+  <section className="flex flex-col md:flex-row gap-7 p-3">
+  <section className="bg-black rounded-md pb-1 flex-1">
+    <img src={PlayStation} alt="playstore_image" className="w-full rounded-t-md" />
+    <div className="p-3">
+      <h1 className="text-xl md:text-4xl font-medium text-white">Play Station 5</h1>
+      <h3 className="text-sm md:text-base text-white mt-2">Black and White Version of the PS5 coming out of Sale.</h3>
+      <button className="border-b-2 border-white text-lg md:text-xl text-white mt-4">Shop Now</button>
+    </div>
+  </section>
+
+  <section className="grid grid-cols-1 md:grid-cols-2 gap-7 flex-1">
+    <section className="">
+      <img src={WomenWithHat} alt="woman_with_hat" className="w-full h-full object-cover rounded-md" />
+     
+    </section>
+    <section className="flex flex-col gap-7">
+      <section className="bg-black p-3 rounded-md">
+        
+        <img src={Speakers} alt="speakers" className="w-full rounded-md" />
+        <h1 className="text-white md:text-4xl text-2xl">Speakers</h1>
+        <h3 className="md:text-2xl text-xl text-white ">Amazon wireless speakers</h3>
+        <button className="border-b-2 text-white">Shop Now</button>
+      
+      </section>
+      <section className="bg-black p-3 rounded-md">
+        <img src={Perfume} alt="perfume" className="w-full rounded-md" />
+        <h1 className="md:text-4xl text-2xl text-white">Perfume</h1>
+        <h3 className="text-xl md:text-2xl text-white">GUCCI INTENSE OUD EP</h3>
+        <button className="border-b-2 text-white">Shop Now</button>
+      </section>
+    </section>
+  </section>
+</section>
 
     </>
   );
