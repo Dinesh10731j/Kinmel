@@ -18,6 +18,9 @@ import {
   ChevronLeft,
   ChevronRight,
   Star,
+  Package,
+  Headphones,
+ShieldCheck,
 } from "lucide-react";
 
 const Home = () => {
@@ -410,6 +413,18 @@ const Home = () => {
     </section>
   </section>
 </section>
+
+<section className="flex flex-col md:flex-row gap-7 justify-center items-center mt-10 pb-4">
+  {[Headphones, Package, ShieldCheck]?.map((Icon: any, index: number) => (
+    <section key={index} className="text-center py-10 px-4">
+      <Icon className="w-12 h-12 text-white bg-black p-2 rounded-full mx-auto mb-2" />
+      {Icon === Headphones && <h1 className="text-sm md:text-base lg:text-lg font-semibold">FREE AND FAST DELIVERY</h1>}
+      {Icon === Package && <h1 className="text-sm md:text-base lg:text-lg font-semibold">24/7 CUSTOMER SERVICE</h1>}
+      {Icon === ShieldCheck && <h1 className="text-sm md:text-base lg:text-lg font-semibold">MONEY BACK GUARANTEE</h1>}
+    </section>
+  ))}
+</section>
+
 
     </>
   );
