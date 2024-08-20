@@ -1,21 +1,19 @@
-import Header from "./Components/Header";
-import Footer from "./Components/Footer";
-import { Routes,Route } from "react-router-dom";
-import Home from "./Landingpage/Home";
+
+import Header from './Components/Header';
+import Footer from './Components/Footer';
+import {Outlet} from 'react-router-dom';
+
 const App = () => {
-
   return (
-   <>
-   <Header/>
-  
-   <Routes>
-   
-    <Route path={'/'} element={<Home/>}/>
-   </Routes>
-   <Footer/>
-  
-   </>
-  )
-}
+    <>
+      <Header />
+      <main>
+        <Outlet />
+      </main>
+      <Footer />
+    </>
+  );
+};
 
-export default App
+
+export default App;
