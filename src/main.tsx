@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App';
 import Home from './Landingpage/Home';
 import Contact from './Landingpage/Contact';
+import About from './Landingpage/About';
 import './index.css';
 
 const queryClient = new QueryClient();
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
         path: 'contact',
         element: <Contact />,
       },
+      {
+        path:'about',
+        element:<About/>
+      }
     ],
   },
 ]);
