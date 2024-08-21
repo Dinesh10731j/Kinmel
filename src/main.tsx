@@ -6,6 +6,7 @@ import App from './App';
 import Home from './Landingpage/Home';
 import Contact from './Landingpage/Contact';
 import About from './Landingpage/About';
+import Signup from './Registration/Signup';
 import './index.css';
 
 const queryClient = new QueryClient();
@@ -26,6 +27,11 @@ const router = createBrowserRouter([
       {
         path:'about',
         element:<About/>
+      },
+      {
+        path:'signup',
+        element:<Signup/>
+
       }
     ],
   },
