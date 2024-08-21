@@ -35,7 +35,7 @@ const Contact = () => {
             </section>
             <h1 className="font-medium text-lg">Call To Us</h1>
           </section>
-          <p className="text-gray-600">We are available 24/7, 7 days a week</p>
+          <p className="text-gray-600 text-sm md:text-xl">We are available 24/7, 7 days a week</p>
           <p className="text-black">Phone: +8801611112222</p>
           <section className="flex items-center gap-4">
             <section className="bg-[#DB4444] text-white h-10 w-10 rounded-full flex items-center justify-center">

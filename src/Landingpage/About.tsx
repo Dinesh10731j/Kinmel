@@ -31,7 +31,7 @@ const About = () => {
       <section className="flex flex-col md:flex-row justify-between items-center md:items-start gap-4 md:gap-8 px-3 py-2">
         <section className="w-full md:w-1/2">
           <h1 className="text-xl md:text-4xl font-medium">Our Story</h1>
-          <p className="mt-2 text-sm md:text-base font-medium text-justify">
+          <p className="mt-2 text-sm md:text-base font-medium text-left md:text-justify leading-relaxed">
             In 2015, a group of visionary entrepreneurs came together with a
             shared dream—to revolutionize the way people shop in South Asia.
             They envisioned a platform that would connect buyers and sellers
