@@ -7,6 +7,7 @@ import Home from './Landingpage/Home';
 import Contact from './Landingpage/Contact';
 import About from './Landingpage/About';
 import Signup from './Registration/Signup';
+import Login from './Registration/Login';
 import './index.css';
 
 const queryClient = new QueryClient();
@@ -32,6 +33,9 @@ const router = createBrowserRouter([
         path:'signup',
         element:<Signup/>
 
+      },{
+        path:'login',
+        element:<Login/>
       }
     ],
   },
