@@ -8,6 +8,7 @@ import Contact from './Landingpage/Contact';
 import About from './Landingpage/About';
 import Signup from './Registration/Signup';
 import Login from './Registration/Login';
+import Error404 from './Pages/Error404';
 import './index.css';
 
 const queryClient = new QueryClient();
@@ -36,6 +37,9 @@ const router = createBrowserRouter([
       },{
         path:'login',
         element:<Login/>
+      },{
+        path:'*',
+        element:<Error404/>
       }
     ],
   },
