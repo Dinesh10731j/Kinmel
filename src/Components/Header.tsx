@@ -1,14 +1,48 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import KinMel_Logo from "../assets/Codynn_Logo.png";
 import { NavLink } from "react-router-dom";
-import { SearchIcon, HeartIcon, ShoppingCart, MenuIcon, XIcon,UserIcon } from "lucide-react";
+import {
+  SearchIcon,
+  HeartIcon,
+  ShoppingCart,
+  MenuIcon,
+  XIcon,
+  UserIcon,
+XCircle,
+ShoppingBagIcon,
+Star,
+LogInIcon
+} from "lucide-react";
 
 const Header = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  // Close dropdown if clicked outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <>
@@ -16,26 +50,41 @@ const Header = () => {
         <section>
           <img src={KinMel_Logo} alt="KinMel_Logo" />
         </section>
-        
+
         {/* Menu Icon for Mobile */}
         <section className="md:hidden flex items-center">
-          <MenuIcon onClick={toggleSidebar} className="text-2xl cursor-pointer" />
+          <MenuIcon
+            onClick={toggleSidebar}
+            className="text-2xl cursor-pointer"
+          />
         </section>
 
         {/* Navigation for Desktop */}
         <section className="hidden md:block">
           <nav>
             <ul className="flex gap-5">
-              <NavLink to={"/"} className={({ isActive }) => (isActive ? "border-b-4" : "")}>
+              <NavLink
+                to={"/"}
+                className={({ isActive }) => (isActive ? "border-b-4" : "")}
+              >
                 Home
               </NavLink>
-              <NavLink to={"/contact"} className={({ isActive }) => (isActive ? "border-b-4" : "")}>
+              <NavLink
+                to={"/contact"}
+                className={({ isActive }) => (isActive ? "border-b-4" : "")}
+              >
                 Contact
               </NavLink>
-              <NavLink to={"/about"} className={({ isActive }) => (isActive ? "border-b-4" : "")}>
+              <NavLink
+                to={"/about"}
+                className={({ isActive }) => (isActive ? "border-b-4" : "")}
+              >
                 About
               </NavLink>
-              <NavLink to={"/signup"} className={({ isActive }) => (isActive ? "border-b-4" : "")}>
+              <NavLink
+                to={"/signup"}
+                className={({ isActive }) => (isActive ? "border-b-4" : "")}
+              >
                 Signup
               </NavLink>
             </ul>
@@ -43,7 +92,7 @@ const Header = () => {
         </section>
 
         <section>
-          <form className="relative flex items-center  gap-5 md:px-2 rounded-md">
+          <form className="relative flex items-center gap-5 md:px-2 rounded-md">
             <input
               type="text"
               placeholder="What are you looking for?"
@@ -55,16 +104,49 @@ const Header = () => {
           </form>
         </section>
 
-        <section className="flex flex-row gap-5">
-          <HeartIcon />
-          <ShoppingCart />
-          <UserIcon/>
+        <section className="flex gap-5">
+          <HeartIcon className="cursor-pointer" />
+          <ShoppingCart className="cursor-pointer" />
+          <div onClick={toggleDropdown} className="relative cursor-pointer">
+            <UserIcon />
+            {isDropdownOpen && (
+              <div
+                ref={dropdownRef}
+                className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 shadow-lg rounded-md"
+              >
+               <ul className="py-2">
+        <li className="px-2 py-2 hover:bg-gray-100 flex items-center gap-2">
+          <UserIcon size={16} />
+          <NavLink to={""}>Manage Account</NavLink>
+        </li>
+        <li className="px-2 py-2 hover:bg-gray-100 flex items-center gap-2">
+          <ShoppingBagIcon size={16} />
+          <NavLink to={""}>My Orders</NavLink>
+        </li>
+        <li className="px-2 py-2 hover:bg-gray-100 flex items-center gap-2">
+          <XCircle size={16} />
+          <NavLink to={""}>My Cancellations</NavLink>
+        </li>
+        <li className="px-2 py-2 hover:bg-gray-100 flex items-center gap-2">
+          <Star size={16} />
+          <NavLink to={""}>My Reviews</NavLink>
+        </li>
+        <li className="px-2 py-2 hover:bg-gray-100 flex items-center gap-2">
+          <LogInIcon size={16} />
+          <NavLink to={""}>Logout</NavLink>
+        </li>
+      </ul>
+              </div>
+            )}
+          </div>
         </section>
       </header>
 
       {/* Sidebar */}
       <div
-        className={`fixed top-0 left-0 h-full z-10 w-64 bg-black text-white transform transition-transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:hidden`}
+        className={`fixed top-0 left-0 h-full z-10 w-64 bg-black text-white transform transition-transform ${
+          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+        } md:hidden`}
       >
         <div className="flex justify-between items-center p-4">
           <h2 className="text-xl">KinMel</h2>
@@ -72,16 +154,32 @@ const Header = () => {
         </div>
         <nav>
           <ul className="flex flex-col p-4 gap-4 ">
-            <NavLink to={"/"} onClick={toggleSidebar} className={({ isActive }) => (isActive ? "font-bold" : "")}>
+            <NavLink
+              to={"/"}
+              onClick={toggleSidebar}
+              className={({ isActive }) => (isActive ? "font-bold" : "")}
+            >
               Home
             </NavLink>
-            <NavLink to={"/contact"} onClick={toggleSidebar} className={({ isActive }) => (isActive ? "font-bold" : "")}>
+            <NavLink
+              to={"/contact"}
+              onClick={toggleSidebar}
+              className={({ isActive }) => (isActive ? "font-bold" : "")}
+            >
               Contact
             </NavLink>
-            <NavLink to={"/about"} onClick={toggleSidebar} className={({ isActive }) => (isActive ? "font-bold" : "")}>
+            <NavLink
+              to={"/about"}
+              onClick={toggleSidebar}
+              className={({ isActive }) => (isActive ? "font-bold" : "")}
+            >
               About
             </NavLink>
-            <NavLink to={"/signup"} onClick={toggleSidebar} className={({ isActive }) => (isActive ? "font-bold" : "")}>
+            <NavLink
+              to={"/signup"}
+              onClick={toggleSidebar}
+              className={({ isActive }) => (isActive ? "font-bold" : "")}
+            >
               Signup
             </NavLink>
           </ul>
