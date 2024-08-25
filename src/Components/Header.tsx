@@ -117,7 +117,7 @@ const Header = () => {
                <ul className="py-2">
         <li className="px-2 py-2 hover:bg-gray-100 flex items-center gap-2">
           <UserIcon size={16} />
-          <NavLink to={""}>Manage Account</NavLink>
+          <NavLink to={"/account"}>Manage Account</NavLink>
         </li>
         <li className="px-2 py-2 hover:bg-gray-100 flex items-center gap-2">
           <ShoppingBagIcon size={16} />
