@@ -106,7 +106,7 @@ const Header = () => {
 
         <section className="flex gap-5">
           <HeartIcon className="cursor-pointer" />
-          <ShoppingCart className="cursor-pointer" />
+        <NavLink to={'/cart'}> <ShoppingCart className="cursor-pointer" /></NavLink> 
           <div onClick={toggleDropdown} className="relative cursor-pointer">
             <UserIcon />
             {isDropdownOpen && (
