@@ -15,6 +15,7 @@ import AddressBook from './Components/AddressBook';
 import PaymentsOptions from './Components/PaymentsOptions';
 import MyReturns from './Components/MyReturns';
 import MyCancellations from './Components/MyCancellations';
+import Cart from './Pages/Cart';
 import './index.css';
 
 
@@ -41,6 +42,9 @@ const router = createBrowserRouter([
         path:'signup',
         element:<Signup/>
 
+      },{
+        path:'cart',
+        element:<Cart/>
       },{
         path:'login',
         element:<Login/>
