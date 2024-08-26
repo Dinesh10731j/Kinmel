@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 
-interface ReturnItem {
+interface CancellationItem {
   orderId: string;
   productName: string;
   productImage: string;
-  returnDate: string;
-  returnStatus: 'Pending' | 'Approved' | 'Completed' | 'Rejected';
+  cancellationDate: string;
+  cancellationStatus: 'Pending' | 'Approved' | 'Rejected';
   refundAmount: number | null;
   reason: string;
   comments: string;
@@ -19,8 +19,8 @@ interface FormValues {
   comments: string;
 }
 
-const MyReturns: React.FC = () => {
-  const [returnItems, setReturnItems] = useState<ReturnItem[]>([]);
+const MyCancellations: React.FC = () => {
+  const [cancellationItems, setCancellationItems] = useState<CancellationItem[]>([]);
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
   const { control, handleSubmit, reset, setValue } = useForm<FormValues>({
     defaultValues: {
@@ -32,29 +32,29 @@ const MyReturns: React.FC = () => {
   });
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
-    const newReturnItem: ReturnItem = {
+    const newCancellationItem: CancellationItem = {
       ...data,
       productImage: 'https://via.placeholder.com/150', // Placeholder image
-      returnDate: new Date().toLocaleDateString(),
-      returnStatus: 'Pending',
+      cancellationDate: new Date().toLocaleDateString(),
+      cancellationStatus: 'Pending',
       refundAmount: null,
     };
 
     if (editingIndex !== null) {
-      const updatedReturnItems = returnItems.map((item, index) =>
-        index === editingIndex ? newReturnItem : item
+      const updatedCancellationItems = cancellationItems.map((item, index) =>
+        index === editingIndex ? newCancellationItem : item
       );
-      setReturnItems(updatedReturnItems);
+      setCancellationItems(updatedCancellationItems);
       setEditingIndex(null);
     } else {
-      setReturnItems([...returnItems, newReturnItem]);
+      setCancellationItems([...cancellationItems, newCancellationItem]);
     }
 
     reset();
   };
 
   const handleEdit = (index: number) => {
-    const item = returnItems[index];
+    const item = cancellationItems[index];
     setEditingIndex(index);
     setValue('orderId', item.orderId);
     setValue('productName', item.productName);
@@ -63,7 +63,7 @@ const MyReturns: React.FC = () => {
   };
 
   const handleDelete = (index: number) => {
-    setReturnItems(returnItems.filter((_, idx) => idx !== index));
+    setCancellationItems(cancellationItems.filter((_, idx) => idx !== index));
     if (editingIndex === index) {
       setEditingIndex(null);
       reset();
@@ -72,18 +72,18 @@ const MyReturns: React.FC = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">My Returns</h1>
+      <h1 className="text-2xl font-bold mb-4">My Cancellations</h1>
 
-      {/* Returns Overview */}
+      {/* Cancellations Overview */}
       <div className="bg-gray-100 p-4 rounded-md mb-6">
-        <p>Total Returns: {returnItems.length}</p>
-        <p>Pending Returns: {returnItems.filter(item => item.returnStatus === 'Pending').length}</p>
-        <p>Approved Returns: {returnItems.filter(item => item.returnStatus === 'Approved').length}</p>
+        <p>Total Cancellations: {cancellationItems.length}</p>
+        <p>Pending Cancellations: {cancellationItems.filter(item => item.cancellationStatus === 'Pending').length}</p>
+        <p>Approved Cancellations: {cancellationItems.filter(item => item.cancellationStatus === 'Approved').length}</p>
       </div>
 
-      {/* Return Request Form */}
+      {/* Cancellation Request Form */}
       <form onSubmit={handleSubmit(onSubmit)} className="bg-white p-4 rounded-md shadow-md mb-6">
-        <h2 className="text-xl font-semibold mb-4">{editingIndex !== null ? 'Edit Return' : 'Start a Return'}</h2>
+        <h2 className="text-xl font-semibold mb-4">{editingIndex !== null ? 'Edit Cancellation' : 'Request a Cancellation'}</h2>
         <div className="mb-4">
           <label className="block font-medium">Order ID</label>
           <Controller
@@ -101,16 +101,16 @@ const MyReturns: React.FC = () => {
           />
         </div>
         <div className="mb-4">
-          <label className="block font-medium">Reason for Return</label>
+          <label className="block font-medium">Reason for Cancellation</label>
           <Controller
             name="reason"
             control={control}
             render={({ field }) => (
               <select {...field} className="border border-gray-300 rounded-md p-2 w-full">
                 <option value="">Select a reason</option>
-                <option value="Damaged item">Damaged item</option>
-                <option value="Incorrect item">Incorrect item</option>
-                <option value="No longer needed">No longer needed</option>
+                <option value="Changed my mind">Changed my mind</option>
+                <option value="Ordered by mistake">Ordered by mistake</option>
+                <option value="Found a better price">Found a better price</option>
                 {/* Add more options as needed */}
               </select>
             )}
@@ -128,23 +128,23 @@ const MyReturns: React.FC = () => {
         </div>
         <button
           type="submit"
-          className="bg-[#DB4444] text-white py-2 px-4 rounded-md transition duration-200"
+          className="bg-[#DB4444] text-white py-2 px-4 rounded-md  transition duration-200"
         >
-          {editingIndex !== null ? 'Update Return' : 'Submit Return'}
+          {editingIndex !== null ? 'Update Cancellation' : 'Submit Cancellation'}
         </button>
       </form>
 
-      {/* Return History */}
+      {/* Cancellation History */}
       <ul className="space-y-4">
-        {returnItems.map((item, index) => (
+        {cancellationItems.map((item, index) => (
           <li key={index} className="bg-white p-4 rounded-md shadow-md">
             <div className="flex items-center space-x-4">
               <img src={item.productImage} alt={item.productName} className="w-16 h-16 object-cover rounded-md" />
               <div className="flex-1">
                 <h3 className="text-lg font-semibold">{item.productName}</h3>
                 <p>Order ID: {item.orderId}</p>
-                <p>Return Date: {item.returnDate}</p>
-                <p>Status: {item.returnStatus}</p>
+                <p>Cancellation Date: {item.cancellationDate}</p>
+                <p>Status: {item.cancellationStatus}</p>
                 {item.refundAmount !== null && <p>Refund: ${item.refundAmount}</p>}
               </div>
               <div className="flex space-x-2">
@@ -168,15 +168,15 @@ const MyReturns: React.FC = () => {
         ))}
       </ul>
 
-      {/* Return Instructions */}
+      {/* Cancellation Instructions */}
       <div className="bg-gray-100 p-4 rounded-md mt-6">
-        <h2 className="text-xl font-semibold mb-2">Return Instructions</h2>
-        <p>Follow these steps to return your item:</p>
+        <h2 className="text-xl font-semibold mb-2">Cancellation Instructions</h2>
+        <p>Follow these steps to cancel your order:</p>
         <ol className="list-decimal pl-6">
-          <li>Ensure the item is in its original packaging.</li>
-          <li>Download and print the return label from your email.</li>
-          <li>Package the item securely and attach the return label.</li>
-          <li>Drop off the package at the nearest shipping center.</li>
+          <li>Ensure the product hasn't been shipped yet.</li>
+          <li>Select the correct order and product for cancellation.</li>
+          <li>Provide a valid reason for the cancellation.</li>
+          <li>Submit the cancellation request for processing.</li>
         </ol>
         <p className="mt-2">For any questions, contact our customer support.</p>
       </div>
@@ -184,4 +184,4 @@ const MyReturns: React.FC = () => {
   );
 };
 
-export default MyReturns;
+export default MyCancellations;
