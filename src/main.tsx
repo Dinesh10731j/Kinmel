@@ -11,6 +11,7 @@ import Login from './Registration/Login';
 import Error404 from './Pages/Error404';
 import Account from './Pages/Account';
 import MyProfile from './Components/MyProfile';
+import AddressBook from './Components/AddressBook';
 import './index.css';
 
 
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
           {
             path:'my-profile',
             element:<MyProfile/>
+            
+          },{
+            path:'address-book',
+            element:<AddressBook/>
           }
         ]
     
