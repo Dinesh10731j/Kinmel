@@ -69,7 +69,7 @@ const Account = () => {
             <ul className="list-none px-6 py-2">
               <li>
                 <NavLink
-                  to={""}
+                  to={"/account/my-returns"}
                   className={({ isActive }) =>
                     isActive ? "text-[#DB4444]" : "text-gray-500"
                   }
