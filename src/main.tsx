@@ -12,6 +12,7 @@ import Error404 from './Pages/Error404';
 import Account from './Pages/Account';
 import MyProfile from './Components/MyProfile';
 import AddressBook from './Components/AddressBook';
+import PaymentsOptions from './Components/PaymentsOptions';
 import './index.css';
 
 
@@ -56,6 +57,9 @@ const router = createBrowserRouter([
           },{
             path:'address-book',
             element:<AddressBook/>
+          },{
+            path:'payment-options',
+            element:<PaymentsOptions/>
           }
         ]
     

@@ -54,7 +54,7 @@ const Account = () => {
               </li>
               <li>
                 <NavLink
-                  to={""}
+                  to={"/account/payment-options"}
                   className={({ isActive }) =>
                     isActive ? "text-[#DB4444]" : "text-gray-500"
                   }
