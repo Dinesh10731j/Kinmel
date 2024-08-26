@@ -24,6 +24,7 @@ ShieldCheck,
 } from "lucide-react";
 
 const Home = () => {
+ 
   const settings = {
     dots: true,
     infinite: true,
@@ -69,7 +70,7 @@ const Home = () => {
 
   useEffect(() => {
     const targetDate = new Date();
-    targetDate.setDate(targetDate.getDate() + 7);
+    targetDate.setDate(targetDate.getDate() + 3);
 
     const updateTime = () => {
       const now = new Date().getTime();
@@ -214,7 +215,7 @@ const Home = () => {
               />
               <div className="flex justify-between items-center p-4">
                 <button className="text-[#DB4444] hover:text-red-600">
-                  <Heart />
+                  <Heart/>
                 </button>
                 <button className="text-[#DB4444] hover:text-red-600">
                   <Eye />

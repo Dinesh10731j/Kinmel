@@ -27,8 +27,8 @@ const Account = () => {
           <h1>Hi,<span className="text-[#DB4444]">Dinesh Tamang</span></h1>
         </section>
       </section>
-      <section className=" flex flex-col md:flex-row justify-evenly mt-10">
-        <section className="flex flex-col gap-6">
+      <section className=" flex flex-col md:flex-row justify-evenly mt-20">
+        <section className="flex flex-col gap-16">
           <section className="px-3 py-2">
             <h1 className="text-xl md:text-3xl">Manage My Account</h1>
             <ul className="list-none px-6 py-2">
@@ -44,7 +44,7 @@ const Account = () => {
               </li>
               <li>
                 <NavLink
-                  to={""}
+                  to={"/account/address-book"}
                   className={({ isActive }) =>
                     isActive ? "text-[#DB4444]" : "text-gray-500"
                   }

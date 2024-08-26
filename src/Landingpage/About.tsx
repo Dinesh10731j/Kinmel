@@ -25,7 +25,7 @@ const About = () => {
         >
           Home
         </NavLink>
-        <span className="px-2"> /</span>
+        <span> / </span>
         <NavLink
           to="/about"
           className={({ isActive }) =>
