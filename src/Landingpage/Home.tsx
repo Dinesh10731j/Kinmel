@@ -23,7 +23,12 @@ import {
 ShieldCheck,
 } from "lucide-react";
 
-const Home = () => {
+interface HomeProps {
+  handleAddCart: (id: string,img:string) => void;
+}
+
+
+const Home: React.FC<HomeProps> = ({ handleAddCart }) => {
  
   const settings = {
     dots: true,
@@ -173,7 +178,7 @@ const Home = () => {
 
       <section className="flex px-5 gap-10 justify-evenly items-center py-5">
         <section>
-          <h1 className="text-xl md:text-4xl font-medium">Flash Sales</h1>
+          <h1 className="text-sm md:text-4xl font-medium">Flash Sales</h1>
         </section>
         <section>
           <div className="flex items-center gap-2 text-xl md:text-3xl font-bold rounded-lg">
@@ -220,8 +225,8 @@ const Home = () => {
                 <button className="text-[#DB4444] hover:text-red-600">
                   <Eye />
                 </button>
-                <button className="bg-[#DB4444] text-white px-4 py-2 rounded-lg hover:bg-[#b73333] flex items-center gap-2">
-                  <ShoppingCart />
+                <button onClick={()=>handleAddCart(product?.id,product?.image)} className="bg-[#DB4444] text-white px-4 py-2 rounded-lg hover:bg-[#b73333] flex items-center gap-2">
+                  <ShoppingCart  />
                   Add to Cart
                 </button>
               </div>

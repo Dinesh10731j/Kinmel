@@ -1,6 +1,13 @@
 import { NavLink } from "react-router-dom";
-
-const Cart = () => {
+interface CartProps {
+  userCart:CartItem[];
+}
+interface CartItem {
+  id: String;
+  img:String;
+}
+const Cart: React.FC<CartProps>= ({ userCart }) => {
+console.log(userCart)
   return (
     <>
       {/* Breadcrumb Section */}
