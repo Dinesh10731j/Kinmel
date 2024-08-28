@@ -19,17 +19,22 @@ import Cart from './Pages/Cart';
 // Define the type for cart items
 
 
-interface cartItems{
-  id:String,
-  img:String,
+interface CartItem {
+  id: string;
+  img: string;
+  title: string;
+  price: number;
+  name: string;
+  quantity: number;
+  key: number;
 }
 
 
 const App: React.FC = () => {
   // Define the router configuration inside the App component
-  const [carts,addCarts] = React.useState<cartItems[]>([]);
-const handleAddCart =(id:string,img:string)=>{
-addCarts((previousCart: any)=>[...previousCart,{id,img}])
+  const [carts,addCarts] = React.useState<CartItem[]>([]);
+const handleAddCart =(id:string,img:string,title:string,price:number)=>{
+addCarts((previousCart: any)=>[...previousCart,{id,img,title,price}])
 
 }
   const router = createBrowserRouter([
