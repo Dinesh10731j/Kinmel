@@ -21,6 +21,10 @@ const Cart: React.FC<CartProps> = ({ userCart }) => {
 
   // Handle quantity changes
   const handleQuantityChange = (id: string, newQuantity: number) => {
+    if (newQuantity < 1) {
+      newQuantity = 1; 
+    }
+  
 
     setCart((prevCart) =>
       prevCart.map((item) =>
@@ -66,37 +70,45 @@ const Cart: React.FC<CartProps> = ({ userCart }) => {
 
       {/* Cart Details Section */}
       <section className="px-4 py-6 mt-4">
-        {cart?.map((item) => (
-          <div
-            key={item.id}
-            className="flex flex-wrap justify-between items-center mb-4 border-b pb-4"
-          >
-            <div className="w-full sm:w-auto text-center mb-4 sm:mb-0">
-              <img src={item?.img} alt={item?.title} className="h-20 w-20 mx-auto" />
-              <h1 className="text-gray-600 mt-2">{item?.title.slice(0,20)}</h1>
-            </div>
 
-            <div className="w-full sm:w-auto text-center mb-4 sm:mb-0">
-              <h1 className="text-lg font-semibold text-gray-700">Price</h1>
-              <h1 className="text-gray-600">${item?.price || 0}</h1>
+        {
+          cart.length<=0?(
+            <h1>No items added</h1>
+          ):
+          cart?.map((item) => (
+            <div
+              key={item.id}
+              className="flex flex-wrap justify-between items-center mb-4 border-b pb-4"
+            >
+              <div className="w-full sm:w-auto text-center mb-4 sm:mb-0">
+                <img src={item?.img} alt={item?.title} className="h-20 w-20 mx-auto" />
+                <h1 className="text-gray-600 mt-2">{item?.title.slice(0,20)}</h1>
+              </div>
+  
+              <div className="w-full sm:w-auto text-center mb-4 sm:mb-0">
+                <h1 className="text-lg font-semibold text-gray-700">Price</h1>
+                <h1 className="text-gray-600">${item?.price || 0}</h1>
+              </div>
+  
+              <div className="w-full sm:w-auto text-center mb-4 sm:mb-0">
+                <h1 className="text-lg font-semibold text-gray-700">Quantity</h1>
+                <input
+                  type="number"
+                defaultValue={'1'}
+                  className="h-10 w-20 px-2 py-1 border border-black rounded-md text-center"
+                  onChange={(e) => handleQuantityChange(item.id, parseInt(e.target.value))}
+                />
+              </div>
+  
+              <div className="w-full sm:w-auto text-center mb-4 sm:mb-0">
+                <h1 className="text-lg font-semibold text-gray-700">Subtotal</h1>
+                <h1 className="text-gray-600">${(item?.price * item?.quantity).toFixed(2)}</h1>
+              </div>
             </div>
+          ))}
 
-            <div className="w-full sm:w-auto text-center mb-4 sm:mb-0">
-              <h1 className="text-lg font-semibold text-gray-700">Quantity</h1>
-              <input
-                type="number"
-              defaultValue={'1'}
-                className="h-10 w-20 px-2 py-1 border border-black rounded-md text-center"
-                onChange={(e) => handleQuantityChange(item.id, parseInt(e.target.value))}
-              />
-            </div>
-
-            <div className="w-full sm:w-auto text-center mb-4 sm:mb-0">
-              <h1 className="text-lg font-semibold text-gray-700">Subtotal</h1>
-              <h1 className="text-gray-600">${(item?.price * item?.quantity).toFixed(2)}</h1>
-            </div>
-          </div>
-        ))}
+        
+       
       </section>
 
       {/* Action Buttons */}
