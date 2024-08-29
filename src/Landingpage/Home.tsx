@@ -23,12 +23,16 @@ import {
 ShieldCheck,
 } from "lucide-react";
 
-interface HomeProps {
-  handleAddCart: (id: string,img:string,title:string,price:number) => void;
-}
+import { useCart } from "../context/cartContext";
 
 
-const Home: React.FC<HomeProps> = ({ handleAddCart }) => {
+
+
+
+const Home: React.FC = () => {
+
+
+  const {handleAddCart} = useCart()
  
   const settings = {
     dots: true,
@@ -225,7 +229,7 @@ const Home: React.FC<HomeProps> = ({ handleAddCart }) => {
                 <button className="text-[#DB4444] hover:text-red-600">
                   <Eye />
                 </button>
-                <button onClick={()=>handleAddCart(product?.id,product?.image,product?.title,product?.price)} className="bg-[#DB4444] text-white px-4 py-2 rounded-lg hover:bg-[#b73333] flex items-center gap-2">
+                <button onClick={()=>handleAddCart(product?.id,product?.image,product?.title,product?.price)}  className="bg-[#DB4444] text-white px-4 py-2 rounded-lg hover:bg-[#b73333] flex items-center gap-2">
                   <ShoppingCart  />
                   Add to Cart
                 </button>
