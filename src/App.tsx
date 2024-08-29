@@ -1,4 +1,5 @@
 import React from 'react';
+import { CartProvider } from './context/cartContext';
 import { Outlet, createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
@@ -15,28 +16,9 @@ import PaymentsOptions from './Components/PaymentsOptions';
 import MyReturns from './Components/MyReturns';
 import MyCancellations from './Components/MyCancellations';
 import Cart from './Pages/Cart';
-
-// Define the type for cart items
-
-
-interface CartItem {
-  id: string;
-  img: string;
-  title: string;
-  price: number;
-  name: string;
-  quantity: number;
-  key: number;
-}
-
+import Checkout from './Pages/Checkout';
 
 const App: React.FC = () => {
-  // Define the router configuration inside the App component
-  const [carts,addCarts] = React.useState<CartItem[]>([]);
-const handleAddCart =(id:string,img:string,title:string,price:number)=>{
-addCarts((previousCart: any)=>[...previousCart,{id,img,title,price}])
-
-}
   const router = createBrowserRouter([
     {
       path: '/',
@@ -50,58 +32,23 @@ addCarts((previousCart: any)=>[...previousCart,{id,img,title,price}])
         </>
       ),
       children: [
-        {
-          path: '',
-          element: <Home handleAddCart={handleAddCart} />,
-        },
-        {
-          path: 'contact',
-          element: <Contact />,
-        },
-        {
-          path: 'about',
-          element: <About />,
-        },
-        {
-          path: 'signup',
-          element: <Signup />,
-        },
-        {
-          path: 'cart',
-          element: <Cart userCart={carts} />,
-        },
-        {
-          path: 'login',
-          element: <Login />,
-        },
-        {
-          path: '*',
-          element: <Error404 />,
-        },
+        { path: '', element: <Home/> },
+        { path: 'contact', element: <Contact /> },
+        { path: 'about', element: <About /> },
+        { path: 'signup', element: <Signup /> },
+        { path: 'cart', element: <Cart /> },
+        { path: 'login', element: <Login /> },
+        { path: 'checkout', element: <Checkout /> },
+        { path: '*', element: <Error404 /> },
         {
           path: 'account',
           element: <Account />,
           children: [
-            {
-              path: 'my-profile',
-              element: <MyProfile />,
-            },
-            {
-              path: 'address-book',
-              element: <AddressBook />,
-            },
-            {
-              path: 'payment-options',
-              element: <PaymentsOptions />,
-            },
-            {
-              path: 'my-returns',
-              element: <MyReturns />,
-            },
-            {
-              path: 'my-cancellations',
-              element: <MyCancellations />,
-            },
+            { path: 'my-profile', element: <MyProfile /> },
+            { path: 'address-book', element: <AddressBook /> },
+            { path: 'payment-options', element: <PaymentsOptions /> },
+            { path: 'my-returns', element: <MyReturns /> },
+            { path: 'my-cancellations', element: <MyCancellations /> },
           ],
         },
       ],
@@ -109,7 +56,9 @@ addCarts((previousCart: any)=>[...previousCart,{id,img,title,price}])
   ]);
 
   return (
-    <RouterProvider router={router} />
+    <CartProvider>
+      <RouterProvider router={router} />
+    </CartProvider>
   );
 };
 
