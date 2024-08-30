@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useCart } from "../context/cartContext";
+import { Trash } from "lucide-react";
 
 
 
@@ -16,8 +17,8 @@ interface CartItem {
 }
 
 const Cart: React.FC= () => {
-  const {carts} = useCart();
-  console.log(carts);
+  const {carts,handleRemoveCart} = useCart();
+
 
   // Local state to manage the cart
   const [cart, setCart] = useState<CartItem[]>(carts as CartItem[]);
@@ -78,12 +79,13 @@ const Cart: React.FC= () => {
               key={index}
               className="flex flex-wrap justify-between items-center mb-4 border-b pb-4"
             >
-              <div className="w-full sm:w-auto text-center mb-4 sm:mb-0">
+              <div className="relative w-full sm:w-auto text-center mb-4 sm:mb-0">
                 <img
                   src={item?.img}
                   alt={item?.title}
                   className="h-20 w-20 mx-auto"
                 />
+                <Trash onClick={()=>handleRemoveCart(item?.id)} className="absolute top-2 right-2 fill-red-600 text-red-600 cursor-pointer"/>
                 <h1 className="text-gray-600 mt-2">
                   {item?.title.slice(0, 20)}
                 </h1>

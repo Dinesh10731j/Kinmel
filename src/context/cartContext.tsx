@@ -28,10 +28,12 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [carts, setCarts] = useState<CartItem[]>([]);
 
   const handleAddCart = (id: string, img: string, title: string, price: number) => {
+    
     setCarts((prevCart) => [...prevCart, { id, img, title, price, quantity: 1 }]);
   };
 
   const handleRemoveCart = (id: string) => {
+    console.log('trash clicked')
     setCarts((prevCart) => prevCart.filter(item => item.id !== id));
   };
 
