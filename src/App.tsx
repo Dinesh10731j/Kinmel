@@ -18,6 +18,7 @@ import MyCancellations from './Components/MyCancellations';
 import Cart from './Pages/Cart';
 import Checkout from './Pages/Checkout';
 
+
 const App: React.FC = () => {
   const router = createBrowserRouter([
     {
