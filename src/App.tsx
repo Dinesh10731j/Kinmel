@@ -36,9 +36,9 @@ const App: React.FC = () => {
         { path: '', element: <Home/> },
         { path: 'contact', element: <Contact /> },
         { path: 'about', element: <About /> },
-        { path: 'signup', element: <Signup /> },
+        { path: 'auth/signup', element: <Signup /> },
         { path: 'cart', element: <Cart /> },
-        { path: 'login', element: <Login /> },
+        { path: 'auth/login', element: <Login /> },
         { path: 'checkout', element: <Checkout /> },
         { path: '*', element: <Error404 /> },
         {

@@ -82,7 +82,7 @@ const Header = () => {
                 About
               </NavLink>
               <NavLink
-                to={"/signup"}
+                to={"/auth/signup"}
                 className={({ isActive }) => (isActive ? "border-b-4" : "")}
               >
                 Signup

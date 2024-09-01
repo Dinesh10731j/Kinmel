@@ -3,6 +3,11 @@ import Login_Image from "../assets/Side Image.png";
 import { Link } from "react-router-dom";
 import { UserUserSignup } from "../hooks/Useusersignup";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { Toaster,toast } from "react-hot-toast";
+import { CircularProgress } from "@mui/material";
+
+
+
 
 
 interface SignupDetails {
@@ -13,7 +18,7 @@ interface SignupDetails {
 
 const Signup = () => {
   // Initialize react-hook-form
-  const { register, handleSubmit, formState: { errors } } = useForm<SignupDetails>();
+  const { register, handleSubmit,reset, formState: { errors } } = useForm<SignupDetails>();
   
   
   const mutation = UserUserSignup();
@@ -22,10 +27,12 @@ const Signup = () => {
   const onSubmit: SubmitHandler<SignupDetails> =  (data) => {
     try {
        mutation.mutate(data);
-      console.log("Signup successful!");
-    } catch (error) {
-      console.error("Signup failed:", error);
+     toast.success("Signup successful!");
+    } catch{
+     toast.error("Signup failed!");
     }
+
+   reset();
   };
 
   return (
@@ -87,17 +94,22 @@ const Signup = () => {
             type="submit"
             className="bg-[#DB4444] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >
-         Signup
+        {mutation.isPending?<CircularProgress size={24} color="primary"/>:'Signup'}
           </button>
 
           <h1 className="px-2 py-3">
             Already have an account?{" "}
-            <Link to="/login" className="px-2 border-b-2">
+            <Link to="/auth/login" className="px-2 border-b-2">
               Login
             </Link>
           </h1>
         </form>
+        <Toaster position="top-center"/>
       </section>
+
+
+   
+
     </section>
   );
 };
