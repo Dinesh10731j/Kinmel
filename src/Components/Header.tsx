@@ -186,7 +186,7 @@ const Header = () => {
               About
             </NavLink>
             <NavLink
-              to={"/signup"}
+              to={"/auth/signup"}
               onClick={toggleSidebar}
               className={({ isActive }) => (isActive ? "font-bold" : "")}
             >
