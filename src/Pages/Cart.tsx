@@ -171,7 +171,7 @@ const Cart: React.FC= () => {
             <h3 className="text-gray-600">${cartTotal.toFixed(2)}</h3>
           </div>
 
-          <NavLink to={cart.length > 0 ? "/checkout" : "#"} className={`${ cart.length <= 0 ? "cursor-not-allowed" : "cursor-pointer"}`}>
+          <NavLink to={cart.length > 0 ? "/payment" : "#"} className={`${ cart.length <= 0 ? "cursor-not-allowed" : "cursor-pointer"}`}>
             <button
               className={`w-full mt-6 py-2 px-10 bg-[#DB4444] text-white rounded-md shadow-md hover:bg-[#702323] transition ${
                 cart.length <= 0 ? "cursor-not-allowed" : "cursor-pointer"
