@@ -10,7 +10,7 @@ interface UserloginType{
 
 
 
-const UserLogin = async (data:UserloginType)=>{
+const UserLogin = async (data:UserloginType):Promise<any>=>{
     try{
 
 const response = await axiosInstance.post(Userlogin,data);
