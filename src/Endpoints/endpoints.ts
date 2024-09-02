@@ -1,5 +1,6 @@
 export const endpoints = {
     Usersignup :'/api/signup',
     Userlogin:'/api/login',
-    Userpayment:'/api/payment',
+    Userpaymentconfig:'/api/config',
+    Userpaymentintent:'/api/create-payment-intent'
 }

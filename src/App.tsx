@@ -17,6 +17,8 @@ import MyReturns from './Components/MyReturns';
 import MyCancellations from './Components/MyCancellations';
 import Cart from './Pages/Cart';
 import Checkout from './Pages/Checkout';
+import Payment from './Pages/Payment';
+import PaymentCompletion from './Pages/Paymentcompletion';
 
 
 const App: React.FC = () => {
@@ -40,7 +42,9 @@ const App: React.FC = () => {
         { path: 'cart', element: <Cart /> },
         { path: 'auth/login', element: <Login /> },
         { path: 'checkout', element: <Checkout /> },
+        {path:'/payment',element:<Payment/>},
         { path: '*', element: <Error404 /> },
+        {path:'/completion', element:<PaymentCompletion/>},
         {
           path: 'account',
           element: <Account />,
