@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import KinMel_Logo from "../assets/Codynn_Logo.png";
 import { NavLink } from "react-router-dom";
+import { useCart } from "../context/cartContext";
 import {
   SearchIcon,
   HeartIcon,
@@ -15,6 +16,7 @@ LogInIcon
 } from "lucide-react";
 
 const Header = () => {
+  const {carts} = useCart();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -106,7 +108,15 @@ const Header = () => {
 
         <section className="flex gap-5">
           <HeartIcon className="cursor-pointer" />
-        <NavLink to={'/cart'}> <ShoppingCart className="cursor-pointer" /></NavLink> 
+          <div className="relative px-4">
+      {/* Display the total number of items on the top-right of the cart icon */}
+      <span className="absolute top-0 right-0 ml-7 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
+        {carts?.length}
+      </span>
+      <NavLink to={'/cart'}>
+        <ShoppingCart className="cursor-pointer" />
+      </NavLink>
+    </div>
           <div onClick={toggleDropdown} className="relative cursor-pointer">
             <UserIcon />
             {isDropdownOpen && (

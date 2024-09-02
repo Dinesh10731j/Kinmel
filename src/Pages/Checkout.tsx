@@ -9,8 +9,9 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useCart } from '../context/cartContext';
 import { loadStripe } from '@stripe/stripe-js';
-import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { Elements, CardElement, useStripe, useElements} from '@stripe/react-stripe-js';
 import { NavLink } from 'react-router-dom';
+//import { UseUserPayment } from '../hooks/Usepayment';
 
 // Validation schema
 const schema = yup.object().shape({
@@ -25,6 +26,9 @@ const schema = yup.object().shape({
 const stripePromise = loadStripe('ypk_test_51OCCtjHP6Csyq28m2J3KmisSCY1opSv9Bd5cEoRdxiZCsvCAjKUq5y6gFi6lZICZUlwnUnJ0yZ4E1tVrnCIeIVrY006KmDqc53');
 
 const Checkout = () => {
+
+  //const mutation = UseUserPayment();
+
   const { carts } = useCart();
   const { handleSubmit } = useForm({
     resolver: yupResolver(schema),
@@ -124,6 +128,7 @@ const Checkout = () => {
               Place Order
             </button>
           </div>
+       
         </form>
       ) : (
         <div className="order-confirmation">

@@ -10,7 +10,8 @@ import NewJblSpeaker from "../assets/JBL_BOOMBOX.png";
 import PlayStation from "../assets/PS5.png";
 import WomenWithHat from "../assets/Attractive-woman.png";
 import Speakers from "../assets/Speaker.png";
-import Perfume from "../assets/Perfume.png"
+import Perfume from "../assets/Perfume.png";
+import {Toaster} from "react-hot-toast"
 import {
   Heart,
   Eye,
@@ -246,6 +247,8 @@ const Home: React.FC = () => {
             </div>
           ))}
         </ScrollMenu>
+
+        <Toaster position="top-center"/>
       </section>
 
       <section className="flex justify-center items-center px-3 py-2">

@@ -1,8 +1,9 @@
 import Login_Image from "../assets/Side Image.png";
 import { Link } from "react-router-dom";
 import { UseUserLogin } from "../hooks/Useuserlogin";
-import {useForm} from "react-hook-form";
-
+import {useForm,SubmitHandler} from "react-hook-form";
+import {Toaster,toast} from "react-hot-toast";
+import { CircularProgress } from "@mui/material";
 
 interface UserLoginFormType{
   email:string,
@@ -15,9 +16,21 @@ const Login = () => {
   const {handleSubmit,register,reset,formState:{errors}} = useForm<UserLoginFormType>();
 
 
-  const OnLogin = (data:UserLoginFormType)=>{
+  const OnLogin:SubmitHandler<UserLoginFormType> = (data)=>{
 
-    mutation.mutate(data);
+    mutation.mutate(data,{
+
+      onSuccess:(data)=>{
+        toast.success(data.msg || 'User login successful!')
+
+      },
+      onError:(err)=>{
+
+        toast.error(err.message || 'User login failed!')
+
+
+      }
+    });
     reset();
 
   }
@@ -69,7 +82,7 @@ const Login = () => {
               type="submit"
               className="bg-[#DB4444] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
-              Login
+             {mutation?.isPending?<CircularProgress size={24} color="primary"/>:'Login'}
             </button>
 
             <h1 className="px-2 py-3">
@@ -80,6 +93,7 @@ const Login = () => {
             </h1>
           </form>
         </section>
+        <Toaster position="top-center"/>
       </section>
     </>
   );
