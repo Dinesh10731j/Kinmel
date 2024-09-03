@@ -1,5 +1,6 @@
 import React from 'react';
 import { CartProvider } from './context/cartContext';
+import { ProductDetailsProvider } from './context/productdetailsContext';
 import { Outlet, createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
@@ -19,7 +20,7 @@ import Cart from './Pages/Cart';
 import Checkout from './Pages/Checkout';
 import Payment from './Pages/Payment';
 import PaymentCompletion from './Pages/Paymentcompletion';
-
+import Productdetails from './Pages/Productdetails';
 
 const App: React.FC = () => {
   const router = createBrowserRouter([
@@ -45,6 +46,7 @@ const App: React.FC = () => {
         {path:'/payment',element:<Payment/>},
         { path: '*', element: <Error404 /> },
         {path:'/completion', element:<PaymentCompletion/>},
+        {path:'productdetails/:id',element:<Productdetails/>},
         {
           path: 'account',
           element: <Account />,
@@ -61,9 +63,13 @@ const App: React.FC = () => {
   ]);
 
   return (
-    <CartProvider>
+    <ProductDetailsProvider>
+        <CartProvider>
       <RouterProvider router={router} />
     </CartProvider>
+
+    </ProductDetailsProvider>
+  
   );
 };
 
