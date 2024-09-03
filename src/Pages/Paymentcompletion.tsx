@@ -20,7 +20,7 @@ const PaymentCompletion = () => {
         <p className="text-lg mb-6">Payment was successful. Thank you for your purchase!</p>
         <button
           onClick={handleGoHome}
-          className="py-2 px-4 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-200"
+          className="py-2 px-4 bg-[#DB4444] hover:bg-red-600 text-white rounded-md transition duration-200"
         >
           Go to Home
         </button>

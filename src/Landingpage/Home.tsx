@@ -11,7 +11,8 @@ import PlayStation from "../assets/PS5.png";
 import WomenWithHat from "../assets/Attractive-woman.png";
 import Speakers from "../assets/Speaker.png";
 import Perfume from "../assets/Perfume.png";
-import {Toaster} from "react-hot-toast"
+import {Toaster} from "react-hot-toast";
+import { useProductDetailsContext } from "../context/productdetailsContext";
 import {
   Heart,
   Eye,
@@ -25,12 +26,15 @@ ShieldCheck,
 } from "lucide-react";
 
 import { useCart } from "../context/cartContext";
+import { Link } from "react-router-dom";
 
 
 
 
 
 const Home: React.FC = () => {
+
+  const {setProductId} = useProductDetailsContext()
 
 
   const {handleAddCart} = useCart()
@@ -227,13 +231,19 @@ const Home: React.FC = () => {
                 <button className="text-[#DB4444] hover:text-red-600">
                   <Heart/>
                 </button>
-                <button className="text-[#DB4444] hover:text-red-600">
+                <Link to={`/productdetails/${product?.id}`}>
+                <button className="text-[#DB4444] hover:text-red-600" onClick={()=>setProductId(product?.id)}>
                   <Eye />
                 </button>
-                <button onClick={()=>handleAddCart(product?.id,product?.image,product?.title,product?.price)}  className="bg-[#DB4444] text-white px-4 py-2 rounded-lg hover:bg-[#b73333] flex items-center gap-2">
+
+                </Link>
+              
+          
+            <button onClick={()=>handleAddCart(product?.id,product?.image,product?.title,product?.price)}  className="bg-[#DB4444] text-white px-4 py-2 rounded-lg hover:bg-[#b73333] flex items-center gap-2">
                   <ShoppingCart  />
                   Add to Cart
                 </button>
+               
               </div>
               <div className="p-4 flex-grow">
                 <h2 className="text-lg font-medium">{product.title}</h2>
@@ -306,12 +316,15 @@ const Home: React.FC = () => {
               className="object-contain w-full h-3/4"
             />
             <section className="flex flex-col gap-6 absolute top-2 right-0 px-3 py-1">
-              <button className="text-gray-600 ">
-                <Heart />
+              <button className="text-gray-600" >
+                <Heart  />
               </button>
-              <button className="text-gray-600">
+              <Link to={`/productdetails/${bestSelling?.id}`}>
+              <button className="text-gray-600" onClick={()=>setProductId(bestSelling?.id)}>
                 <Eye />
               </button>
+              </Link>
+             
             </section>
             <section className="px-3 py-2 flex flex-col gap-1">
               <h1 className="font-medium">{bestSelling?.title}</h1>
@@ -366,9 +379,12 @@ const Home: React.FC = () => {
 
       {/* Icons on the right */}
       <section className="flex flex-col absolute top-3 right-4 gap-2">
+        <Link to={`/productdetails/${ourproducts?.id}`}>
         <button className="text-gray-600 hover:text-gray-800">
           <Eye className="w-6 h-6" />
         </button>
+        </Link>
+       
         <button className="text-gray-600 hover:text-gray-800">
           <Heart className="w-6 h-6" />
         </button>
