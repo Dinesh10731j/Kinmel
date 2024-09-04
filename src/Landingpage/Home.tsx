@@ -233,7 +233,7 @@ const Home: React.FC = () => {
               />
               <div className="flex justify-between items-center p-4">
                 <button className="text-[#DB4444] hover:text-red-600" onClick={()=>addToWishList(product)}>
-                  <Heart/>
+                  <Heart />
                 </button>
                 <Link to={`/productdetails/${product?.id}`}>
                 <button className="text-[#DB4444] hover:text-red-600" onClick={()=>setProductId(product?.id)}>
@@ -320,7 +320,7 @@ const Home: React.FC = () => {
               className="object-contain w-full h-3/4"
             />
             <section className="flex flex-col gap-6 absolute top-2 right-0 px-3 py-1">
-              <button className="text-gray-600" >
+              <button className="text-gray-600" onClick={()=>addToWishList(bestSelling)} >
                 <Heart  />
               </button>
               <Link to={`/productdetails/${bestSelling?.id}`}>
