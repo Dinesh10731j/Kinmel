@@ -389,7 +389,7 @@ const Home: React.FC = () => {
         </button>
         </Link>
        
-        <button className="text-gray-600 hover:text-gray-800">
+        <button className="text-gray-600 hover:text-gray-800" onClick={()=>addToWishList(ourproducts)}>
           <Heart className="w-6 h-6" />
         </button>
       </section>

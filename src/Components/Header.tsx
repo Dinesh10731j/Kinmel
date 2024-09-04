@@ -52,7 +52,7 @@ const Header = () => {
     <>
       <header className="flex flex-row justify-evenly items-center gap-7 py-5 px-3">
         <section>
-          <img src={KinMel_Logo} alt="KinMel_Logo" />
+          <img src={KinMel_Logo} alt="KinMel_Logo" className="h-10 w-10" />
         </section>
 
         {/* Menu Icon for Mobile */}
@@ -97,12 +97,14 @@ const Header = () => {
 
         <section>
           <form className="relative flex items-center gap-5 md:px-2 rounded-md">
-            <input
-              type="text"
-              placeholder="What are you looking for?"
-              className="w-full px-12 py-2 rounded-md bg-[#FFFFFF]"
-            />
-            <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
+          <input
+  type="text"
+  placeholder="What are you looking for?"
+  className="w-full px-4 py-2  md:px-6 md:py-2 lg:px-2 lg:py-2 rounded-md bg-[#FFFFFF] text-black placeholder-gray-500"
+  style={{ fontSize: '0.875rem' }} 
+/>
+
+            <div className="absolute right-2 top-1/2 transform -translate-y-1/2">
               <SearchIcon />
             </div>
           </form>

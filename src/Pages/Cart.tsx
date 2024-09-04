@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useCart } from "../context/cartContext";
-import { Trash } from "lucide-react";
+import { Trash2} from "lucide-react";
 
 
 
@@ -85,7 +85,7 @@ const Cart: React.FC= () => {
                   alt={item?.title}
                   className="h-20 w-20 mx-auto"
                 />
-                <Trash onClick={()=>handleRemoveCart(item?.id)} className="absolute top-2 right-2 fill-red-600 text-red-600 cursor-pointer"/>
+                <Trash2 onClick={()=>handleRemoveCart(item?.id)} className="absolute top-2 right-2 text-red-700 cursor-pointer"/>
                 <h1 className="text-gray-600 mt-2">
                   {item?.title.slice(0, 20)}
                 </h1>
