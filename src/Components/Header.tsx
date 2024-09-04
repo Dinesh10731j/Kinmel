@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import KinMel_Logo from "../assets/Codynn_Logo.png";
 import { NavLink } from "react-router-dom";
 import { useCart } from "../context/cartContext";
+import { useWishList } from "../context/wishlistContext";
 import {
   SearchIcon,
   HeartIcon,
@@ -17,6 +18,7 @@ LogInIcon
 
 const Header = () => {
   const {carts} = useCart();
+  const {wishlist} = useWishList();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -107,7 +109,18 @@ const Header = () => {
         </section>
 
         <section className="flex gap-5">
-          <HeartIcon className="cursor-pointer" />
+          <div className="relative px-4">
+          <span className="absolute top-0 right-0 ml-7 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
+        {wishlist?.length}
+      </span>
+      <NavLink to={'/wishlist'}>
+      <HeartIcon className="cursor-pointer" />
+
+      </NavLink>
+
+         
+          </div>
+        
           <div className="relative px-4">
       {/* Display the total number of items on the top-right of the cart icon */}
       <span className="absolute top-0 right-0 ml-7 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">

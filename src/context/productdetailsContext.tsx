@@ -13,7 +13,6 @@ const ProductDetailsContext = createContext<ProductDetailsContextType | undefine
 export const ProductDetailsProvider = ({ children }: { children: ReactNode }) => {
   const [productId, setProductId] = useState<string>('');
 
-  console.log('This is productid',productId);
 
   return (
     <ProductDetailsContext.Provider value={{ productId, setProductId }}>

@@ -13,6 +13,7 @@ import Speakers from "../assets/Speaker.png";
 import Perfume from "../assets/Perfume.png";
 import {Toaster} from "react-hot-toast";
 import { useProductDetailsContext } from "../context/productdetailsContext";
+import { useWishList } from "../context/wishlistContext";
 import {
   Heart,
   Eye,
@@ -34,10 +35,13 @@ import { Link } from "react-router-dom";
 
 const Home: React.FC = () => {
 
-  const {setProductId} = useProductDetailsContext()
+  const {setProductId} = useProductDetailsContext();
 
 
-  const {handleAddCart} = useCart()
+  const {handleAddCart} = useCart();
+
+
+  const {addToWishList} = useWishList();
  
   const settings = {
     dots: true,
@@ -228,7 +232,7 @@ const Home: React.FC = () => {
                 className="w-full h-48 object-contain rounded-t-lg"
               />
               <div className="flex justify-between items-center p-4">
-                <button className="text-[#DB4444] hover:text-red-600">
+                <button className="text-[#DB4444] hover:text-red-600" onClick={()=>addToWishList(product)}>
                   <Heart/>
                 </button>
                 <Link to={`/productdetails/${product?.id}`}>
