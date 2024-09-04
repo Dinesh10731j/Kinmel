@@ -2,6 +2,7 @@
 import { useNavigate } from 'react-router-dom';
 import { Check } from 'lucide-react';
 
+
 const PaymentCompletion = () => {
   const navigate = useNavigate();
 

@@ -2,17 +2,17 @@ import React, { createContext, useState, useContext, ReactNode, useCallback } fr
 import {toast} from "react-hot-toast"
 
 interface CartItem {
-  id: string;
+  id: number;
   img: string;
   title: string;
-  price: number;
+  price:number;
   quantity: number;
 }
 
 interface CartContextType {
   carts: CartItem[];
-  handleAddCart: (id: string, img: string, title: string, price: number) => void;
-  handleRemoveCart: (id: string) => void;
+  handleAddCart: (id: number, img: string, title: string, price: number) => void;
+  handleRemoveCart: (id: number) => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -28,13 +28,13 @@ export const useCart = () => {
 export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [carts, setCarts] = useState<CartItem[]>([]);
 
-  const handleAddCart = (id: string, img: string, title: string, price: number) => {
+  const handleAddCart = (id: number, img: string, title: string, price:number) => {
     toast.success('Added to your cart')
     
     setCarts((prevCart) => [...prevCart, { id, img, title, price, quantity: 1 }]);
   };
 
-  const handleRemoveCart = useCallback((id: string) => {
+  const handleRemoveCart = useCallback((id: number) => {
     setCarts((prevCart) => prevCart.filter(item => item.id !== id));
   }, [carts]);
   

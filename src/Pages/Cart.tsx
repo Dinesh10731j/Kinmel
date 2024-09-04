@@ -7,7 +7,7 @@ import { Trash } from "lucide-react";
 
 interface CartItem {
   title: string;
-  id: string;
+  id: number;
   img: string;
   name: string;
   price: number;
@@ -21,10 +21,10 @@ const Cart: React.FC= () => {
 
 
   // Local state to manage the cart
-  const [cart, setCart] = useState<CartItem[]>(carts as CartItem[]);
+  const [cart, setCart] = useState<CartItem[]>(carts as unknown as CartItem[]);
 
   // Handle quantity changes
-  const handleQuantityChange = (id: string, newQuantity: number) => {
+  const handleQuantityChange = (id: number, newQuantity: number) => {
     if (newQuantity < 1) {
       newQuantity = 1;
     }

@@ -21,6 +21,9 @@ import Checkout from './Pages/Checkout';
 import Payment from './Pages/Payment';
 import PaymentCompletion from './Pages/Paymentcompletion';
 import Productdetails from './Pages/Productdetails';
+import { WishListProvider } from './context/wishlistContext';
+import Wishlist from './Pages/Wishlist';
+
 
 const App: React.FC = () => {
   const router = createBrowserRouter([
@@ -47,6 +50,7 @@ const App: React.FC = () => {
         { path: '*', element: <Error404 /> },
         {path:'/completion', element:<PaymentCompletion/>},
         {path:'productdetails/:id',element:<Productdetails/>},
+        {path:'/wishlist',element:<Wishlist/>},
         {
           path: 'account',
           element: <Account />,
@@ -63,12 +67,16 @@ const App: React.FC = () => {
   ]);
 
   return (
-    <ProductDetailsProvider>
+    <WishListProvider>
+       <ProductDetailsProvider>
         <CartProvider>
       <RouterProvider router={router} />
     </CartProvider>
 
     </ProductDetailsProvider>
+
+    </WishListProvider>
+   
   
   );
 };
