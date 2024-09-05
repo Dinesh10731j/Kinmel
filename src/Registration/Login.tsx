@@ -2,7 +2,7 @@ import Login_Image from "../assets/Side Image.png";
 import { Link } from "react-router-dom";
 import { UseUserLogin } from "../hooks/Useuserlogin";
 import {useForm,SubmitHandler} from "react-hook-form";
-import {Toaster,toast} from "react-hot-toast";
+import {Toaster} from "react-hot-toast";
 import { CircularProgress } from "@mui/material";
 
 interface UserLoginFormType{
@@ -18,19 +18,7 @@ const Login = () => {
 
   const OnLogin:SubmitHandler<UserLoginFormType> = (data)=>{
 
-    mutation.mutate(data,{
-
-      onSuccess:(data)=>{
-        toast.success(data.msg || 'User login successful!')
-
-      },
-      onError:(err)=>{
-
-        toast.error(err.message || 'User login failed!')
-
-
-      }
-    });
+    mutation.mutate(data);
     reset();
 
   }

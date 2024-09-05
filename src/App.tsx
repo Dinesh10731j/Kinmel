@@ -24,6 +24,7 @@ import Productdetails from './Pages/Productdetails';
 import { WishListProvider } from './context/wishlistContext';
 import Wishlist from './Pages/Wishlist';
 import Admin from './Admindashboard/Admin';
+import AdminRoute from './Protectedroutes/AdminRoute';
 
 
 const App: React.FC = () => {
@@ -67,8 +68,11 @@ const App: React.FC = () => {
     },
 
     {
-      path:'/dashboard',
-      element:<Admin/>
+      path: '/dashboard/*',
+      element: <AdminRoute />,  // Protect the dashboard route
+      children: [
+        { path: 'admin', element: <Admin /> }, // Nested route under /dashboard
+      ]
     }
   ]);
 
