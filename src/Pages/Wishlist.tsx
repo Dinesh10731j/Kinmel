@@ -24,7 +24,7 @@ const Wishlist = () => {
           Wishlist
         </NavLink>
       </div>
-      <h1 className="text-3xl font-bold mb-6">My Wishlist</h1>
+      <h1 className=" text-xl md:text-3xl font-bold mb-6">My Wishlist</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
         {wishlist.length > 0 ? (
           wishlist.map((item, index) => (
@@ -64,7 +64,7 @@ const Wishlist = () => {
       </div>
 
       <section className="mt-12">
-        <h2 className="text-2xl font-bold mb-6">Just For You</h2>
+        <h2 className=" text-xl md:text-2xl font-bold mb-6">Just For You</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {productsToShow.length > 0 ? (
             productsToShow.map((item:any) => (

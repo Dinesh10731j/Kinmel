@@ -3,7 +3,7 @@ import Login_Image from "../assets/Side Image.png";
 import { Link } from "react-router-dom";
 import { UserUserSignup } from "../hooks/Useusersignup";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Toaster,toast } from "react-hot-toast";
+import { Toaster} from "react-hot-toast";
 import { CircularProgress } from "@mui/material";
 
 
@@ -25,12 +25,7 @@ const Signup = () => {
 
   // Handle form submission
   const onSubmit: SubmitHandler<SignupDetails> =  (data) => {
-    try {
-       mutation.mutate(data);
-     toast.success("Signup successful!");
-    } catch{
-     toast.error("Signup failed!");
-    }
+  mutation.mutate(data);
 
    reset();
   };
