@@ -1,7 +1,8 @@
+import toast from "react-hot-toast";
 import axiosInstance from "../Endpoints/axiosInstance";
 import { endpoints } from "../Endpoints/endpoints";
 import {useMutation} from "@tanstack/react-query";
-
+import { useNavigate } from "react-router-dom";
 const {Usersignup} = endpoints;
 
 interface Signupdetails{
@@ -11,6 +12,7 @@ interface Signupdetails{
 }
 
 const UserSignup = async (data:Signupdetails) => {
+
     try{
 
         const response = await axiosInstance.post(Usersignup,data);
@@ -28,5 +30,17 @@ const UserSignup = async (data:Signupdetails) => {
 
 
 export const UserUserSignup = ()=>{
-    return useMutation({mutationKey:['usersignup'],mutationFn:UserSignup})
+    const navigate = useNavigate();
+    return useMutation({mutationKey:['usersignup'],mutationFn:UserSignup,
+        onSuccess:()=>{
+
+            toast.success('User signup sucessfully');
+
+            setTimeout(()=>{
+                navigate("/auth/login")
+            },1000)
+
+        },onError:()=>{
+            toast.error('User signup failed! ')
+        }})
 }
