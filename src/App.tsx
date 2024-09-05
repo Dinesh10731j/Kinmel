@@ -23,6 +23,7 @@ import PaymentCompletion from './Pages/Paymentcompletion';
 import Productdetails from './Pages/Productdetails';
 import { WishListProvider } from './context/wishlistContext';
 import Wishlist from './Pages/Wishlist';
+import Admin from './Admindashboard/Admin';
 
 
 const App: React.FC = () => {
@@ -64,6 +65,11 @@ const App: React.FC = () => {
         },
       ],
     },
+
+    {
+      path:'/dashboard',
+      element:<Admin/>
+    }
   ]);
 
   return (
