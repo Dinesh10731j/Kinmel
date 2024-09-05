@@ -28,7 +28,7 @@ export const UseUserLogin = () => {
         mutationKey: ['userlogin'],
         mutationFn: UserLogin,
         onSuccess: (data) => {
-            console.log('This is logindata', data);
+          
             Cookies.set('token', data?.token);
             Cookies.set("role", data?.role);
 
@@ -44,7 +44,7 @@ export const UseUserLogin = () => {
 
                 }
                 else {
-                    navigate('/dashboard'); 
+                    navigate('/'); 
                 }
             }, 1000);
         },

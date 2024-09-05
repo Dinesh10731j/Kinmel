@@ -1,8 +1,13 @@
 
+import { Outlet,Navigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const SellerRoute = () => {
+const role = Cookies.get("role");
   return (
-    <div>SellerRoute</div>
+   <>
+   {role === 'seller'?<Outlet/>:<Navigate to={'/auth/login'}/>}
+   </>
   )
 }
 

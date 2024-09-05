@@ -25,6 +25,8 @@ import { WishListProvider } from './context/wishlistContext';
 import Wishlist from './Pages/Wishlist';
 import Admin from './Admindashboard/Admin';
 import AdminRoute from './Protectedroutes/AdminRoute';
+import SellerRoute from './Protectedroutes/SellerRoute';
+import Seller from './Sellerdashboard/Seller';
 
 
 const App: React.FC = () => {
@@ -49,7 +51,7 @@ const App: React.FC = () => {
         { path: 'auth/login', element: <Login /> },
         { path: 'checkout', element: <Checkout /> },
         {path:'/payment',element:<Payment/>},
-        { path: '*', element: <Error404 /> },
+        {path: '*', element: <Error404 /> },
         {path:'/completion', element:<PaymentCompletion/>},
         {path:'productdetails/:id',element:<Productdetails/>},
         {path:'/wishlist',element:<Wishlist/>},
@@ -72,6 +74,16 @@ const App: React.FC = () => {
       element: <AdminRoute />,  // Protect the dashboard route
       children: [
         { path: 'admin', element: <Admin /> }, // Nested route under /dashboard
+      ]
+    },
+
+
+
+    {
+      path:'/dashboard/*',
+      element:<SellerRoute/>,
+      children:[
+        {path:'seller',element:<Seller/>}
       ]
     }
   ]);
