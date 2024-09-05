@@ -1,8 +1,16 @@
-
-
+import Cookies from "js-cookie";
+import { Outlet,Navigate } from "react-router-dom";
 const AdminRoute = () => {
+
+
+  const role = Cookies.get('role');
+if(!role){
+  throw new Error('Token not found')
+}
+
   return (
-    <div>AdminRoute</div>
+    <>{role==='admin'?<Outlet/>:<Navigate to={'/auth/login'}/>}</>
+    
   )
 }
 

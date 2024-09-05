@@ -14,8 +14,8 @@ const Admin = () => {
                 to="/dashboard"
                 className={({ isActive }) =>
                   isActive
-                    ? "text-white bg-gray-800 p-2 block rounded"
-                    : "text-gray-700 hover:bg-gray-200 p-2 block rounded"
+                    ? "text-white bg-[#DB4444] p-2 block rounded shadow-md"
+                    : "text-gray-700 hover:bg-red-700 p-2 block rounded"
                 }
               >
                 Dashboard
