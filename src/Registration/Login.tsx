@@ -68,7 +68,7 @@ const Login = () => {
             </div>
             <button
               type="submit"
-              className="bg-[#DB4444] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className="bg-[#DB4444] w-full lg:w-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline "
             >
              {mutation?.isPending?<CircularProgress size={24} color="primary"/>:'Login'}
             </button>
