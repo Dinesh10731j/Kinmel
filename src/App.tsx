@@ -27,6 +27,7 @@ import Admin from './Admindashboard/Admin';
 import AdminRoute from './Protectedroutes/AdminRoute';
 import SellerRoute from './Protectedroutes/SellerRoute';
 import Seller from './Sellerdashboard/Seller';
+import AddNewProduct from './Pages/Addnewproduct';
 
 
 const App: React.FC = () => {
@@ -83,7 +84,8 @@ const App: React.FC = () => {
       path:'/dashboard/*',
       element:<SellerRoute/>,
       children:[
-        {path:'seller',element:<Seller/>}
+        {path:'seller',element:<Seller/>},
+        {path:'add-product', element:<AddNewProduct/>}
       ]
     }
   ]);
