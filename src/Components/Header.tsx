@@ -3,8 +3,9 @@ import KinMel_Logo from "../assets/Codynn_Logo.png";
 import { NavLink } from "react-router-dom";
 import { useCart } from "../context/cartContext";
 import { useWishList } from "../context/wishlistContext";
+import Cookies from "js-cookie";
 import {
-  SearchIcon,
+  // SearchIcon,
   HeartIcon,
   ShoppingCart,
   MenuIcon,
@@ -13,7 +14,8 @@ import {
 XCircle,
 ShoppingBagIcon,
 Star,
-LogInIcon
+LogInIcon,
+
 } from "lucide-react";
 
 const Header = () => {
@@ -22,6 +24,12 @@ const Header = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+
+  const Logout = ()=>{
+    Cookies.remove('token');
+    Cookies.remove('role');
+  }
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -104,9 +112,9 @@ const Header = () => {
   style={{ fontSize: '0.875rem' }} 
 />
 
-            <div className="absolute right-2 top-1/2 transform -translate-y-1/2">
+            {/* <div className="absolute right-2 top-1/2 transform -translate-y-1/2">
               <SearchIcon />
-            </div>
+            </div> */}
           </form>
         </section>
 
@@ -156,7 +164,7 @@ const Header = () => {
           <Star size={16} />
           <NavLink to={""}>My Reviews</NavLink>
         </li>
-        <li className="px-2 py-2 hover:bg-gray-100 flex items-center gap-2">
+        <li className="px-2 py-2 hover:bg-gray-100 flex items-center gap-2" onClick={Logout}>
           <LogInIcon size={16} />
           <NavLink to={""}>Logout</NavLink>
         </li>
