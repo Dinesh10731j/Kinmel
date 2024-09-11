@@ -1,6 +1,10 @@
 import { NavLink, Outlet } from "react-router-dom";
+import { UseUserDetails } from "../hooks/Useuserdetails";
+import { CircularProgress } from "@mui/material";
 
 const Account = () => {
+
+  const {data:username,isLoading} = UseUserDetails();
   return (
     <>
       <section className="flex justify-between px-3 py-2">
@@ -24,7 +28,10 @@ const Account = () => {
           </NavLink>
         </section>
         <section>
-          <h1>Hi,<span className="text-[#DB4444]">Dinesh Tamang</span></h1>
+          {
+            isLoading?<CircularProgress size={24}/>:<h1>Hi,<span className="text-[#DB4444]">{username?.name}</span></h1>
+          }
+          
         </section>
       </section>
       <section className=" flex flex-col md:flex-row justify-evenly mt-20">

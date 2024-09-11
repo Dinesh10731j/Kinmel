@@ -5,6 +5,7 @@ import Cookies from "js-cookie";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
 
+
 const { Userlogin } = endpoints;
 
 interface UserloginType {
@@ -28,7 +29,7 @@ export const UseUserLogin = () => {
         mutationKey: ['userlogin'],
         mutationFn: UserLogin,
         onSuccess: (data) => {
-          
+         Cookies.set('userId',data?.userid)
             Cookies.set('token', data?.token);
             Cookies.set("role", data?.role);
 
