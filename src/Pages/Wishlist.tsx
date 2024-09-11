@@ -4,14 +4,32 @@ import { Link, NavLink } from 'react-router-dom';
 import { UseGetProductsImages } from '../hooks/Usegetproductsimage';
 import { useCart } from '../context/cartContext';
 import { Toaster } from 'react-hot-toast';
+import { Star } from 'lucide-react';
 
 const Wishlist = () => {
   const { wishlist, removeFromWishList } = useWishList();
   const {handleAddCart} = useCart();
   const { data: justforyou } = UseGetProductsImages();
 
+
+
   // Slice to show only the first 4 products
   const productsToShow = justforyou?.slice(0, 4) || [];
+
+  const renderStars = (rating: number) => {
+    const stars = [];
+    for (let i = 0; i < 5; i++) {
+      stars.push(
+        <Star
+          key={i}
+          className={`text-yellow-400 ${
+            i < Math.floor(rating) ? "fill-current" : "text-gray-400"
+          }`}
+        />
+      );
+    }
+    return stars;
+  };
 
   return (
     <div className="container mx-auto p-6 mt-7">
@@ -40,8 +58,8 @@ const Wishlist = () => {
               <div className="p-4">
                 <h2 className="text-xl font-semibold mb-2">{item?.title}</h2>
                 <p className="text-gray-700 mb-2">{item?.price}</p>
-                <p className="text-yellow-500 mb-4">
-                  Rating: {item?.rating?.rate} ⭐
+                <p className="text-yellow-500 mb-4 flex">
+                  { renderStars(item?.rating?.rate)}
                 </p>
                 <div className="flex justify-between items-center">
                   <button className="bg-[#DB4444] cursor-pointer hover:bg-red-700 text-white px-4 py-2 rounded-md" onClick={()=>handleAddCart(item?.id,item?.image,item?.title,item?.price)}>
@@ -79,7 +97,8 @@ const Wishlist = () => {
                 />
                 <div className="p-4 flex flex-col flex-grow">
                   <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                  <p className="text-gray-700 mb-4">{item.price}</p>
+                  <p className="text-gray-700 mb-4">${item.price}</p>
+                  <h1 className='flex py-2 '>{renderStars(item?.rating?.rate)}</h1>
                   <div className="flex justify-between items-center mt-auto">
                     <button className="bg-[#DB4444] text-white px-4 py-2 rounded-md hover:bg-red-700" onClick={()=>handleAddCart(item?.id,item?.image,item?.title,item?.price)}>
                       <ShoppingCart className="w-5 h-5 inline-block mr-1" />
