@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 const {Usersignup} = endpoints;
 
 interface Signupdetails{
+    name:string,
     email:string,
     password:string,
     confirmpassword:string,

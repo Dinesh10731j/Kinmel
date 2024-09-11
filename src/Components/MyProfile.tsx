@@ -1,8 +1,9 @@
 import { useForm } from "react-hook-form";
+import { UseUserDetails } from "../hooks/Useuserdetails";
+
 
 interface MyprofileType {
-  firstName: string;
-  lastName: string;
+  fullName: string;
   email: string;
   currentPassword: string;
   newPassword: string;
@@ -10,11 +11,15 @@ interface MyprofileType {
 }
 
 const MyProfile = () => {
+
+
+  const {data:userdetails} =  UseUserDetails();
+
+  console.log(userdetails);
   const { register, handleSubmit, watch, formState: { errors } } = useForm<MyprofileType>({
     defaultValues:{
-      firstName:'Dinesh',
-      lastName:'Tamang',
-      email:'www.dineshtmg1122@gmail.com',
+      fullName:userdetails?.name,
+      email:userdetails?.email,
       
     }
   });
@@ -33,26 +38,17 @@ const MyProfile = () => {
       <h1 className="text-2xl font-bold mb-6">Edit My Profile</h1>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
-          <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">First Name</label>
+          <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">Full Name</label>
           <input
             id="firstName"
-            {...register("firstName", { required: "First name is required" })}
+            {...register("fullName", { required: "Full name is required" })}
             className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
             type="text"
           />
-          {errors.firstName && <p className="text-red-500 text-sm">{errors.firstName.message}</p>}
+          {errors.fullName && <p className="text-red-500 text-sm">{errors.fullName.message}</p>}
         </div>
 
-        <div>
-          <label htmlFor="lastName" className="block text-sm font-medium text-gray-700">Last Name</label>
-          <input
-            id="lastName"
-            {...register("lastName", { required: "Last name is required" })}
-            className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-            type="text"
-          />
-          {errors.lastName && <p className="text-red-500 text-sm">{errors.lastName.message}</p>}
-        </div>
+       
 
         <div>
           <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email Address</label>

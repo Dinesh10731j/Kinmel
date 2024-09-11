@@ -3,6 +3,7 @@ export const endpoints = {
     Userlogin:'/api/login',
     Userpaymentconfig:'/api/config',
     Userpaymentintent:'/api/create-payment-intent',
-    Getproductdetails:'/products/'
+    Getproductdetails:'/products/',
+    Getuserdetails:'/api/userdetails',
     
 }
