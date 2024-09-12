@@ -29,6 +29,7 @@ const Header = () => {
   const Logout = ()=>{
     Cookies.remove('token');
     Cookies.remove('role');
+    Cookies.remove('userId');
   }
 
   const toggleSidebar = () => {
@@ -140,7 +141,7 @@ const Header = () => {
         <ShoppingCart className="cursor-pointer" />
       </NavLink>
     </div>
-          <div onClick={toggleDropdown} className="relative cursor-pointer">
+          <div onClick={toggleDropdown} className="relative cursor-pointer z-10">
             <UserIcon />
             {isDropdownOpen && (
               <div

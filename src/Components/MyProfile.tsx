@@ -15,7 +15,7 @@ const MyProfile = () => {
 
   const {data:userdetails} =  UseUserDetails();
 
-  console.log(userdetails);
+
   const { register, handleSubmit, watch, formState: { errors } } = useForm<MyprofileType>({
     defaultValues:{
       fullName:userdetails?.name,

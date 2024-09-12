@@ -57,7 +57,7 @@ const Wishlist = () => {
               />
               <div className="p-4">
                 <h2 className="text-xl font-semibold mb-2">{item?.title}</h2>
-                <p className="text-gray-700 mb-2">{item?.price}</p>
+                <p className="text-gray-700 mb-2">${item?.price}</p>
                 <p className="text-yellow-500 mb-4 flex">
                   { renderStars(item?.rating?.rate)}
                 </p>
