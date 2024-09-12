@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { Star } from "lucide-react";
 import { useCart } from "../context/cartContext";
 import { Toaster } from "react-hot-toast";
+import { ShoppingCart } from "lucide-react";
 
 type ProductIdType = {
     id: string;
@@ -69,8 +70,8 @@ const ProductDetails = () => {
             <p className="text-gray-600 text-sm md:text-base leading-relaxed">
               {productinfo?.description}
             </p>
-            <button onClick={()=>handleAddCart(productinfo?.id,productinfo?.image,productinfo?.title,productinfo?.price)} className="mt-4 px-6 py-2 bg-[#DB4444] hover:bg-red-600 text-white rounded-lg transition">
-              Add to Cart
+            <button onClick={()=>handleAddCart(productinfo?.id,productinfo?.image,productinfo?.title,productinfo?.price)} className=" flex justify-center gap-4 mt-4 px-6 py-2 bg-[#DB4444] hover:bg-red-600 text-white rounded-lg transition">
+            <ShoppingCart/>  Add to Cart
             </button>
           </div>
           <Toaster position="top-center"/>

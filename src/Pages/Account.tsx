@@ -29,7 +29,7 @@ const Account = () => {
         </section>
         <section>
           {
-            isLoading?<CircularProgress size={24}/>:<h1>Hi,<span className="text-[#DB4444]">{username?.name}</span></h1>
+            isLoading?<CircularProgress size={24}/>:<h1>Hi,<span className="text-[#DB4444]">{username?.name || 'Guest' }</span></h1>
           }
           
         </section>
