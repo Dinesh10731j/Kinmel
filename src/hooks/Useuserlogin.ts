@@ -33,8 +33,12 @@ export const UseUserLogin = () => {
             Cookies.set('token', data?.token);
             Cookies.set("role", data?.role);
 
+
+            
+            toast.success('Login Successful');
+
             setTimeout(() => {
-                toast.success('Login Successful');
+            
 
                 if (data?.role === 'admin') {
                     navigate('/dashboard/admin'); 

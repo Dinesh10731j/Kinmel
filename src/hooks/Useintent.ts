@@ -6,7 +6,6 @@ const PaymentIntent = async ()=>{
     try{
 const response = await axiosInstance.post(Userpaymentintent);
 
-
 return response.data;
 
     
