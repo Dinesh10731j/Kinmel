@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import { UseUserDetails } from "../hooks/Useuserdetails";
+import { useNavigate } from "react-router-dom";
 
 
 interface MyprofileType {
@@ -11,6 +12,8 @@ interface MyprofileType {
 }
 
 const MyProfile = () => {
+
+  const navigate = useNavigate();
 
 
   const {data:userdetails} =  UseUserDetails();
@@ -25,12 +28,14 @@ const MyProfile = () => {
   });
 
   const onSubmit = (data: MyprofileType) => {
+
     console.log(data);
+  
   };
 
   const handleCancel = () => {
-    console.log("Cancel button clicked");
-    // Add your cancel logic here
+  
+navigate("/account");
   };
 
   return (
@@ -118,6 +123,7 @@ const MyProfile = () => {
           >
             Save Changes
           </button>
+        
         </div>
       </form>
     </section>
