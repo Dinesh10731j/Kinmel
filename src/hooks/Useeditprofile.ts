@@ -20,8 +20,9 @@ const editProfile = async (editprofiledata:editProfileType)=>{
 
         return response.data;
 
-    }catch{
-        throw new Error('Failed to edit profile');
+    }catch(error:any){
+        const errorMessage = error.response?.data?.msg || 'Failed to edit profile';
+        throw new Error(errorMessage);
     }
 }
 
@@ -32,8 +33,8 @@ export const UseEditProfile = ()=>{
     return useMutation({mutationKey:['editprofile'],mutationFn:editProfile,onSuccess:()=>{
         toast.success('Profile updated successfully')
         
-    },onError:()=>{
-        toast.error('Failed to edit profile')
+    },onError:(error)=>{
+        toast.error(error?.message)
 
     }});
 
