@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { UseUserDetails } from "../hooks/Useuserdetails";
 import { useNavigate } from "react-router-dom";
+import { UseEditProfile } from "../hooks/Useeditprofile";
 
 
 interface MyprofileType {
@@ -17,6 +18,7 @@ const MyProfile = () => {
 
 
   const {data:userdetails} =  UseUserDetails();
+  const mutation = UseEditProfile();
 
 
   const { register, handleSubmit, watch, formState: { errors } } = useForm<MyprofileType>({
@@ -29,7 +31,7 @@ const MyProfile = () => {
 
   const onSubmit = (data: MyprofileType) => {
 
-    console.log(data);
+   mutation.mutate(data);
   
   };
 

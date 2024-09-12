@@ -1,10 +1,12 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { UseUserDetails } from "../hooks/Useuserdetails";
 import { CircularProgress } from "@mui/material";
+import { Toaster } from "react-hot-toast";
 
 const Account = () => {
 
   const {data:username,isLoading} = UseUserDetails();
+  
   return (
     <>
       <section className="flex justify-between px-3 py-2">
@@ -100,6 +102,8 @@ const Account = () => {
         <section>
           <Outlet />
         </section>
+
+        <Toaster position="top-center"/>
       </section>
     </>
   );
