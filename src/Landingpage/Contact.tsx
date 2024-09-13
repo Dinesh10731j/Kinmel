@@ -1,7 +1,9 @@
 import { NavLink } from "react-router-dom";
 import { PhoneCall, Mail } from "lucide-react";
 import { useForm } from "react-hook-form";
-
+import { Toaster } from "react-hot-toast";
+import { UseUserContact } from "../hooks/Useusercontact";
+import { CircularProgress } from "@mui/material";
 
 interface contactDataType{
   name:string,
@@ -14,10 +16,13 @@ const Contact = () => {
 
   const {register,handleSubmit,formState:{errors}} = useForm<contactDataType>();
 
+  const mutation = UseUserContact();
+
+
+
 
   const onsubmit = (data:contactDataType)=>{
-
-    console.log(data);
+mutation.mutate(data);
 
   }
   return (
@@ -103,11 +108,12 @@ const Contact = () => {
               type="submit"
               className="bg-[#DB4444] text-white py-2 px-4 rounded-md"
             >
-              Send Message
+              {mutation?.isPending?<CircularProgress size={24} sx={{color:'black'}}/>:'Send Message'}
             </button>
           </form>
         </section>
       </section>
+      <Toaster position="top-center"/>
     </section>
   );
 };
