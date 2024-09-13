@@ -5,6 +5,7 @@ export const endpoints = {
     Userpaymentintent:'/api/create-payment-intent',
     Getproductdetails:'/products/',
     Getuserdetails:'/api/userdetails',
-    Editprofile:'/api/editprofile'
+    Editprofile:'/api/editprofile',
+    Usercontact:'/api/contact',
     
 }
