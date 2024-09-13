@@ -1,7 +1,25 @@
 import { NavLink } from "react-router-dom";
 import { PhoneCall, Mail } from "lucide-react";
+import { useForm } from "react-hook-form";
+
+
+interface contactDataType{
+  name:string,
+  email:string,
+  phone:string,
+  message:string
+}
 
 const Contact = () => {
+
+  const {register,handleSubmit,formState:{errors}} = useForm<contactDataType>();
+
+
+  const onsubmit = (data:contactDataType)=>{
+
+    console.log(data);
+
+  }
   return (
     <section className="flex flex-col gap-20 px-3 py-2">
       {/* Breadcrumb Navigation */}
@@ -52,26 +70,35 @@ const Contact = () => {
         {/* Form Section */}
         <section className="flex-1">
           <h2 className="font-medium text-lg mb-4">Contact Form</h2>
-          <form className="flex flex-col gap-4">
+          <form className="flex flex-col gap-4" onSubmit={handleSubmit(onsubmit)}>
             <input
               type="text"
               placeholder="Your Name"
               className="border border-gray-300 p-2 rounded-md"
+              {...register('name',{required:'Username is required'})}
             />
+
+            {errors.message && <p className="text-red-500 text-sm">{errors.name?.message}</p>}
             <input
               type="email"
               placeholder="Your Email"
               className="border border-gray-300 p-2 rounded-md"
+              {...register('email',{required:'E-mail is required'})}
             />
+            {errors.message && <p className="text-red-500 text-sm">{errors.email?.message}</p>}
             <input
-              type="email"
+              type="text"
               placeholder="Your Phone"
               className="border border-gray-300 p-2 rounded-md"
+              {...register('phone',{required:'Phone is required'})}
             />
+            {errors.message && <p className="text-red-500 text-sm">{errors.phone?.message}</p>}
             <textarea
               placeholder="Your Message"
               className="border border-gray-300 p-2 rounded-md h-32"
+              {...register('message',{required:'Message is required'})}
             />
+           {errors.message && <p className="text-red-500 text-sm">{errors.message?.message}</p>}
             <button
               type="submit"
               className="bg-[#DB4444] text-white py-2 px-4 rounded-md"
