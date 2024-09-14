@@ -17,7 +17,7 @@ const editProfile = async (editprofiledata: editProfileType) => {
 
     return response.data;
   } catch (error: any) {
-    const errorMessage = error.response?.data?.msg || "Failed to edit profile";
+    const errorMessage = error.response?.data?.msg ??"Failed to edit profile";
     throw new Error(errorMessage);
   }
 };
