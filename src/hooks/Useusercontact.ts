@@ -16,7 +16,7 @@ const userContact = async (contactdata: ContactType) => {
     return response?.data;
   } catch (error: any) {
     const errorMessage =
-      error?.response?.data?.msg || "Failed to send user contact details";
+      error?.response?.data?.msg ?? "Failed to send user contact details";
     
     throw new Error(errorMessage);
   }

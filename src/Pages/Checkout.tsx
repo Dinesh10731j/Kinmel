@@ -15,7 +15,7 @@ const Checkout = () => {
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
+console.log(event)
     if (!stripe || !elements) {
       return;
     }

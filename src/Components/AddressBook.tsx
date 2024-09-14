@@ -23,6 +23,7 @@ const AddressBook: React.FC = () => {
   });
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
+    console.log(data)
     if (editingIndex !== null) {
       const updatedAddresses = addresses.map((addr, idx) =>
         idx === editingIndex ? data : addr
