@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useForm, Controller, SubmitHandler } from 'react-hook-form';
+import { useForm, SubmitHandler } from 'react-hook-form';
 
 interface Address {
   name: string;
@@ -15,7 +15,7 @@ const AddressBook: React.FC = () => {
   const [addresses, setAddresses] = useState<Address[]>([]);
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
 
-  const { control, handleSubmit, reset, setValue } = useForm<FormValues>({
+  const {handleSubmit, reset, setValue,formState:{errors},register } = useForm<FormValues>({
     defaultValues: {
       name: '',
       address: '',
@@ -23,7 +23,7 @@ const AddressBook: React.FC = () => {
   });
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
-    console.log(data)
+
     if (editingIndex !== null) {
       const updatedAddresses = addresses.map((addr, idx) =>
         idx === editingIndex ? data : addr
@@ -57,31 +57,28 @@ const AddressBook: React.FC = () => {
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-gray-700">Name</label>
-          <Controller
-            name="name"
-            control={control}
-            render={({ field }) => (
+        
               <input
-                {...field}
+               
                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                 placeholder="Enter name"
+                {...register('name',{required:'Name is required'})}
               />
-            )}
-          />
+              {errors.name?.message && <p className='text-red-500 text-sm'>{errors?.name.message}</p>}
+           
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700">Address</label>
-          <Controller
-            name="address"
-            control={control}
-            render={({ field }) => (
+         
               <input
-                {...field}
+             
                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                 placeholder="Enter address"
+                {...register('address',{required:'Address is required'})}
               />
-            )}
-          />
+
+              {errors.name?.message && <p className='text-red-500 text-sm'>{errors?.address?.message}</p>}
+           
         </div>
         <button
           type="submit"
