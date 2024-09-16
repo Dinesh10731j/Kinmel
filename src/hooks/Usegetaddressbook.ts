@@ -9,7 +9,7 @@ const getAddressBook = async () => {
 
     const response = await axiosInstance.get(`${Getaddressbook}/${userId}`);
 
-    return response.data;
+    return response.data?.data;
   } catch (error: any) {
     const errorMessage =
       error.response?.data?.msg ?? "Failed to get user addressbook";

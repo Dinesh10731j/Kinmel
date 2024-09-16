@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { UseUserAddressBook } from '../hooks/Useaddressbook';
 import { UseGetAddressBook } from '../hooks/Usegetaddressbook';
 import { Toaster } from 'react-hot-toast';
+import { Edit,Trash2 } from 'lucide-react';
+import { CircularProgress } from '@mui/material';
 interface Address {
+  _id:string
   name: string;
   address: string;
 }
@@ -18,14 +21,12 @@ const AddressBook: React.FC = () => {
 
   const mutation = UseUserAddressBook();
 
-  const {data:addressbook} = UseGetAddressBook();
+  const {data:addressbook,isLoading} = UseGetAddressBook(); 
 
  
 
-  const [addresses, setAddresses] = useState<Address[]>([]);
-  const [editingIndex, setEditingIndex] = useState<number | null>(null);
 
-  const {handleSubmit, reset, setValue,formState:{errors},register } = useForm<FormValues>({
+  const {handleSubmit, reset,formState:{errors},register} = useForm<FormValues>({
     defaultValues: {
       name: '',
       address: '',
@@ -34,31 +35,17 @@ const AddressBook: React.FC = () => {
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     mutation.mutate(data);
-    if (editingIndex !== null) {
-      
-      const updatedAddresses = addressbook?.map((addr: any, idx: number) =>
-        idx === editingIndex ? data : addr
-      );
-      setAddresses(updatedAddresses);
-      setEditingIndex(null);
-    } else {
-      setAddresses([...addresses, data]);
-    }
+   
     reset();
   };
 
-  const handleEdit = (index: number) => {
-    setEditingIndex(index);
-    setValue('name', addresses[index].name);
-    setValue('address', addresses[index].address);
+  const handleEdit = (index: string) => {
+    console.log(index);
+   
   };
 
-  const handleDelete = (index: number) => {
-    setAddresses(addresses.filter((_, idx) => idx !== index));
-    if (editingIndex === index) {
-      setEditingIndex(null);
-      reset();
-    }
+  const handleDelete = (index: string) => {
+  console.log(index)
   };
 
   return (
@@ -95,37 +82,48 @@ const AddressBook: React.FC = () => {
           type="submit"
           className="w-full py-2 px-4 mb-4 bg-[#DB4444] text-white font-semibold rounded-md hover:bg-[#df5353] focus:outline-none focus:ring-2 focus:ring-indigo-500"
         >
-          {editingIndex !== null ? 'Update' : 'Add'} Address
+         Add
         </button>
       </form>
 
-      <ul className="mt-6 space-y-4 mb-3">
-        {addresses.map((addr, index) => (
-          <li
-            key={index}
-            className="flex justify-between items-center p-4 bg-gray-100 rounded-md shadow-md"
-          >
-            <div>
-              <strong className="text-lg text-gray-800">{addr.name}</strong>
-              <p className="text-sm text-gray-600">{addr.address}</p>
-            </div>
-            <div className="space-x-2">
-              <button
-                onClick={() => handleEdit(index)}
-                className="text-indigo-600 hover:text-indigo-900"
-              >
-                Edit
-              </button>
-              <button
-                onClick={() => handleDelete(index)}
-                className="text-red-600 hover:text-red-900"
-              >
-                Delete
-              </button>
-            </div>
-          </li>
-        ))}
-      </ul>
+      {
+addressbook?.length < 0 ?(
+  <h1>Addressbook not found...</h1>
+):isLoading?(
+  <CircularProgress size={24} sx={{color:'black'}}/>
+):(
+  <ul className="mt-6 space-y-4 mb-3">
+  {addressbook?.map((addr:Address, index:number) => (
+    <li
+      key={index}
+      className="flex justify-between items-center p-4 bg-gray-100 rounded-md shadow-md"
+    >
+      <div>
+        <strong className="text-lg text-gray-800">{addr?.name}</strong>
+        <p className="text-sm text-gray-600">{addr?.address}</p>
+      </div>
+      <div className="space-x-2">
+        <button
+          onClick={() => handleEdit(addr?._id)}
+          className="text-indigo-600 hover:text-indigo-900"
+        >
+          <Edit/>
+        </button>
+        <button
+          onClick={() => handleDelete(addr?._id)}
+          className="text-red-600 hover:text-red-900"
+        >
+          <Trash2/>
+        </button>
+      </div>
+    </li>
+  ))}
+</ul>
+)
+
+      }
+
+     
       <Toaster position='top-center'/>
     </div>
   );
