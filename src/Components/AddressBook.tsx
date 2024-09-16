@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { UseUserAddressBook } from '../hooks/Useaddressbook';
+import { UseGetAddressBook } from '../hooks/Usegetaddressbook';
 import { Toaster } from 'react-hot-toast';
 interface Address {
   name: string;
@@ -17,6 +18,10 @@ const AddressBook: React.FC = () => {
 
   const mutation = UseUserAddressBook();
 
+  const {data:addressbook} = UseGetAddressBook();
+
+ 
+
   const [addresses, setAddresses] = useState<Address[]>([]);
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
 
@@ -31,7 +36,7 @@ const AddressBook: React.FC = () => {
     mutation.mutate(data);
     if (editingIndex !== null) {
       
-      const updatedAddresses = addresses.map((addr, idx) =>
+      const updatedAddresses = addressbook?.map((addr: any, idx: number) =>
         idx === editingIndex ? data : addr
       );
       setAddresses(updatedAddresses);
