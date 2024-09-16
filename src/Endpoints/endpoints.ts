@@ -7,6 +7,7 @@ export const endpoints = {
     Getuserdetails:'/api/userdetails',
     Editprofile:'/api/editprofile',
     Usercontact:'/api/contact',
-    Addressbook:'/api/addressbook'
+    Addressbook:'/api/addressbook',
+    Getaddressbook:'/api/getaddressbook'
     
 }
