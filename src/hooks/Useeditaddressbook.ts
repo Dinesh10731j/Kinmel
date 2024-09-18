@@ -12,7 +12,6 @@ interface editedDataType {
 const editAddressBook = async (editeddata: editedDataType) => {
   try {
     const response = await axiosInstance.patch(Editaddressbook, editeddata);
-
     return response.data;
   } catch (error: any) {
     const errorMessage = error?.response?.data?.msg;
