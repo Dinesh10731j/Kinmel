@@ -8,8 +8,7 @@ import toast from "react-hot-toast";
 interface addressBookType {
  
   name: string;
-  userId: string;
-  address: string;
+  addressBookId: string;
 }
 
 const addressBook = async (addressbook: addressBookType) => {
