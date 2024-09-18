@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
+import { useForm,SubmitHandler } from "react-hook-form";
 
 //  types for payment methods and form values
 interface PaymentMethod {
@@ -19,9 +19,9 @@ const PaymentsOptions: React.FC = () => {
   const [editingPaymentIndex, setEditingPaymentIndex] = useState<number | null>(
     null
   );
-  // const [editingAddressIndex, setEditingAddressIndex] = useState<number | null>(null);
+ 
 
-  const { control, handleSubmit, reset, setValue } = useForm<FormValues>({
+  const {register, handleSubmit, reset, setValue,formState:{errors} } = useForm<FormValues>({
     defaultValues: {
       name: "",
       details: "",
@@ -81,31 +81,32 @@ const PaymentsOptions: React.FC = () => {
             <label className="block text-sm font-medium text-gray-700">
               Cardholder Name
             </label>
-            <Controller
-              name="name"
-              control={control}
-              render={({ field }) => (
+           
+            
                 <input
-                  {...field}
+                {...register('name',{required:'Name is required'})}
+                 
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 />
-              )}
-            />
+                          {errors.name && <p className="text-red-700 text-sm">{errors.name?.message}</p>}
+     
           </div>
           <div className="mb-3">
             <label className="block text-sm font-medium text-gray-700">
               Card Details
             </label>
-            <Controller
-              name="details"
-              control={control}
-              render={({ field }) => (
+           
+              
                 <input
-                  {...field}
+                {...register('details',{required:'Card detail is required',pattern:{
+                  value:/^\d{16}$/,
+                  message:'Card details must be 16 digits'
+                }})}
+                 
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 />
-              )}
-            />
+                {errors.details && <p className="text-red-700 text-sm">{errors.details?.message}</p>}
+           
           </div>
           <button
             type="submit"
