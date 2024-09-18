@@ -10,5 +10,6 @@ export const endpoints = {
     Addressbook:'/api/addressbook',
     Getaddressbook:'/api/getaddressbook',
     Deleteaddressbook:'/api/address-book',
+    Editaddressbook:'/api/edit-adressbook',
     
 }

@@ -6,47 +6,52 @@ import { Toaster } from 'react-hot-toast';
 import { Edit, Trash2 } from 'lucide-react';
 import { CircularProgress } from '@mui/material';
 import { UseDeleteAddressBook } from '../hooks/Usedeleteaddressbook';
+import { UseEditAddressBook } from '../hooks/Useeditaddressbook';
 
 interface Address {
   _id: string;
   name: string;
   address: string;
+  addressBookId: string;
+  
 }
 
 interface FormValues {
   name: string;
   address: string;
-  userId: string;
+  addressBookId: string;
 }
 
 const AddressBook: React.FC = () => {
   const [editingAddress, setEditingAddress] = useState<Address | null>(null); // State for editing
   const mutation = UseUserAddressBook();
   const deleteAddressBook = UseDeleteAddressBook();
-  const { data: addressbook, isLoading } = UseGetAddressBook();
+  const editAddressBook = UseEditAddressBook();
+  const { data: addressbook, isLoading,isError } = UseGetAddressBook();
 
   const { handleSubmit, reset, formState: { errors }, register, setValue } = useForm<FormValues>({
     defaultValues: {
       name: '',
       address: '',
+      addressBookId:''
     },
   });
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     if (editingAddress) {
-      // Assuming mutation.mutate() can handle updates if an id is provided
-      mutation.mutate({ ...data, userId: editingAddress._id });
+editAddressBook.mutate(data);
     } else {
       mutation.mutate(data);
     }
     reset();
-    setEditingAddress(null); // Reset the editing state after submission
+    setEditingAddress(null);
   };
 
   const handleEdit = (data: Address) => {
     setEditingAddress(data);
     setValue('name', data.name);
     setValue('address', data.address);
+    setValue('addressBookId',data._id)
   };
 
   const handleDelete = (id: string) => {
@@ -86,7 +91,7 @@ const AddressBook: React.FC = () => {
 
       {isLoading ? (
         <CircularProgress size={24} sx={{ color: 'black' }} />
-      ) : addressbook?.length === 0 ? (
+      ): isError?(<h2>Error fetching user addressbook</h2>):addressbook?.length === 0 ? (
         <h1>Addressbook not found...</h1>
       ) : (
         <ul className="mt-6 space-y-4 mb-3">
