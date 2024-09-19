@@ -11,5 +11,7 @@ export const endpoints = {
     Getaddressbook:'/api/getaddressbook',
     Deleteaddressbook:'/api/address-book',
     Editaddressbook:'/api/edit-adressbook',
+    Paymentoption:'/api/payment-option',
+    Getpaymentoption:'/api/payment-option'
     
 }
