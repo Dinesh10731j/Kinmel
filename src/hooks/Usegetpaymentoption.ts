@@ -8,7 +8,6 @@ const fetchPaymentOption = async () => {
     const userId = Cookies.get("userId");
 
     const response = await axiosInstance.get(`${Getpaymentoption}/${userId}`);
-console.log(response.data?.data)
     return response.data?.data;
   } catch (error: any) {
     const errorMessage = error?.response?.data?.msg;
