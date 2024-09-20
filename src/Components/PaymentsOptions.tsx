@@ -1,43 +1,74 @@
-// import { useState } from "react";
+import { useState } from "react";
 import { useForm,SubmitHandler } from "react-hook-form";
 import { UsePaymentOption } from "../hooks/Usepaymentoption";
 import { CircularProgress } from "@mui/material";
 import { Toaster } from "react-hot-toast";
 import { UseGetPaymentOption } from "../hooks/Usegetpaymentoption";
+import { UseEditPaymentOption } from "../hooks/Useeditpaymentoption";
+import { Trash2,Edit } from "lucide-react";
 
 
 interface FormValues {
+  _id:string;
   name: string;
   details: string;
+  paymentOptionId:string,
+}
+
+
+interface editFormValue{
+  name:string,
+  details:string,
+  paymentOptionId:string,
+
 }
 
 const PaymentsOptions = () => {
 
   const mutation = UsePaymentOption();
+  const editPaymentOption = UseEditPaymentOption();
   const {data:getPaymentOption,isLoading} = UseGetPaymentOption();
-  //const [paymentMethods, setPaymentMethods] = useState<PaymentMethod[]>([]);
+  const [editPaymentMethods, setEditPaymentMethods] = useState<FormValues | null>(null) ;
 
  
 
-  const {register, handleSubmit, reset, formState:{errors} } = useForm<FormValues>({
+  const {register, handleSubmit, reset, formState:{errors} ,setValue} = useForm<editFormValue>({
     defaultValues: {
       name: "",
       details: "",
+      paymentOptionId:"",
     },
   });
 
   // Handle form submission for payment methods
-  const onSubmitPayment: SubmitHandler<FormValues> = (data) => {
-  mutation.mutate(data);
+  const onSubmitPayment: SubmitHandler<editFormValue> = (data) => {
+
+    if(editPaymentMethods){
+      editPaymentOption.mutate(data);
+    }else{
+      mutation.mutate(data);
+
+    }
+
     reset();
+
+    setEditPaymentMethods(null)
     
     }
     
  
 
   // Handle editing a payment method
-  const handleEditPayment = (index: number) => {
-    console.log(index);
+  const handleEditPayment = (editedData:FormValues) => {
+
+    setEditPaymentMethods(editedData);
+
+setValue('name',editedData?.name);
+setValue('details',editedData?.details),
+setValue('paymentOptionId',editedData?._id);
+
+
+   
   };
 
   // Handle deleting a payment method
@@ -90,7 +121,7 @@ const PaymentsOptions = () => {
             type="submit"
             className=" w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-[#DB4444]  focus:outline-none focus:ring-2 focus:ring-offset-2"
           >
-    {mutation?.isPending?<CircularProgress size={24} sx={{color:'black'}}/>:'Add'}
+    {editPaymentMethods?'Update':'Add'}
           </button>
         </form>
 
@@ -109,16 +140,16 @@ const PaymentsOptions = () => {
              </div>
              <div>
                <button
-                 onClick={() => handleEditPayment(index)}
-                 className="text-blue-600 hover:text-blue-900 mr-2"
+                 onClick={() => handleEditPayment(PaymentsOption)}
+                 className="text-blue-600 hover:text-blue-900 mr-2 px-2 py-1"
                >
-                 Edit
+              <Edit/>
                </button>
                <button
                  onClick={() => handleDeletePayment(index)}
                  className="text-red-600 hover:text-red-900"
                >
-                 Delete
+               <Trash2/>
                </button>
              </div>
            </li>
