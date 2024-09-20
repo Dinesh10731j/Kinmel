@@ -6,6 +6,7 @@ import { Toaster } from "react-hot-toast";
 import { UseGetPaymentOption } from "../hooks/Usegetpaymentoption";
 import { UseEditPaymentOption } from "../hooks/Useeditpaymentoption";
 import { Trash2,Edit } from "lucide-react";
+import { UseDeletePaymentOption } from "../hooks/Usedeletepaymentoption";
 
 
 interface FormValues {
@@ -27,6 +28,7 @@ const PaymentsOptions = () => {
 
   const mutation = UsePaymentOption();
   const editPaymentOption = UseEditPaymentOption();
+  const deletePaymentOption = UseDeletePaymentOption();
   const {data:getPaymentOption,isLoading} = UseGetPaymentOption();
   const [editPaymentMethods, setEditPaymentMethods] = useState<FormValues | null>(null) ;
 
@@ -72,8 +74,8 @@ setValue('paymentOptionId',editedData?._id);
   };
 
   // Handle deleting a payment method
-  const handleDeletePayment = (index: number) => {
-  console.log(index);
+  const handleDeletePayment = (paymentOption_Id:string) => {
+deletePaymentOption.mutate(paymentOption_Id);
    
     }
  
@@ -130,7 +132,7 @@ setValue('paymentOptionId',editedData?._id);
           <ul>
 
 
-          {getPaymentOption?.map((PaymentsOption:any, index:number) => (
+          {getPaymentOption?.map((PaymentsOption:any) => (
            <li
              key={PaymentsOption?._id}
              className="flex justify-between items-center mb-3 p-3 border border-gray-200 rounded-md shadow-sm"
@@ -146,7 +148,7 @@ setValue('paymentOptionId',editedData?._id);
               <Edit/>
                </button>
                <button
-                 onClick={() => handleDeletePayment(index)}
+                 onClick={() => handleDeletePayment(PaymentsOption?._id)}
                  className="text-red-600 hover:text-red-900"
                >
                <Trash2/>

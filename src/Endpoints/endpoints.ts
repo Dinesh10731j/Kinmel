@@ -14,6 +14,7 @@ export const endpoints = {
     Paymentoption:'/api/payment-option',
     Getpaymentoption:'/api/payment-option',
     Editpaymentoption:'/api/edit-payment-option',
+    DeletePaymentoption:'/api/delete-payment-option',
 
     
 }
