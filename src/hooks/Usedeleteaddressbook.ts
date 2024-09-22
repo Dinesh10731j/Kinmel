@@ -26,8 +26,8 @@ export const UseDeleteAddressBook = ()=>{
 
     return useMutation({mutationKey:['deleteaddressbook'],mutationFn:deleteAddressBook,onSuccess:()=>{
         toast.success('User addresbook deleted successfully');
-    },onError:()=>{
-        toast.error('Failed to delete user addressbook');
+    },onError:(error)=>{
+        toast.error(error?.message);
     }})
 
 

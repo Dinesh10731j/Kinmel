@@ -19,7 +19,7 @@ interface cancellationType{
 const Cancellation = async (data:cancellationType) => {
 try{
 
-    const userId = Cookies.get("userId")
+    const userId = Cookies.get("userId");
 
     const response = await axiosInstance.post(Mycancellation,{...data,userId:userId});
 

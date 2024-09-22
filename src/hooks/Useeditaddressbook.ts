@@ -14,7 +14,7 @@ const editAddressBook = async (editeddata: editedDataType) => {
     const response = await axiosInstance.patch(Editaddressbook, editeddata);
     return response.data;
   } catch (error: any) {
-    const errorMessage = error?.response?.data?.msg;
+    const errorMessage = error?.response?.data?.msg ?? 'Failed to edit addressbook';
     throw new Error(errorMessage);
   }
 };
@@ -25,8 +25,8 @@ export const UseEditAddressBook = () => {
     mutationFn: editAddressBook,
     onSuccess:()=>{
         toast.success('Addressbook edited successfully')
-    },onError:()=>{
-        toast.error('Failed to edit addressbook');
+    },onError:(error)=>{
+        toast.error(error?.message);
     },
   
   });

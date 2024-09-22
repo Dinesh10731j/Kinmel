@@ -20,7 +20,7 @@ const editPaymentOption = async (
 
     return response.data;
   } catch (error: any) {
-    const errorMessage = error?.response?.data?.msg;
+    const errorMessage = error?.response?.data?.msg ?? "Faile to edit payment option";
 
     throw new Error(errorMessage);
   }
@@ -33,8 +33,8 @@ export const UseEditPaymentOption = () => {
     onSuccess: () => {
       toast.success("Payment option edited successfully");
     },
-    onError: () => {
-      toast.error("Failed to edit payment option");
+    onError: (error) => {
+      toast.error(error?.message);
     },
   });
 };
