@@ -17,7 +17,8 @@ export const endpoints = {
     DeletePaymentoption:'/api/delete-payment-option',
     Mycancellation:'/api/cancellation',
     Getcancellation :'/api/cancellations',
-    Editcancellation:'/api/edit-cancellation'
+    Editcancellation:'/api/edit-cancellation',
+    Deletecancellation:'/api/delete-cancellation',
 
     
 }
