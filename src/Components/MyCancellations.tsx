@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-
+import { Toaster } from 'react-hot-toast';
+import { UseCancellation } from '../hooks/Usecancellation';
 interface CancellationItem {
   orderId: string;
   productName: string;
@@ -20,6 +21,7 @@ interface FormValues {
 }
 
 const MyCancellations: React.FC = () => {
+  const cancellation = UseCancellation();
   const [cancellationItems, setCancellationItems] = useState<CancellationItem[]>([]);
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
   const {register, handleSubmit, reset, setValue,formState:{errors} } = useForm<FormValues>({
@@ -37,8 +39,12 @@ const MyCancellations: React.FC = () => {
       productImage: 'https://via.placeholder.com/150', // Placeholder image
       cancellationDate: new Date().toLocaleDateString(),
       cancellationStatus: 'Pending',
-      refundAmount: null,
+      refundAmount: 1000,
     };
+
+    cancellation.mutate(newCancellationItem);
+
+
 
     if (editingIndex !== null) {
       const updatedCancellationItems = cancellationItems.map((item, index) =>
@@ -168,6 +174,7 @@ const MyCancellations: React.FC = () => {
         </ol>
         <p className="mt-2">For any questions, contact our customer support.</p>
       </div>
+      <Toaster position='top-center'/>
     </div>
   );
 };
