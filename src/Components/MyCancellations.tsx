@@ -4,7 +4,8 @@ import { Toaster } from "react-hot-toast";
 import { UseCancellation } from "../hooks/Usecancellation";
 import { UseGetCancellation } from "../hooks/Usegetcancellation";
 import { UseEditCancellation } from "../hooks/Useeditcancellation";
-import {Edit,Trash2} from "lucide-react"
+import {Edit,Trash2} from "lucide-react";
+import { UseDeleteCancellation } from "../hooks/Usedeletecancellation";
 interface CancellationItem {
   orderId: string;
   productName: string;
@@ -31,6 +32,7 @@ const MyCancellations: React.FC = () => {
   const getCancellation = UseGetCancellation();
 
   const editCancellation = UseEditCancellation();
+  const deleteCancellation = UseDeleteCancellation();
   const [editingItems, setEditingItems] = useState<CancellationItem | null>(
     null
   );
@@ -80,7 +82,7 @@ const MyCancellations: React.FC = () => {
   };
 
   const handleDelete = (cancellationId: string) => {
-    console.log(cancellationId);
+    deleteCancellation.mutate(cancellationId)
   };
 
   return (
