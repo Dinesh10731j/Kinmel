@@ -11,7 +11,7 @@ const deletePaymentOption = async (detelePaymentOptionId: string) => {
     );
     return response.data;
   } catch (error: any) {
-    const errorMessage = error?.response?.data?.msg;
+    const errorMessage = error?.response?.data?.msg ?? 'Failed to delete payment option';
 
     throw new Error(errorMessage);
   }
@@ -24,8 +24,8 @@ export const UseDeletePaymentOption = () => {
     onSuccess: () => {
       toast.success("Payment option deleted successfully");
     },
-    onError: () => {
-      toast.error("Failed to delete payment option");
+    onError: (error) => {
+      toast.error(error?.message);
     },
   });
 };
