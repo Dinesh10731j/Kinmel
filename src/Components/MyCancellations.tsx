@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useForm, Controller, SubmitHandler } from 'react-hook-form';
+import { useForm, SubmitHandler } from 'react-hook-form';
 
 interface CancellationItem {
   orderId: string;
@@ -22,7 +22,7 @@ interface FormValues {
 const MyCancellations: React.FC = () => {
   const [cancellationItems, setCancellationItems] = useState<CancellationItem[]>([]);
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
-  const { control, handleSubmit, reset, setValue } = useForm<FormValues>({
+  const {register, handleSubmit, reset, setValue,formState:{errors} } = useForm<FormValues>({
     defaultValues: {
       orderId: '',
       productName: '',
@@ -86,45 +86,33 @@ const MyCancellations: React.FC = () => {
         <h2 className="text-xl font-semibold mb-4">{editingIndex !== null ? 'Edit Cancellation' : 'Request a Cancellation'}</h2>
         <div className="mb-4">
           <label className="block font-medium">Order ID</label>
-          <Controller
-            name="orderId"
-            control={control}
-            render={({ field }) => <input {...field} className="border border-gray-300 rounded-md p-2 w-full" />}
-          />
+           <input {...register('orderId',{required:'OrderId is required'})} className="border border-gray-300 rounded-md p-2 w-full" />
+         {errors.orderId?.message && <p className='text-sm text-red-700'>{errors.orderId?.message}</p>}
         </div>
         <div className="mb-4">
           <label className="block font-medium">Product Name</label>
-          <Controller
-            name="productName"
-            control={control}
-            render={({ field }) => <input {...field} className="border border-gray-300 rounded-md p-2 w-full" />}
-          />
+           <input {...register('productName',{required:'Productname is required'})} className="border border-gray-300 rounded-md p-2 w-full" />
+         {errors.productName?.message && <p className='text-sm text-red-700'>{errors.productName?.message}</p>}
         </div>
         <div className="mb-4">
           <label className="block font-medium">Reason for Cancellation</label>
-          <Controller
-            name="reason"
-            control={control}
-            render={({ field }) => (
-              <select {...field} className="border border-gray-300 rounded-md p-2 w-full">
+         
+              <select {...register('reason',{required:'Reason is required'})} className="border border-gray-300 rounded-md p-2 w-full">
                 <option value="">Select a reason</option>
                 <option value="Changed my mind">Changed my mind</option>
                 <option value="Ordered by mistake">Ordered by mistake</option>
                 <option value="Found a better price">Found a better price</option>
                 {/* Add more options as needed */}
               </select>
-            )}
-          />
+              {errors.reason?.message && <p className='text-sm text-red-700'>{errors.reason?.message}</p>}
+           
+          
         </div>
         <div className="mb-4">
           <label className="block font-medium">Additional Comments</label>
-          <Controller
-            name="comments"
-            control={control}
-            render={({ field }) => (
-              <textarea {...field} className="border border-gray-300 rounded-md p-2 w-full" />
-            )}
-          />
+         
+              <textarea {...register('comments',{required:'Comment is required'})} className="border border-gray-300 rounded-md p-2 w-full" />
+          
         </div>
         <button
           type="submit"
