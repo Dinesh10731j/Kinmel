@@ -159,7 +159,7 @@ const Header = () => {
         </li>
         <li className="px-2 py-2 hover:bg-gray-100 flex items-center gap-2">
           <XCircle size={16} />
-          <NavLink to={""}>My Cancellations</NavLink>
+          <NavLink to={"/account/my-cancellations"}>My Cancellations</NavLink>
         </li>
         <li className="px-2 py-2 hover:bg-gray-100 flex items-center gap-2">
           <Star size={16} />

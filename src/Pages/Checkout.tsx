@@ -20,8 +20,6 @@ const Checkout = () => {
       return;
     }
 
-    // Create a payment intent or handle the payment process
-    // Note: Ensure you have created a payment intent on your server and have the client secret
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
