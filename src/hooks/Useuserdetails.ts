@@ -20,6 +20,7 @@ export const UseUserDetails = () => {
   return useQuery({
     queryKey: ["userdetails"],
     queryFn: FetchUserDetails,
+    refetchInterval:100,
     staleTime: 100,
     refetchOnMount: "always",
     refetchOnWindowFocus: "always",

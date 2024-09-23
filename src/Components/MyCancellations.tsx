@@ -6,6 +6,7 @@ import { UseGetCancellation } from "../hooks/Usegetcancellation";
 import { UseEditCancellation } from "../hooks/Useeditcancellation";
 import {Edit,Trash2} from "lucide-react";
 import { UseDeleteCancellation } from "../hooks/Usedeletecancellation";
+import {Clock,Check,X} from "lucide-react"
 interface CancellationItem {
   orderId: string;
   productName: string;
@@ -196,7 +197,28 @@ const MyCancellations: React.FC = () => {
                 <h3 className="text-lg font-semibold">{item.productName}</h3>
                 <p>Order ID: {item.orderId}</p>
                 <p>Cancellation Date: {item.cancellationDate}</p>
-                <p>Status: {item.cancellationStatus}</p>
+                <p className="flex items-center">
+  Status:
+  {item.cancellationStatus === 'Pending' && (
+    <span className="ml-2 text-yellow-500 flex items-center">
+      <Clock size={18} />
+      <span className="ml-1">Pending</span>
+    </span>
+  )}
+  {item.cancellationStatus === 'Approved' && (
+    <span className="ml-2 text-green-500 flex items-center">
+      <Check size={18} />
+      <span className="ml-1">Approved</span>
+    </span>
+  )}
+  {item.cancellationStatus === 'Rejected' && (
+    <span className="ml-2 text-red-700 flex items-center">
+      <X size={18} />
+      <span className="ml-1">Rejected</span>
+    </span>
+  )}
+</p>
+
                 {item.refundAmount !== null && (
                   <p>Refund: ${item.refundAmount}</p>
                 )}
