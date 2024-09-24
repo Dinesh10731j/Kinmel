@@ -19,6 +19,9 @@ export const endpoints = {
     Getcancellation :'/api/cancellations',
     Editcancellation:'/api/edit-cancellation',
     Deletecancellation:'/api/delete-cancellation',
+    Myreturns:'/api/return',
+    Getreturns:'/api/user-returns',
+    Editreturn:'/api/'
 
     
 }
