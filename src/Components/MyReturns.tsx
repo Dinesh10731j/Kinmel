@@ -2,13 +2,17 @@ import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { UseReturns } from "../hooks/Usereturn";
 import { UseGetreturns } from "../hooks/Usegetreturn";
+import { UseEditReturn } from "../hooks/Useeditreturn";
+import { UseDeleteReturn } from "../hooks/Usedeletereturn";
+import {Edit,Trash2} from "lucide-react";
+import {Clock,Check,X} from "lucide-react"
 
 interface ReturnItem {
   orderId: string;
   productName: string;
   productImage: string;
   returnDate: string;
-  returnStatus: "Pending" | "Approved" | "Completed" | "Rejected";
+  returnStatus: "Pending" | "Approved" | "Rejected";
   refundAmount: number | null;
   reason: string;
   comments: string;
@@ -28,6 +32,9 @@ interface FormValues {
 const MyReturns: React.FC = () => {
   const myReturns = UseReturns();
   const getReturns = UseGetreturns();
+  const editReturn = UseEditReturn();
+  const deleteReturn = UseDeleteReturn();
+
 
 
 
@@ -58,6 +65,7 @@ const MyReturns: React.FC = () => {
     };
 
     if(editingItems){
+      editReturn.mutate(newReturnItem);
 
     }else{
       myReturns.mutate(newReturnItem);
@@ -81,7 +89,7 @@ const MyReturns: React.FC = () => {
   };
 
   const handleDelete = (returnItemId:string) => {
-   console.log(returnItemId);
+   deleteReturn.mutate(returnItemId);
   };
 
   return (
@@ -90,9 +98,28 @@ const MyReturns: React.FC = () => {
 
       {/* Returns Overview */}
       <div className="bg-gray-100 p-4 rounded-md mb-6">
-        <p>Total Returns: </p>
-        <p>Pending Returns: </p>
-        <p>Approved Returns: </p>
+        <p>Total Returns:{getReturns?.data?.data?.length} </p>
+        <p>Pending Returns:   {
+         myReturns?.data?.data?.filter(
+            (status: {returnStatus: string }) =>
+              status.returnStatus === "Pending"
+          ).length
+        } </p>
+        <p>Approved Returns:   {
+          myReturns?.data?.data?.filter(
+            (status: { returnStatus: string }) =>
+              status?.returnStatus === "Approved"
+          ).length
+        } </p>
+
+
+        <p>Rejected Returns:
+          {
+          myReturns?.data?.data?.filter(
+            (status: { returnStatus: string }) =>
+              status.returnStatus === "Rejected"
+          ).length
+        }</p>
       </div>
 
       {/* Return Request Form */}
@@ -165,7 +192,7 @@ const MyReturns: React.FC = () => {
 
       {/* Return History */}
       <ul className="space-y-4">
-        {getReturns?.data?.map((item:ReturnItem, index:number) => (
+        {getReturns?.data?.data?.map((item:ReturnItem, index:number) => (
           <li key={index} className="bg-white p-4 rounded-md shadow-md">
             <div className="flex items-center space-x-4">
               <img src={item.productImage} alt={item.productName} className="w-16 h-16 object-cover rounded-md" />
@@ -173,7 +200,27 @@ const MyReturns: React.FC = () => {
                 <h3 className="text-lg font-semibold">{item.productName}</h3>
                 <p>Order ID: {item.orderId}</p>
                 <p>Return Date: {item.returnDate}</p>
-                <p>Status: {item.returnStatus}</p>
+                <p className="flex items-center">
+  Status:
+  {item.returnStatus === 'Pending' && (
+    <span className="ml-2 text-yellow-500 flex items-center">
+      <Clock size={18} />
+      <span className="ml-1">Pending</span>
+    </span>
+  )}
+  {item.returnStatus === 'Approved' && (
+    <span className="ml-2 text-green-500 flex items-center">
+      <Check size={18} />
+      <span className="ml-1">Approved</span>
+    </span>
+  )}
+  {item.returnStatus === 'Rejected' && (
+    <span className="ml-2 text-red-700 flex items-center">
+      <X size={18} />
+      <span className="ml-1">Rejected</span>
+    </span>
+  )}
+</p>
                 {item.refundAmount !== null && <p>Refund: ${item.refundAmount}</p>}
               </div>
               <div className="flex space-x-2">
@@ -181,13 +228,13 @@ const MyReturns: React.FC = () => {
                   onClick={() => handleEdit(item)}
                   className="bg-yellow-400 text-white py-2 px-4 rounded-md hover:bg-yellow-500 transition duration-200"
                 >
-                  Edit
+                  <Edit/>
                 </button>
                 <button
                   onClick={() => handleDelete(item?._id)}
                   className="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 transition duration-200"
                 >
-                  Delete
+                  <Trash2/>
                 </button>
               </div>
             </div>

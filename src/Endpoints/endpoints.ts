@@ -21,7 +21,8 @@ export const endpoints = {
     Deletecancellation:'/api/delete-cancellation',
     Myreturns:'/api/return',
     Getreturns:'/api/user-returns',
-    Editreturn:'/api/'
+    Editreturn:'/api/edit-return',
+    Deletereturn:'/api/delete-return',
 
     
 }

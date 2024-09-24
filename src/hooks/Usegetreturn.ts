@@ -8,7 +8,7 @@ const getReturn = async () => {
     const userId = Cookies.get("userId");
     const response = await axiosInstance.get(`${Getreturns}/${userId}`);
 
-    return response.data?.data;
+    return response.data;
   } catch (error: any) {
     const errorMessage = error.response.data?.msg;
 
