@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import React, { useState } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { UseReturns } from "../hooks/Usereturn";
+import { UseGetreturns } from "../hooks/Usegetreturn";
 
 interface ReturnItem {
   orderId: string;
   productName: string;
   productImage: string;
   returnDate: string;
-  returnStatus: 'Pending' | 'Approved' | 'Completed' | 'Rejected';
+  returnStatus: "Pending" | "Approved" | "Completed" | "Rejected";
   refundAmount: number | null;
   reason: string;
   comments: string;
+  _id:string;
+  returnId:string;
 }
 
 interface FormValues {
@@ -17,57 +21,67 @@ interface FormValues {
   productName: string;
   reason: string;
   comments: string;
+  _id:string;
+  returnId:string;
 }
 
 const MyReturns: React.FC = () => {
-  const [returnItems, setReturnItems] = useState<ReturnItem[]>([]);
-  const [editingIndex, setEditingIndex] = useState<number | null>(null);
-  const { handleSubmit, reset, setValue,register,formState:{errors} } = useForm<FormValues>({
+  const myReturns = UseReturns();
+  const getReturns = UseGetreturns();
+
+
+
+  const [editingItems, setEditingItems] = useState<FormValues | null>(null);
+  const {
+    handleSubmit,
+    reset,
+    setValue,
+    register,
+    formState: { errors },
+  } = useForm<FormValues>({
     defaultValues: {
-      orderId: '',
-      productName: '',
-      reason: '',
-      comments: '',
+      orderId: "",
+      productName: "",
+      reason: "",
+      comments: "",
     },
   });
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     const newReturnItem: ReturnItem = {
       ...data,
-      productImage: 'https://via.placeholder.com/150', // Placeholder image
+      productImage: "https://via.placeholder.com/150", // Placeholder image
       returnDate: new Date().toLocaleDateString(),
-      returnStatus: 'Pending',
-      refundAmount: null,
+      returnStatus: "Pending",
+      refundAmount: 1000,
+    
     };
 
-    if (editingIndex !== null) {
-      const updatedReturnItems = returnItems.map((item, index) =>
-        index === editingIndex ? newReturnItem : item
-      );
-      setReturnItems(updatedReturnItems);
-      setEditingIndex(null);
-    } else {
-      setReturnItems([...returnItems, newReturnItem]);
+    if(editingItems){
+
+    }else{
+      myReturns.mutate(newReturnItem);
+
     }
 
+    
+
+    setEditingItems(null);
     reset();
   };
 
-  const handleEdit = (index: number) => {
-    const item = returnItems[index];
-    setEditingIndex(index);
-    setValue('orderId', item.orderId);
-    setValue('productName', item.productName);
-    setValue('reason', item.reason);
-    setValue('comments', item.comments);
+  const handleEdit:SubmitHandler<FormValues> = (data) => {
+
+   setEditingItems(data);
+    setValue('orderId', data?.orderId);
+    setValue('productName', data?.productName);
+    setValue('reason', data?.reason);
+    setValue('comments', data?.comments);
+    setValue("returnId",data?._id);
   };
 
-  const handleDelete = (index: number) => {
-    setReturnItems(returnItems.filter((_, idx) => idx !== index));
-    if (editingIndex === index) {
-      setEditingIndex(null);
-      reset();
-    }
+  const handleDelete = (returnItemId:string) => {
+   console.log(returnItemId);
   };
 
   return (
@@ -76,55 +90,82 @@ const MyReturns: React.FC = () => {
 
       {/* Returns Overview */}
       <div className="bg-gray-100 p-4 rounded-md mb-6">
-        <p>Total Returns: {returnItems.length}</p>
-        <p>Pending Returns: {returnItems.filter(item => item.returnStatus === 'Pending').length}</p>
-        <p>Approved Returns: {returnItems.filter(item => item.returnStatus === 'Approved').length}</p>
+        <p>Total Returns: </p>
+        <p>Pending Returns: </p>
+        <p>Approved Returns: </p>
       </div>
 
       {/* Return Request Form */}
-      <form onSubmit={handleSubmit(onSubmit)} className="bg-white p-4 rounded-md shadow-md mb-6">
-        <h2 className="text-xl font-semibold mb-4">{editingIndex !== null ? 'Edit Return' : 'Start a Return'}</h2>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="bg-white p-4 rounded-md shadow-md mb-6"
+      >
+        <h2 className="text-xl font-semibold mb-4">
+          {editingItems ? "Edit Return" : "Start a Return"}
+        </h2>
         <div className="mb-4">
           <label className="block font-medium">Order ID</label>
-          <input {...register('orderId',{required:'OrderId is required'})} className="border border-gray-300 rounded-md p-2 w-full" />
-      {errors.orderId?.message && <p className='text-sm text-red-700'>{errors.orderId?.message}</p>}
+          <input
+            {...register("orderId", { required: "OrderId is required" })}
+            className="border border-gray-300 rounded-md p-2 w-full"
+          />
+          {errors.orderId?.message && (
+            <p className="text-sm text-red-700">{errors.orderId?.message}</p>
+          )}
         </div>
         <div className="mb-4">
           <label className="block font-medium">Product Name</label>
-          <input {...register("productName",{required:'ProductName is required'})} className="border border-gray-300 rounded-md p-2 w-full" />
-          {errors.productName?.message && <p className='text-sm text-red-700'>{errors.productName?.message}</p>}
+          <input
+            {...register("productName", {
+              required: "ProductName is required",
+            })}
+            className="border border-gray-300 rounded-md p-2 w-full"
+          />
+          {errors.productName?.message && (
+            <p className="text-sm text-red-700">
+              {errors.productName?.message}
+            </p>
+          )}
         </div>
         <div className="mb-4">
           <label className="block font-medium">Reason for Return</label>
-        
-              <select {...register('reason',{required:'Reason is required'})} className="border border-gray-300 rounded-md p-2 w-full">
-                <option value="">Select a reason</option>
-                <option value="Damaged item">Damaged item</option>
-                <option value="Incorrect item">Incorrect item</option>
-                <option value="No longer needed">No longer needed</option>
-                {/* Add more options as needed */}
-              </select>
 
-         
+          <select
+            {...register("reason", { required: "Reason is required" })}
+            className="border border-gray-300 rounded-md p-2 w-full"
+          >
+            <option value="">Select a reason</option>
+            <option value="Damaged item">Damaged item</option>
+            <option value="Incorrect item">Incorrect item</option>
+            <option value="No longer needed">No longer needed</option>
+            {/* Add more options as needed */}
+          </select>
         </div>
-        {errors.reason?.message && <p className='text-sm text-red-700'>{errors.reason?.message}</p>}
+        {errors.reason?.message && (
+          <p className="text-sm text-red-700">{errors.reason?.message}</p>
+        )}
         <div className="mb-4">
           <label className="block font-medium">Additional Comments</label>
-          
-              <textarea {...register('comments',{required:'Comment is required'})} className="border border-gray-300 rounded-md p-2 w-full" />
-              {errors.comments?.message && <p className='text-sm text-red-700'>{errors.comments?.message}</p>}
+
+          <textarea
+            {...register("comments", { required: "Comment is required" })}
+            className="border border-gray-300 rounded-md p-2 w-full"
+          />
+          {errors.comments?.message && (
+            <p className="text-sm text-red-700">{errors.comments?.message}</p>
+          )}
         </div>
         <button
           type="submit"
           className="bg-[#DB4444] text-white py-2 px-4 rounded-md transition duration-200"
         >
-          {editingIndex !== null ? 'Update Return' : 'Submit Return'}
+          {editingItems ? "Update Return" : "Submit Return"}
         </button>
       </form>
 
       {/* Return History */}
       <ul className="space-y-4">
-        {returnItems.map((item, index) => (
+        {getReturns?.data?.map((item:ReturnItem, index:number) => (
           <li key={index} className="bg-white p-4 rounded-md shadow-md">
             <div className="flex items-center space-x-4">
               <img src={item.productImage} alt={item.productName} className="w-16 h-16 object-cover rounded-md" />
@@ -137,13 +178,13 @@ const MyReturns: React.FC = () => {
               </div>
               <div className="flex space-x-2">
                 <button
-                  onClick={() => handleEdit(index)}
+                  onClick={() => handleEdit(item)}
                   className="bg-yellow-400 text-white py-2 px-4 rounded-md hover:bg-yellow-500 transition duration-200"
                 >
                   Edit
                 </button>
                 <button
-                  onClick={() => handleDelete(index)}
+                  onClick={() => handleDelete(item?._id)}
                   className="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 transition duration-200"
                 >
                   Delete

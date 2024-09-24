@@ -26,7 +26,7 @@ try{
     return response.data;
 
 }catch(error:any){
-    const errorMessage = error?.response?.data?.msg;
+    const errorMessage = error?.response?.data?.msg ?? "Failed to create cancellation";
 
     throw new Error(errorMessage);
 
@@ -40,8 +40,8 @@ export const UseCancellation = () => {
 
     return useMutation({mutationKey:['cancellation'],mutationFn:Cancellation,onSuccess:()=>{
         toast.success('Cancellation request send successfully')
-    },onError:()=>{
-        toast.error('Failed to send cancellation request')
+    },onError:(error)=>{
+        toast.error(error.message)
     }});
 
 }
