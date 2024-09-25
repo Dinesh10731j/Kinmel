@@ -28,6 +28,7 @@ import AdminRoute from './Protectedroutes/AdminRoute';
 import SellerRoute from './Protectedroutes/SellerRoute';
 import Seller from './Sellerdashboard/Seller';
 import AddNewProduct from './Pages/Addnewproduct';
+import ForgetPassword from './Pages/Forgetpassword';
 
 
 const App: React.FC = () => {
@@ -56,6 +57,7 @@ const App: React.FC = () => {
         {path:'/completion', element:<PaymentCompletion/>},
         {path:'productdetails/:id',element:<Productdetails/>},
         {path:'/wishlist',element:<Wishlist/>},
+        {path:'/forgotpassword',element:<ForgetPassword/>},
         {
           path: 'account',
           element: <Account />,

@@ -23,6 +23,7 @@ export const endpoints = {
     Getreturns:'/api/user-returns',
     Editreturn:'/api/edit-return',
     Deletereturn:'/api/delete-return',
+    Forgotpassword:'/api/forgot-password',
 
     
 }
