@@ -70,6 +70,7 @@ const Login = () => {
               type="submit"
               className="bg-[#DB4444] w-full lg:w-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline "
             >
+            
             {mutation?.isPending ? (
   <CircularProgress size={24} sx={{ color: 'black' }} />
 ) : (
@@ -77,6 +78,7 @@ const Login = () => {
 )}
 
             </button>
+           <p className="underline text-end mt-2"><Link to={'/forgotpassword'}>Forgot password?</Link></p> 
 
             <h1 className="px-2 py-3">
               Don't have an account? 
