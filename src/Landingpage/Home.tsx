@@ -13,7 +13,10 @@ import Speakers from "../assets/Speaker.png";
 import Perfume from "../assets/Perfume.png";
 import {Toaster} from "react-hot-toast";
 import { useProductDetailsContext } from "../context/productdetailsContext";
-import { useWishList } from "../context/wishlistContext";
+import {useDispatch} from "react-redux";
+
+
+
 import {
   Heart,
   Eye,
@@ -26,22 +29,43 @@ import {
 ShieldCheck,
 } from "lucide-react";
 
-import { useCart } from "../context/cartContext";
 import { Link } from "react-router-dom";
+import { addProduct} from "../store/slices/productSlice";
+import {addToWishList} from "../store/slices/wishListSlice";
 
 
 
 
 
 const Home: React.FC = () => {
+  const dispatch = useDispatch();
 
   const {setProductId} = useProductDetailsContext();
 
 
-  const {handleAddCart} = useCart();
+ 
 
 
-  const {addToWishList} = useWishList();
+  // const {addToWishList} = useWishList();
+
+
+  const handleProduct = (product:{title:string,image:string,price:string})=>{
+
+    dispatch(addProduct(product));
+
+  }
+
+
+  const addWishList = (wishlists:any)=>{
+    dispatch(addToWishList(wishlists));
+
+  }
+
+
+
+
+
+ 
  
   const settings = {
     dots: true,
@@ -232,7 +256,7 @@ const Home: React.FC = () => {
                 className="w-full h-48 object-contain rounded-t-lg"
               />
               <div className="flex justify-between items-center p-4">
-                <button className="text-[#DB4444] hover:text-red-600" onClick={()=>addToWishList(product)}>
+                <button className="text-[#DB4444] hover:text-red-600" onClick={()=>addWishList(product)}>
                   <Heart />
                 </button>
                 <Link to={`/productdetails/${product?.id}`}>
@@ -243,7 +267,7 @@ const Home: React.FC = () => {
                 </Link>
               
           
-            <button onClick={()=>handleAddCart(product?.id,product?.image,product?.title,product?.price)}  className="bg-[#DB4444] text-white px-4 py-2 rounded-lg hover:bg-[#b73333] flex items-center gap-2">
+            <button onClick={()=>handleProduct({title:product?.title,image:product?.image,price:product?.price})}  className="bg-[#DB4444] text-white px-4 py-2 rounded-lg hover:bg-[#b73333] flex items-center gap-2">
                   <ShoppingCart  />
                   Add to Cart
                 </button>
@@ -320,7 +344,7 @@ const Home: React.FC = () => {
               className="object-contain w-full h-3/4"
             />
             <section className="flex flex-col gap-6 absolute top-2 right-0 px-3 py-1">
-              <button className="text-gray-600" onClick={()=>addToWishList(bestSelling)} >
+              <button className="text-gray-600" onClick={()=>addWishList(bestSelling)} >
                 <Heart  />
               </button>
               <Link to={`/productdetails/${bestSelling?.id}`}>
@@ -389,7 +413,7 @@ const Home: React.FC = () => {
         </button>
         </Link>
        
-        <button className="text-gray-600 hover:text-gray-800" onClick={()=>addToWishList(ourproducts)}>
+        <button className="text-gray-600 hover:text-gray-800" onClick={()=>addWishList(ourproducts)}>
           <Heart className="w-6 h-6" />
         </button>
       </section>

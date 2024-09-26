@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useCart } from "../context/cartContext";
 import { Trash2} from "lucide-react";
+import { useSelector } from "react-redux";
 
 
 
@@ -18,6 +19,16 @@ interface CartItem {
 
 const Cart: React.FC= () => {
   const {carts,handleRemoveCart} = useCart();
+
+  const products = useSelector((state:any)=>{
+
+    return state.product;
+
+
+  });
+
+
+
 
 
   // Local state to manage the cart
@@ -38,7 +49,7 @@ const Cart: React.FC= () => {
 
   // Calculate cart total
   const cartTotal = cart.reduce(
-    (acc, item) => acc + item.price * item.quantity,
+    (acc:any, item:any) => acc + item.price * item.quantity,
     0
   );
 
@@ -71,17 +82,17 @@ const Cart: React.FC= () => {
 
       {/* Cart Details Section */}
       <section className="px-4 py-6 mt-4">
-        {cart.length <= 0 ? (
+        {products?.length <= 0 ? (
           <h1>No items added</h1>
         ) : (
-          cart?.map((item,index) => (
+          products?.map((item:any,index:number) => (
             <div
               key={index}
               className="flex flex-wrap justify-between items-center mb-4 border-b pb-4"
             >
               <div className="relative w-full sm:w-auto text-center mb-4 sm:mb-0">
                 <img
-                  src={item?.img}
+                  src={item?.image}
                   alt={item?.title}
                   className="h-20 w-20 mx-auto"
                 />
@@ -171,10 +182,10 @@ const Cart: React.FC= () => {
             <h3 className="text-gray-600">${cartTotal.toFixed(2)}</h3>
           </div>
 
-          <NavLink to={cart.length > 0 ? "/payment" : "#"} className={`${ cart.length <= 0 ? "cursor-not-allowed" : "cursor-pointer"}`}>
+          <NavLink to={products.length > 0 ? "/payment" : "#"} className={`${ products?.length <= 0 ? "cursor-not-allowed" : "cursor-pointer"}`}>
             <button
               className={`w-full mt-6 py-2 px-10 bg-[#DB4444] text-white rounded-md shadow-md hover:bg-[#702323] transition ${
-                cart.length <= 0 ? "cursor-not-allowed" : "cursor-pointer"
+                products.length <= 0 ? "cursor-not-allowed" : "cursor-pointer"
               }`}
             >
               Proceed To Checkout

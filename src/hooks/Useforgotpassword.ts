@@ -25,7 +25,7 @@ const forgotPassword = async (email:FormInputs)=>{
 export const UseForgotPassword = () => {
 
     return useMutation({mutationKey:['forgotpassword'],mutationFn:forgotPassword,onSuccess:()=>{
-        toast.success('Your new password is sent to your gmail');
+        toast.success('New password sent to your email');
     },onError:(error)=>{
         toast.error(error.message);
     }})

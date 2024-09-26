@@ -5,11 +5,25 @@ import { UseGetProductsImages } from '../hooks/Usegetproductsimage';
 import { useCart } from '../context/cartContext';
 import { Toaster } from 'react-hot-toast';
 import { Star } from 'lucide-react';
+import { useSelector } from 'react-redux';
 
 const Wishlist = () => {
-  const { wishlist, removeFromWishList } = useWishList();
+  const { removeFromWishList } = useWishList();
   const {handleAddCart} = useCart();
   const { data: justforyou } = UseGetProductsImages();
+
+
+  const wishlists = useSelector((state:any)=>{
+
+    return state.wishlist;
+
+
+  });
+
+
+
+
+
 
 
 
@@ -44,8 +58,8 @@ const Wishlist = () => {
       </div>
       <h1 className=" text-xl md:text-3xl font-bold mb-6">My Wishlist</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
-        {wishlist.length > 0 ? (
-          wishlist.map((item, index) => (
+        {wishlists.length > 0 ? (
+          wishlists.map((item:any, index:number) => (
             <div
               key={index}
               className="bg-white shadow-md rounded-lg overflow-hidden"
