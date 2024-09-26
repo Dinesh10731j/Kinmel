@@ -1,12 +1,13 @@
 
 import { Outlet,Navigate } from "react-router-dom";
-import Cookies from "js-cookie";
-
+import { useSelector } from "react-redux";
 const SellerRoute = () => {
-const role = Cookies.get("role");
+const userRole = useSelector((state:any)=>{
+  return state.userRole.role;
+});
   return (
    <>
-   {role === 'seller'?<Outlet/>:<Navigate to={'/auth/login'}/>}
+   {userRole === 'seller'?<Outlet/>:<Navigate to={'/auth/login'}/>}
    </>
   )
 }

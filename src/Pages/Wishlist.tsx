@@ -2,15 +2,16 @@ import { Trash2, Eye, ShoppingCart } from 'lucide-react';
 // import { useWishList } from '../context/wishlistContext';
 import { Link, NavLink } from 'react-router-dom';
 import { UseGetProductsImages } from '../hooks/Usegetproductsimage';
-import { useCart } from '../context/cartContext';
+// import { useCart } from '../context/cartContext';
 import { Toaster } from 'react-hot-toast';
 import { Star } from 'lucide-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeWishList } from '../store/slices/wishListSlice';
+import { addProduct } from '../store/slices/productSlice';
 
 const Wishlist = () => {
   // const { removeFromWishList } = useWishList();
-  const {handleAddCart} = useCart();
+  // const {handleAddCart} = useCart();
   const { data: justforyou } = UseGetProductsImages();
   const dispatch = useDispatch();
 
@@ -26,6 +27,13 @@ const Wishlist = () => {
   const removeFromWishList = (wishListId:any)=>{
 
     dispatch(removeWishList(wishListId));
+
+  }
+
+
+  const handleAddCart = (item:any)=>{
+
+    dispatch(addProduct(item));
 
   }
 
@@ -85,7 +93,7 @@ const Wishlist = () => {
                   { renderStars(item?.rating?.rate)}
                 </p>
                 <div className="flex justify-between items-center">
-                  <button className="bg-[#DB4444] cursor-pointer hover:bg-red-700 text-white px-4 py-2 rounded-md" onClick={()=>handleAddCart(item?.id,item?.image,item?.title,item?.price)}>
+                  <button className="bg-[#DB4444] cursor-pointer hover:bg-red-700 text-white px-4 py-2 rounded-md" onClick={()=>handleAddCart(item)}>
                     <ShoppingCart className="w-5 h-5 inline-block mr-1" />
                     Add to Cart
                   </button>
@@ -123,7 +131,7 @@ const Wishlist = () => {
                   <p className="text-gray-700 mb-4">${item.price}</p>
                   <h1 className='flex py-2 '>{renderStars(item?.rating?.rate)}</h1>
                   <div className="flex justify-between items-center mt-auto">
-                    <button className="bg-[#DB4444] text-white px-4 py-2 rounded-md hover:bg-red-700" onClick={()=>handleAddCart(item?.id,item?.image,item?.title,item?.price)}>
+                    <button className="bg-[#DB4444] text-white px-4 py-2 rounded-md hover:bg-red-700" onClick={()=>handleAddCart(item)}>
                       <ShoppingCart className="w-5 h-5 inline-block mr-1" />
                       Add to Cart
                     </button>
