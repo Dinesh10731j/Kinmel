@@ -1,16 +1,18 @@
 import { Trash2, Eye, ShoppingCart } from 'lucide-react';
-import { useWishList } from '../context/wishlistContext';
+// import { useWishList } from '../context/wishlistContext';
 import { Link, NavLink } from 'react-router-dom';
 import { UseGetProductsImages } from '../hooks/Usegetproductsimage';
 import { useCart } from '../context/cartContext';
 import { Toaster } from 'react-hot-toast';
 import { Star } from 'lucide-react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeWishList } from '../store/slices/wishListSlice';
 
 const Wishlist = () => {
-  const { removeFromWishList } = useWishList();
+  // const { removeFromWishList } = useWishList();
   const {handleAddCart} = useCart();
   const { data: justforyou } = UseGetProductsImages();
+  const dispatch = useDispatch();
 
 
   const wishlists = useSelector((state:any)=>{
@@ -19,6 +21,13 @@ const Wishlist = () => {
 
 
   });
+
+
+  const removeFromWishList = (wishListId:any)=>{
+
+    dispatch(removeWishList(wishListId));
+
+  }
 
 
 

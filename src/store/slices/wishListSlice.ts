@@ -7,13 +7,20 @@ const wishListSlice = createSlice({
 
             state.push(action.payload);
 
-            return state
+            return state;
+        },
+
+        removeWishList(state,action){
+            const updatedState = state.filter((product:{id:number}) => product.id !== action.payload);
+         
+
+            return updatedState;
         }
     }
 });
 
 
-export const {addToWishList} = wishListSlice.actions
+export const {addToWishList,removeWishList} = wishListSlice.actions
 
 
 export default wishListSlice.reducer
