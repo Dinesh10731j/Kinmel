@@ -49,7 +49,7 @@ const Home: React.FC = () => {
   // const {addToWishList} = useWishList();
 
 
-  const handleProduct = (product:{title:string,image:string,price:string})=>{
+  const handleProduct = (product:any)=>{
 
     dispatch(addProduct(product));
 
@@ -267,7 +267,7 @@ const Home: React.FC = () => {
                 </Link>
               
           
-            <button onClick={()=>handleProduct({title:product?.title,image:product?.image,price:product?.price})}  className="bg-[#DB4444] text-white px-4 py-2 rounded-lg hover:bg-[#b73333] flex items-center gap-2">
+            <button onClick={()=>handleProduct(product)}  className="bg-[#DB4444] text-white px-4 py-2 rounded-lg hover:bg-[#b73333] flex items-center gap-2">
                   <ShoppingCart  />
                   Add to Cart
                 </button>

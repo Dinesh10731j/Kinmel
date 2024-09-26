@@ -3,6 +3,8 @@ import { NavLink } from "react-router-dom";
 import { useCart } from "../context/cartContext";
 import { Trash2} from "lucide-react";
 import { useSelector } from "react-redux";
+import { removeProduct } from "../store/slices/productSlice";
+import { useDispatch } from "react-redux";
 
 
 
@@ -18,7 +20,8 @@ interface CartItem {
 }
 
 const Cart: React.FC= () => {
-  const {carts,handleRemoveCart} = useCart();
+  const {carts} = useCart();
+  const dispatch = useDispatch()
 
   const products = useSelector((state:any)=>{
 
@@ -26,6 +29,14 @@ const Cart: React.FC= () => {
 
 
   });
+
+
+  const removeCart = (itemId:any)=>{
+dispatch(removeProduct(itemId));
+
+
+
+  }
 
 
 
@@ -85,9 +96,9 @@ const Cart: React.FC= () => {
         {products?.length <= 0 ? (
           <h1>No items added</h1>
         ) : (
-          products?.map((item:any,index:number) => (
+          products?.map((item:any,id:number) => (
             <div
-              key={index}
+              key={id}
               className="flex flex-wrap justify-between items-center mb-4 border-b pb-4"
             >
               <div className="relative w-full sm:w-auto text-center mb-4 sm:mb-0">
@@ -96,7 +107,7 @@ const Cart: React.FC= () => {
                   alt={item?.title}
                   className="h-20 w-20 mx-auto"
                 />
-                <Trash2 onClick={()=>handleRemoveCart(item?.id)} className="absolute top-2 right-2 text-red-700 cursor-pointer"/>
+                <Trash2 onClick={()=>removeCart(item?.id)} className="absolute top-2 right-2 text-red-700 cursor-pointer"/>
                 <h1 className="text-gray-600 mt-2">
                   {item?.title.slice(0, 20)}
                 </h1>
