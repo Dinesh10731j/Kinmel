@@ -5,7 +5,7 @@ import { useSelector} from "react-redux";
 const AdminRoute = () => {
 const userRole = useSelector((state:any)=>{
 
-  return state.userRole.role;
+  return state.userRole?.role;
 
 });
   

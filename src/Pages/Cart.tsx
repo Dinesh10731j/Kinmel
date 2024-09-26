@@ -1,34 +1,46 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { useCart } from "../context/cartContext";
+// import { useCart } from "../context/cartContext";
 import { Trash2} from "lucide-react";
 import { useSelector } from "react-redux";
 import { removeProduct } from "../store/slices/productSlice";
 import { useDispatch } from "react-redux";
+import { updateProductQuantity } from "../store/slices/productSlice";
 
 
 
-interface CartItem {
-  title: string;
-  id: number;
-  img: string;
-  name: string;
-  price: number;
-  quantity: number;
-  key: number;
+
+// interface CartItem {
+//   title: string;
+//   id: number;
+//   img: string;
+//   name: string;
+//   price: number;
+//   quantity: number;
+//   key: number;
  
-}
+// }
 
 const Cart: React.FC= () => {
-  const {carts} = useCart();
+  // const {carts} = useCart();
   const dispatch = useDispatch()
 
   const products = useSelector((state:any)=>{
+    
 
     return state.product;
 
 
   });
+
+
+
+
+  const totalPrice = products.reduce((accumulator: number, product: { price: number; quantity: number }) => {
+    return accumulator + (product.price * product.quantity); // Multiply price by quantity
+  }, 0);
+  
+
 
 
   const removeCart = (itemId:any)=>{
@@ -43,26 +55,21 @@ dispatch(removeProduct(itemId));
 
 
   // Local state to manage the cart
-  const [cart, setCart] = useState<CartItem[]>(carts as unknown as CartItem[]);
+  // const [cart, setCart] = useState<CartItem[]>(carts as unknown as CartItem[]);
 
   // Handle quantity changes
   const handleQuantityChange = (id: number, newQuantity: number) => {
+ 
     if (newQuantity < 1) {
       newQuantity = 1;
     }
 
-    setCart((prevCart) =>
-      prevCart.map((item) =>
-        item.id === id ? { ...item, quantity: newQuantity } : item
-      )
-    );
+    dispatch(updateProductQuantity({id,quantity: newQuantity }))
+
+   
   };
 
-  // Calculate cart total
-  const cartTotal = cart.reduce(
-    (acc:any, item:any) => acc + item.price * item.quantity,
-    0
-  );
+ 
 
   return (
     <>
@@ -180,7 +187,7 @@ dispatch(removeProduct(itemId));
           </h1>
           <div className="flex justify-between border-b py-2">
             <h1 className="text-gray-600">Subtotal</h1>
-            <h3 className="text-gray-600">${cartTotal.toFixed(2)}</h3>
+            <h3 className="text-gray-600">${totalPrice.toFixed(2)}</h3>
           </div>
 
           <div className="flex justify-between border-b py-2">
@@ -190,7 +197,7 @@ dispatch(removeProduct(itemId));
 
           <div className="flex justify-between border-b py-2">
             <h1 className="text-gray-600">Total</h1>
-            <h3 className="text-gray-600">${cartTotal.toFixed(2)}</h3>
+            <h3 className="text-gray-600">${totalPrice.toFixed(2)}</h3>
           </div>
 
           <NavLink to={products.length > 0 ? "/payment" : "#"} className={`${ products?.length <= 0 ? "cursor-not-allowed" : "cursor-pointer"}`}>
