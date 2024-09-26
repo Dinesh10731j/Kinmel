@@ -1,17 +1,30 @@
 import { useState } from 'react';
 import { PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { NavLink } from 'react-router-dom';
-import { useCart } from '../context/cartContext';
+//import { useCart } from '../context/cartContext';
+import { useSelector} from 'react-redux';
+
+interface Product {
+  id: number;
+  image?: string;
+  title: string;
+  quantity: number; 
+  price: number;
+}
 
 // Stripe setup
 
 const Checkout = () => {
-  const { carts } = useCart();
+ // const { carts } = useCart();
   const stripe = useStripe();
   const elements = useElements();
   const [orderPlaced, setOrderPlaced] = useState(false);
 
-  const totalAmount = carts.reduce((acc, item) => acc + item.price * item.quantity, 0);
+const products = useSelector((state:any)=>{
+  return state.product
+})
+
+  const totalAmount = products.reduce((acc:any, item:any) => acc + item.price * item.quantity, 0);
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -50,13 +63,13 @@ const Checkout = () => {
             <section className="mb-8">
               <h3 className="text-xl font-semibold mb-4">Order Summary</h3>
               <ul className="order-summary mb-4">
-                {carts.map(item => (
-                  <li key={item.id} className="flex justify-between gap-3 py-7 px-1">
-                    <img src={item.img} className="h-10 w-10" alt={item.title} />
-                    <span>{item.title} (x{item.quantity})</span>
-                    <span>${item.price * item.quantity}</span>
-                  </li>
-                ))}
+              {products.map((item: Product) => (
+  <li key={item.id} className="flex justify-between gap-3 py-7 px-1">
+    <img src={item?.image} className="h-10 w-10" alt={item.title} />
+    <span>{item.title} (x{item.quantity})</span>
+    <span>${(item.price * item.quantity).toFixed(2)}</span>
+  </li>
+))}
               </ul>
               <div className="flex justify-between font-semibold">
                 <span>Total</span>
