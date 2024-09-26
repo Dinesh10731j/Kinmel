@@ -4,6 +4,8 @@ import { endpoints } from "../Endpoints/endpoints";
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { setUserRole } from "../store/slices/userRoleSlice";
+import { useDispatch } from "react-redux";
 
 
 const { Userlogin } = endpoints;
@@ -24,6 +26,7 @@ const UserLogin = async (data: UserloginType): Promise<any> => {
 
 export const UseUserLogin = () => {
     const navigate = useNavigate(); // Get the navigate function
+    const dispatch = useDispatch();
 
     return useMutation({
         mutationKey: ['userlogin'],
@@ -31,7 +34,9 @@ export const UseUserLogin = () => {
         onSuccess: (data) => {
          Cookies.set('userId',data?.userid)
             Cookies.set('token', data?.token);
-            Cookies.set("role", data?.role);
+        
+
+            dispatch(setUserRole(data?.role));
 
 
             
