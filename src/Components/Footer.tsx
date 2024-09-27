@@ -1,6 +1,7 @@
 
 import { SendHorizontal} from "lucide-react";
 import { useForm,SubmitHandler } from "react-hook-form";
+import { UseUserSubscribe } from "../hooks/Usesubscribe";
 
 interface subscribeType{
  email:string;
@@ -8,12 +9,14 @@ interface subscribeType{
 }
 const Footer = () => {
 
+  const subscription = UseUserSubscribe();
+
 
   const {handleSubmit,register,formState:{errors}} = useForm<subscribeType>();
 
 
   const onSubscribe:SubmitHandler<subscribeType> = (data)=>{
-    console.log(data);
+subscription.mutate(data);
 
   }
   return (

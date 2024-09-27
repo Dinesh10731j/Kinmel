@@ -24,6 +24,7 @@ export const endpoints = {
     Editreturn:'/api/edit-return',
     Deletereturn:'/api/delete-return',
     Forgotpassword:'/api/forgot-password',
+    Subscribe:'/api/subscribe',
 
     
 }
