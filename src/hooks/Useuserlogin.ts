@@ -19,8 +19,9 @@ const UserLogin = async (data: UserloginType): Promise<any> => {
     try {
         const response = await axiosInstance.post(Userlogin, data);
         return response.data;
-    } catch {
-        throw new Error('Failed to Login!');
+    } catch(error:any) {
+        const errorMessage = error.response.data?.msg;
+        throw new Error(errorMessage);
     }
 }
 
@@ -58,8 +59,8 @@ export const UseUserLogin = () => {
                 }
             }, 1000);
         },
-        onError: () => {
-            toast.error("Invalid credentials!");
+        onError: (error) => {
+            toast.error(error.message);
         }
     });
 }

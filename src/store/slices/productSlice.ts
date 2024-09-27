@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import toast from "react-hot-toast";
 
 interface Product {
   id: number;       
@@ -20,7 +21,7 @@ const productSlice = createSlice({
       
         state[existingIndex].quantity += action.payload.quantity;
       } else {
-        
+        toast.success('Product added successfully')
         state.push(action.payload);
       }
     },

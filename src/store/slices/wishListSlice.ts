@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import toast from "react-hot-toast";
 const wishListSlice = createSlice({
     name:'wishlists',
     initialState:[],
@@ -6,6 +7,7 @@ const wishListSlice = createSlice({
         addToWishList(state:any,action){
 
             state.push(action.payload);
+            toast.success('Wishlist added successfully');
 
             return state;
         },
