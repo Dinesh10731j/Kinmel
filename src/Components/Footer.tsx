@@ -12,11 +12,13 @@ const Footer = () => {
   const subscription = UseUserSubscribe();
 
 
-  const {handleSubmit,register,formState:{errors}} = useForm<subscribeType>();
+  const {handleSubmit,register,formState:{errors},reset} = useForm<subscribeType>();
 
 
   const onSubscribe:SubmitHandler<subscribeType> = (data)=>{
 subscription.mutate(data);
+
+reset();
 
   }
   return (

@@ -1,35 +1,30 @@
 import Login_Image from "../assets/Side Image.png";
 import { Link } from "react-router-dom";
 import { UseUserLogin } from "../hooks/Useuserlogin";
-import {useForm,SubmitHandler} from "react-hook-form";
-import {Toaster} from "react-hot-toast";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { Toaster } from "react-hot-toast";
 import { CircularProgress } from "@mui/material";
 
-
-interface UserLoginFormType{
-  email:string,
-  password:string,
+interface UserLoginFormType {
+  email: string;
+  password: string;
 }
 
 const Login = () => {
   const mutation = UseUserLogin();
 
+  const {
+    handleSubmit,
+    register,
+    reset,
+    formState: { errors },
+  } = useForm<UserLoginFormType>();
 
-  const {handleSubmit,register,reset,formState:{errors}} = useForm<UserLoginFormType>();
-
-
-  const OnLogin:SubmitHandler<UserLoginFormType> = (data)=>{
-
+  const OnLogin: SubmitHandler<UserLoginFormType> = (data) => {
     mutation.mutate(data);
 
-
     reset();
-
-  
-
-  }
-
-  
+  };
 
   return (
     <>
@@ -56,9 +51,13 @@ const Login = () => {
                 type="email"
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 placeholder="Enter your email"
-                {...register('email',{required:'Email is required'})}
+                {...register("email", { required: "Email is required" })}
               />
-              {errors.email && <p className="text-red-500 text-sm  mt-2  italic">{errors.email.message}</p>}
+              {errors.email && (
+                <p className="text-red-500 text-sm  mt-2  italic">
+                  {errors.email.message}
+                </p>
+              )}
             </div>
             <div className="mb-6">
               <label className="block text-gray-700 text-sm font-bold mb-2">
@@ -68,33 +67,37 @@ const Login = () => {
                 type="password"
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 placeholder="Enter your password"
-                {...register('password',{required:'Password is required'})}
+                {...register("password", { required: "Password is required" })}
               />
-            {errors.password && <p className="text-red-500 text-sm  mt-2  italic">{errors.password.message}</p>}
+              {errors.password && (
+                <p className="text-red-500 text-sm  mt-2  italic">
+                  {errors.password.message}
+                </p>
+              )}
             </div>
             <button
               type="submit"
               className="bg-[#DB4444] w-full lg:w-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline "
             >
-            
-            {mutation?.isPending ? (
-  <CircularProgress size={24} sx={{ color: 'black' }} />
-) : (
-  'Login'
-)}
-
+              {mutation?.isPending ? (
+                <CircularProgress size={24} sx={{ color: "black" }} />
+              ) : (
+                "Login"
+              )}
             </button>
-           <p className="underline text-end mt-2"><Link to={'/forgotpassword'}>Forgot password?</Link></p> 
+            <p className="underline text-end mt-2">
+              <Link to={"/forgotpassword"}>Forgot password?</Link>
+            </p>
 
             <h1 className="px-2 py-3">
-              Don't have an account? 
-              <Link to={'/auth/signup'} className="px-2 border-b-2">
+              Don't have an account?
+              <Link to={"/auth/signup"} className="px-2 border-b-2">
                 Sign Up
               </Link>
             </h1>
           </form>
         </section>
-        <Toaster position="top-center"/>
+        <Toaster position="top-center" />
       </section>
     </>
   );
