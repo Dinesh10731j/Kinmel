@@ -226,13 +226,13 @@ const MyCancellations: React.FC = () => {
               <div className="flex space-x-2">
                 <button
                   onClick={() => handleEdit(item)}
-                  className="bg-yellow-400 text-white py-2 px-4 rounded-md hover:bg-yellow-500 transition duration-200"
+                  className="bg-yellow-400 text-white py-1 px-2 rounded-md hover:bg-yellow-500 transition duration-200"
                 >
                   <Edit/>
                 </button>
                 <button
                   onClick={() => handleDelete(item?._id)}
-                  className="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 transition duration-200"
+                  className="bg-red-500 text-white py-1 px-2 rounded-md hover:bg-red-600 transition duration-200"
                 >
                   <Trash2/>
                 </button>
