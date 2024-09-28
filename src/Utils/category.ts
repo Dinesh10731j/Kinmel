@@ -55,3 +55,32 @@ export const BrowserByCategory = [
     icon:GamepadIcon
   },
 ];
+
+
+export const ReviewOrders =[
+  {
+    date: '2024/12/10',
+    product: 'Ziromax Antibiotics',
+    location: 'New York, USA',
+    status: 'In Transit',
+  },
+  {
+    date: '2024/11/22',
+    product: 'Paracetamol',
+    location: 'Los Angeles, USA',
+    status: 'Delivered',
+  },
+  {
+    date: '2024/10/05',
+    product: 'Cough Syrup',
+    location: 'Chicago, USA',
+    status: 'Pending',
+  },
+  {
+    date: '2024/09/25',
+    product: 'Vitamin C Supplements',
+    location: 'Houston, USA',
+    status: 'Delivered',
+  },
+];
+

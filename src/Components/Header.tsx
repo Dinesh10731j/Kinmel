@@ -112,6 +112,10 @@ const wishlists = useSelector((state:any)=>{
           </nav>
         </section>
 
+      
+
+      
+
         <section>
           <form className="relative flex items-center gap-5 md:px-2 rounded-md">
           <input
