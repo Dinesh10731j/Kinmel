@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
 import { setUserRole } from "../store/slices/userRoleSlice";
 import { useDispatch } from "react-redux";
+import bs64 from "base-64"
 
 
 const { Userlogin } = endpoints;
@@ -35,9 +36,11 @@ export const UseUserLogin = () => {
         onSuccess: (data) => {
          Cookies.set('userId',data?.userid)
             Cookies.set('token', data?.token);
+
+            const encodedRole = bs64.encode(data?.role)
         
 
-            dispatch(setUserRole(data?.role));
+            dispatch(setUserRole(encodedRole));
 
 
             
