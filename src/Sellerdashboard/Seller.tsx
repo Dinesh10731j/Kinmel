@@ -7,6 +7,7 @@ import user from "../assets/Frame 875.png";
 import "chart.js/auto";
 import { ReviewOrders } from "../Utils/category";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { UseAddProduct } from "../hooks/Useaddproduct";
 
 interface addProductType {
   productName: string;
@@ -17,6 +18,8 @@ interface addProductType {
 }
 
 const SellerDashBoard = () => {
+
+  const addProduct = UseAddProduct();
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const {
@@ -73,7 +76,7 @@ const SellerDashBoard = () => {
   };
 
   const onAddProuduct: SubmitHandler<addProductType> = (productdata) => {
-    console.log(productdata);
+addProduct.mutate(productdata);
 
     reset();
   };

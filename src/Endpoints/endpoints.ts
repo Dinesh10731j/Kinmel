@@ -25,6 +25,7 @@ export const endpoints = {
     Deletereturn:'/api/delete-return',
     Forgotpassword:'/api/forgot-password',
     Subscribe:'/api/subscribe',
+    Addproduct:'/api/add-product'
 
     
 }

@@ -6,10 +6,10 @@ import wishListSlice from './slices/wishListSlice';
 import userRoleSlice from './slices/userRoleSlice';
 
 const userRolePersistConfig = {
-  key: 'userRole',  
-  storage,          
-};
+  key: 'userRole',
+  storage,
 
+};
 
 const persistedUserRoleReducer = persistReducer(userRolePersistConfig, userRoleSlice);
 
@@ -17,14 +17,13 @@ const store = configureStore({
   reducer: {
     product: productSlice,
     wishlist: wishListSlice,
-    userRole: persistedUserRoleReducer,  
+    userRole: persistedUserRoleReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false, 
     }),
 });
-
 
 const persistor = persistStore(store);
 
