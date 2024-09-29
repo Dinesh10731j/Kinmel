@@ -8,13 +8,17 @@ import "chart.js/auto";
 import { ReviewOrders } from "../Utils/category";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { UseAddProduct } from "../hooks/Useaddproduct";
-
+import { Toaster } from "react-hot-toast";
+import { uploadToCloudinary } from "../hooks/Useuploadimage";
+import Cookies from "js-cookie";
+import toast from "react-hot-toast";
 interface addProductType {
   productName: string;
   productImage: FileList;
   productPrice: string;
   productCategory: string;
   productDescription: string;
+  sellerId:string,
 }
 
 const SellerDashBoard = () => {
@@ -75,11 +79,35 @@ const SellerDashBoard = () => {
     },
   };
 
-  const onAddProuduct: SubmitHandler<addProductType> = (productdata) => {
-addProduct.mutate(productdata);
-
-    reset();
+  const onAddProduct: SubmitHandler<addProductType> = async (productdata) => {
+    try {
+      const sellerId = Cookies.get("userId");
+  
+      const file = productdata.productImage[0];
+      if (file) {
+        const imageUrl = await uploadToCloudinary(file);
+  
+        const productData = {
+          productPrice: productdata.productPrice,
+          productName: productdata.productName,
+          productCategory: productdata.productCategory,
+          productDescription:productdata.productDescription,
+          productImage: imageUrl,
+          sellerId: sellerId,
+        };
+  
+        addProduct.mutate(productData);
+        
+      } else {
+        toast.error("Please select a file to upload");
+      }
+  
+      reset(); // Reset the form after successful submission
+    } catch (error) {
+      toast.error("Failed to upload image. Please try again.");
+    }
   };
+  
 
   return (
     <>
@@ -88,7 +116,7 @@ addProduct.mutate(productdata);
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur">
           <div className="bg-white w-full max-w-md p-6 rounded-lg shadow-lg transform transition-transform duration-500 ease-in-out translate-y-0">
             <h2 className="text-2xl font-bold mb-4">Add New Product</h2>
-            <form onSubmit={handleSubmit(onAddProuduct)}>
+            <form onSubmit={handleSubmit(onAddProduct)}>
               <input
                 type="text"
                 placeholder="Product Name"
@@ -395,6 +423,8 @@ addProduct.mutate(productdata);
             ))}
           </div>
         </section>
+
+        <Toaster position="top-center"/>
       </div>
     </>
   );
