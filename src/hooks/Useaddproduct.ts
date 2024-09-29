@@ -4,15 +4,18 @@ import { endpoints } from "../Endpoints/endpoints";
 import toast from "react-hot-toast";
 const {Addproduct} = endpoints;
 
+
 interface productDataType{
     productName:string,
     productPrice:string,
     productCategory:string,
     productDescription:string,
-    productUImage:FileList
+    productImage:FileList,
+    sellerId:string | undefined
 }
 const addProduct = async (productdata:productDataType)=>{
     try{
+      
 
         const response = await axiosInstance.post(Addproduct,productdata);
 
