@@ -13,12 +13,12 @@ const Admin = () => {
   return (
     <>
       {/* Header */}
-      <header className="flex justify-between items-center transition-opacity px-10 md:px-40 py-5 bg-white shadow-md">
+      <header className="fixed top-0 w-full z-50 flex justify-between items-center transition-opacity px-10 md:px-40 py-5 bg-white shadow-md">
+
         {/* Logo and Search */}
         <div className="flex items-center space-x-4">
           <img src={kinMel_logo} alt="kinMel_logo" className="h-10 w-10" />
 
-          {/* Menu Icon for Mobile */}
           <Menu className="block h-6 w-6 text-gray-600 cursor-pointer" onClick={()=>setSidenav(!sidenav)} />
 
           {/* Search Bar (Hidden on Mobile) */}
@@ -56,27 +56,27 @@ const Admin = () => {
       </div>
 
       {/* Sidebar */}
-      <aside className={` md:fixed md:min-h-screen md:w-56 p-4 transition-all shadow-md ${sidenav?'-translate-x-full':'-translate-x-0'}`}>
+      <aside className={`z-20 fixed bg-black top-20  rounded-r-md min-h-screen left-0 md:fixed md:min-h-screen md:w-56 p-4 transition-all shadow-md ${sidenav?'-translate-x-full bg-opacity-50 backdrop-blur':'-translate-x-0'}`}>
         <nav className="space-y-4">
           <h2 className="text-xl font-semibold text-black ">KinMel</h2>
           <ul className="space-y-3">
             <li className="text-gray-700 p-2 rounded px-4 py-2">
-              <NavLink to="/dashboard/admin" className={({isActive})=>isActive?'bg-[#DB4444] py-2 px-12 shadow-md rounded-md':'text-black'}>Dashboard</NavLink>
+              <NavLink to="/dashboard/admin" className={({isActive})=>isActive?'bg-[#DB4444] py-2 px-12 shadow-md rounded-md':'text-white'}>Dashboard</NavLink>
             </li>
             <li className="text-gray-700  rounded px-4 py-2">
-              <NavLink to="/dashboard/products"  className={({isActive})=>isActive?'bg-[#DB4444] py-2 px-12 shadow-md rounded-md':'text-black'}>Product</NavLink>
+              <NavLink to="/dashboard/products"  className={({isActive})=>isActive?'bg-[#DB4444] py-2 px-12 shadow-md rounded-md':'text-white'}>Product</NavLink>
             </li>
             <li className="text-gray-700 p-2 rounded px-4 py-2">
-              <NavLink to="/dashboard/favorites"  className={({isActive})=>isActive?'bg-[#DB4444] py-2 px-12 shadow-md rounded-md':'text-black'}>Favorite</NavLink>
+              <NavLink to="/dashboard/favorites"  className={({isActive})=>isActive?'bg-[#DB4444] py-2 px-12 shadow-md rounded-md':'text-white'}>Favorite</NavLink>
             </li>
             <li className="text-gray-700  rounded px-4 py-2">
-              <NavLink to="/dashboard/inbox"  className={({isActive})=>isActive?'bg-[#DB4444] py-2 px-12 shadow-md rounded-md':'text-black'}>Inbox</NavLink>
+              <NavLink to="/dashboard/inbox"  className={({isActive})=>isActive?'bg-[#DB4444] py-2 px-12 shadow-md rounded-md':'text-white'}>Inbox</NavLink>
             </li>
             <li className="text-gray-700  rounded px-4 py-2">
-              <NavLink to="/dashboard/orders"  className={({isActive})=>isActive?'bg-[#DB4444] py-2 px-12 shadow-md rounded-md':'text-black'}>Orders</NavLink>
+              <NavLink to="/dashboard/orders"  className={({isActive})=>isActive?'bg-[#DB4444] py-2 px-12 shadow-md rounded-md':'text-white'}>Orders</NavLink>
             </li>
             <li className="text-gray-700  rounded px-4 py-2">
-              <NavLink to="/dashboard/product-stock"  className={({isActive})=>isActive?'bg-[#DB4444] py-2 px-12 shadow-md rounded-md':'text-black'}>Product Stock</NavLink>
+              <NavLink to="/dashboard/product-stock"  className={({isActive})=>isActive?'bg-[#DB4444] py-2 px-12 shadow-md rounded-md':'text-white'}>Product Stock</NavLink>
             </li>
           </ul>
         </nav>
