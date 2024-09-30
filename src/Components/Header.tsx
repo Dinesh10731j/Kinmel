@@ -113,7 +113,7 @@ const wishlists = useSelector((state:any)=>{
         </section>
 
       
-
+     
       
 
         <section>
