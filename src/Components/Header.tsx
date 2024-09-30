@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import KinMel_Logo from "../assets/Codynn_Logo.png";
 import { NavLink } from "react-router-dom";
 // import { useWishList } from "../context/wishlistContext";
+import { UseGetProductsImages } from "../hooks/Usegetproductsimage";
 import Cookies from "js-cookie";
 import { useSelector } from "react-redux";
 import {
@@ -18,7 +19,16 @@ LogInIcon,
 
 } from "lucide-react";
 
+interface SuggestionType {
+  title: string;
+}
+
 const Header = () => {
+
+  const [query, setQuery] = useState('');
+  const [filteredSuggestions, setFilteredSuggestions] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const {data:suggestions} = UseGetProductsImages();
 
   // const {wishlist} = useWishList();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -64,6 +74,30 @@ const wishlists = useSelector((state:any)=>{
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+
+const handleChange = (e: React.ChangeEvent<HTMLInputElement>)=>{
+  const userInput = e.target.value;
+  setQuery(userInput);
+
+  if (userInput.length > 0) {
+    const filtered = suggestions.filter((suggestion:SuggestionType) =>
+      suggestion.title.toLowerCase().includes(userInput.toLowerCase())
+    );
+    setFilteredSuggestions(filtered);
+    setShowSuggestions(true);
+  } else {
+    setShowSuggestions(false);
+  }
+
+}
+
+
+const handleSuggestionClick = (suggestion: SuggestionType) => {
+  setQuery(suggestion.title);
+  setShowSuggestions(false);
+};
+
 
   return (
     <>
@@ -123,7 +157,28 @@ const wishlists = useSelector((state:any)=>{
   placeholder="What are you looking for?"
   className="w-full px-4 py-2  md:px-6 md:py-2 lg:px-2 lg:py-2 rounded-md bg-[#FFFFFF] text-black placeholder-gray-500"
   style={{ fontSize: '0.875rem' }} 
+  onChange={handleChange}
+  value={query}
 />
+
+
+{showSuggestions && (
+        <ul className="absolute bg-white border w-full mt-20 z-20">
+          {filteredSuggestions.length > 0 ? (
+            filteredSuggestions.map((suggestion:SuggestionType, index) => (
+              <li
+                key={index}
+                onClick={() => handleSuggestionClick(suggestion)}
+                className="cursor-pointer p-2 hover:bg-gray-200"
+              >
+                {suggestion?.title}
+              </li>
+            ))
+          ) : (
+            <li className="p-2">Product not found</li>
+          )}
+        </ul>
+      )}
 
             {/* <div className="absolute right-2 top-1/2 transform -translate-y-1/2">
               <SearchIcon />
