@@ -1,4 +1,4 @@
-import { Bell, Menu, Users, BoxIcon, LineChartIcon, TimerIcon } from "lucide-react"; 
+import { Bell, Menu, Users, BoxIcon, LineChartIcon, TimerIcon,Blocks,Table,Heart, Inbox,ListOrderedIcon,Store, } from "lucide-react"; 
 import { NavLink } from "react-router-dom";
 import kinMel_logo from "../assets/Codynn_Logo.png";
 import adminprofile from "../assets/Frame 876.png";
@@ -58,27 +58,77 @@ const Admin = () => {
       {/* Sidebar */}
       <aside className={`z-20 fixed bg-black top-20  rounded-r-md min-h-screen left-0 md:fixed md:min-h-screen md:w-56 p-4 transition-all shadow-md ${sidenav?'-translate-x-full bg-opacity-50 backdrop-blur':'-translate-x-0'}`}>
         <nav className="space-y-4">
-          <h2 className="text-xl font-semibold text-black ">KinMel</h2>
+          <h2 className="text-xl font-semibold text-white ">KinMel</h2>
           <ul className="space-y-3">
-            <li className="text-gray-700 p-2 rounded px-4 py-2">
-              <NavLink to="/dashboard/admin" className={({isActive})=>isActive?'bg-[#DB4444] py-2 px-12 shadow-md rounded-md':'text-white'}>Dashboard</NavLink>
-            </li>
-            <li className="text-gray-700  rounded px-4 py-2">
-              <NavLink to="/dashboard/products"  className={({isActive})=>isActive?'bg-[#DB4444] py-2 px-12 shadow-md rounded-md':'text-white'}>Product</NavLink>
-            </li>
-            <li className="text-gray-700 p-2 rounded px-4 py-2">
-              <NavLink to="/dashboard/favorites"  className={({isActive})=>isActive?'bg-[#DB4444] py-2 px-12 shadow-md rounded-md':'text-white'}>Favorite</NavLink>
-            </li>
-            <li className="text-gray-700  rounded px-4 py-2">
-              <NavLink to="/dashboard/inbox"  className={({isActive})=>isActive?'bg-[#DB4444] py-2 px-12 shadow-md rounded-md':'text-white'}>Inbox</NavLink>
-            </li>
-            <li className="text-gray-700  rounded px-4 py-2">
-              <NavLink to="/dashboard/orders"  className={({isActive})=>isActive?'bg-[#DB4444] py-2 px-12 shadow-md rounded-md':'text-white'}>Orders</NavLink>
-            </li>
-            <li className="text-gray-700  rounded px-4 py-2">
-              <NavLink to="/dashboard/product-stock"  className={({isActive})=>isActive?'bg-[#DB4444] py-2 px-12 shadow-md rounded-md':'text-white'}>Product Stock</NavLink>
-            </li>
-          </ul>
+  <li className="text-gray-700 rounded">
+    <NavLink
+      to="/dashboard/admin"
+      className={({ isActive }) =>
+        `flex items-center gap-2 p-2 ${isActive ? 'bg-[#DB4444] text-white shadow-md rounded-md' : 'text-white'}`
+      }
+    >
+      <Blocks  className="text-gray-600" />
+      <span>Dashboard</span>
+    </NavLink>
+  </li>
+  <li className="text-gray-700 rounded">
+    <NavLink
+      to="/dashboard/products"
+      className={({ isActive }) =>
+        `flex items-center gap-2 p-2 ${isActive ? 'bg-[#DB4444] text-white shadow-md rounded-md' : 'text-white'}`
+      }
+    >
+      <Table className="text-gray-600" />
+      <span>Product</span>
+    </NavLink>
+  </li>
+  <li className="text-gray-700 rounded">
+    <NavLink
+      to="/dashboard/favorites"
+      className={({ isActive }) =>
+        `flex items-center gap-2 p-2 ${isActive ? 'bg-[#DB4444] text-white shadow-md rounded-md' : 'text-white'}`
+      }
+    >
+      <Heart  className="text-gray-600" />
+      <span>Favorite</span>
+    </NavLink>
+  </li>
+  <li className="text-gray-700 rounded">
+    <NavLink
+      to="/dashboard/inbox"
+      className={({ isActive }) =>
+        `flex items-center gap-2 p-2 ${isActive ? 'bg-[#DB4444] text-white shadow-md rounded-md' : 'text-white'}`
+      }
+    >
+      <Inbox  className="text-gray-600" />
+      <span>Inbox</span>
+    </NavLink>
+  </li>
+  <li className="text-gray-700 rounded">
+    <NavLink
+      to="/dashboard/orders"
+      className={({ isActive }) =>
+        `flex items-center gap-2 p-2 ${isActive ? 'bg-[#DB4444] text-white shadow-md rounded-md' : 'text-white'}`
+      }
+    >
+      <ListOrderedIcon  className="text-gray-600" />
+      <span>Orders</span>
+    </NavLink>
+  </li>
+  <li className="text-gray-700 rounded">
+    <NavLink
+      to="/dashboard/product-stock"
+      className={({ isActive }) =>
+        `flex items-center gap-2 p-2 ${isActive ? 'bg-[#DB4444] text-white shadow-md rounded-md' : 'text-white'}`
+      }
+    >
+      <Store  className="text-gray-600" />
+      <span>Product Stock</span>
+    </NavLink>
+  </li>
+</ul>
+
+
         </nav>
       </aside>
 
@@ -121,7 +171,7 @@ const Admin = () => {
           </section>
 
           {/* Total Pending */}
-          <section className="shadow-xl  bg-white rounded-lg flex flex-col items-center justify-center">
+          <section className="shadow-xl p-6 bg-white rounded-lg flex flex-col items-center justify-center">
             <h2 className="text-md md:text-lg font-medium">Total Pending</h2>
 
             <section className="flex gap-4 mt-3" >
