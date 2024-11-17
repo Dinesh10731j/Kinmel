@@ -1,50 +1,51 @@
-# React + TypeScript + Vite
+Live demo:
+https://kin-mel.netlify.app/
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+# 🛒 Kinmel - E-Commerce Website
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Kinmel** is an advanced e-commerce platform where users can explore and purchase a wide range of products with a seamless shopping experience. Built using the **MERN stack**, this application integrates **React Query**, **Redux**, and **Stripe** for secure payment handling, along with a modern and responsive UI using **Tailwind CSS**.
 
-## Expanding the ESLint configuration
+## 📖 Features
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### User Features
+- **User Authentication**: Secure sign-up and login functionality.
+- **Product Browsing**: Explore products with detailed descriptions, images, and prices.
+- **Search & Filter**: Powerful search and filtering options to find products quickly.
+- **Shopping Cart**: Add, update, or remove items from the shopping cart.
+- **Checkout Process**: Review order summary before finalizing the purchase.
+- **Payment Gateway**: Seamless and secure payments using Stripe.
 
-- Configure the top-level `parserOptions` property like this:
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## 🛠️ Tech Stack
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+- **Frontend**: React.js, React Query, Redux, Tailwind CSS
+- **Backend**: Node.js, Express.js
+- **Database**: MongoDB
+- **Payment Integration**: Stripe
+- **Styling**: Tailwind CSS
+- **State Management**: Redux (global state), React Query (server state)
+
+
+
+
+
+## 💳 Stripe Payment Integration
+
+Kinmel integrates **Stripe** to handle secure payments. Users can enter their payment details at checkout, and the transaction is processed safely with Stripe's API.
+
+- **Test Card Details**:
+  - **Card Number**: `4242 4242 4242 4242`
+  - **Expiry Date**: Any future date
+  - **CVC**: Any 3 digits
+
+
+
+
+
+
+
+
+
