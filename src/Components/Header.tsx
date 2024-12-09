@@ -5,6 +5,7 @@ import { NavLink } from "react-router-dom";
 import { UseGetProductsImages } from "../hooks/Usegetproductsimage";
 import Cookies from "js-cookie";
 import { useSelector } from "react-redux";
+import {persistor} from '../store/store'
 import {
   // SearchIcon,
   HeartIcon,
@@ -48,6 +49,7 @@ const wishlists = useSelector((state:any)=>{
     Cookies.remove('token');
     Cookies.remove('role');
     Cookies.remove('userId');
+    persistor.purge();
   }
 
   const toggleSidebar = () => {

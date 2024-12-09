@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { loadStripe, Stripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import Checkout from "./Checkout";
+import E_SewaPaymentButton from "../Components/Payment_Button";
 
 const Payment = () => {
     const { data: PublishableKey } = UseUserPaymentConfig();
@@ -12,13 +13,13 @@ const Payment = () => {
     const [stripePromise, setStripePromise] = useState<Promise<Stripe | null> | null>(null);
 
     useEffect(() => {
-        mutate(); // Trigger the mutation to fetch the client secret
+        mutate(); 
     }, [mutate]);
 
     useEffect(() => {
         if (PublishableKey?.publishablekey) {
             const stripeInstance = loadStripe(PublishableKey?.publishablekey);
-            setStripePromise(stripeInstance); // Set the stripe promise to state
+            setStripePromise(stripeInstance); 
         }
     }, [PublishableKey]);
 
@@ -31,8 +32,16 @@ const Payment = () => {
             {stripePromise && (
                 <Elements stripe={stripePromise} options={{ clientSecret: data?.SecretKey }}>
                     <Checkout />
+                
+                    
                 </Elements>
             )}
+
+
+            <div className="flex w-full justify-center items-center mb-3">
+            <E_SewaPaymentButton/>
+            </div>
+
         </>
     );
 };

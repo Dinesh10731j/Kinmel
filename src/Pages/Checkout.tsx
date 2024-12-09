@@ -33,7 +33,7 @@ const products = useSelector((state:any)=>{
       return;
     }
 
-    const { error } = await stripe.confirmPayment({
+    const { error } = await stripe.confirmPayment({ 
       elements,
       confirmParams: {
         return_url: window.location.origin + '/completion', // URL to redirect to after payment
@@ -73,7 +73,7 @@ const products = useSelector((state:any)=>{
               </ul>
               <div className="flex justify-between font-semibold">
                 <span>Total</span>
-                <span>${totalAmount}</span>
+                <span> ${totalAmount.toFixed(2)}</span>
               </div>
             </section>
 
