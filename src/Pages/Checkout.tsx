@@ -36,7 +36,7 @@ const products = useSelector((state:any)=>{
     const { error } = await stripe.confirmPayment({ 
       elements,
       confirmParams: {
-        return_url: window.location.origin + '/completion', // URL to redirect to after payment
+        return_url: window.location.origin + '/completion', 
       },
     });
 
