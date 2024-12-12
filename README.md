@@ -24,7 +24,7 @@ https://kin-mel.netlify.app/
 - **Frontend**: React.js, React Query, Redux, Tailwind CSS
 - **Backend**: Node.js, Express.js
 - **Database**: MongoDB
-- **Payment Integration**: Stripe
+- **Payment Integration**: E-sewa
 - **Styling**: Tailwind CSS
 - **State Management**: Redux (global state), React Query (server state)
 
@@ -32,14 +32,18 @@ https://kin-mel.netlify.app/
 
 
 
-## 💳 Stripe Payment Integration
+## 💳 Payment Integration Update
 
-Kinmel integrates **Stripe** to handle secure payments. Users can enter their payment details at checkout, and the transaction is processed safely with Stripe's API.
+- Removed the previous payment method and integrated **E-Sewa**.
+- Using the **test version** of E-Sewa for handling payments.
 
-- **Test Card Details**:
-  - **Card Number**: `4242 4242 4242 4242`
-  - **Expiry Date**: Any future date
-  - **CVC**: Any 3 digits
+### 🧪 E-Sewa Test Payment Details:
+Use the following credentials for testing:
+
+- **E-Sewa ID**: 9806800001/2/3/4/5
+- **E-Sewa Password/MPIN**:Password: Nepal@123 MPIN: 1122 
+
+
 
 
 
