@@ -22,12 +22,12 @@ const E_SewaPaymentButton = () => {
     <button
       onClick={handlePayment}
       disabled={mutation.isPending}
-      className={`bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600
+      className={`bg-[#DB4444] text-white px-4 py-2 rounded hover:bg-[#DB4448]
         
       ${totalAmount <= 0 ? 'cursor-not-allowed opacity-50' : 'cursor-pointer hover:bg-[#c33333]'}
         `}
     >
-      {mutation.isPending? 'Processing...' : 'Pay with eSewa'}
+      {mutation.isPending? 'Processing...' : ' Place Order'}
 
     </button>
   );
