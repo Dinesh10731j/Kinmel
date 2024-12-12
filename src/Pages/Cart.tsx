@@ -1,6 +1,6 @@
-// import React, { useState } from "react";
+
 import { NavLink } from "react-router-dom";
-// import { useCart } from "../context/cartContext";
+
 import { Trash2} from "lucide-react";
 import { useSelector } from "react-redux";
 import { removeProduct } from "../store/slices/productSlice";
@@ -8,21 +8,8 @@ import { useDispatch } from "react-redux";
 import { updateProductQuantity } from "../store/slices/productSlice";
 
 
-
-
-// interface CartItem {
-//   title: string;
-//   id: number;
-//   img: string;
-//   name: string;
-//   price: number;
-//   quantity: number;
-//   key: number;
- 
-// }
-
 const Cart: React.FC= () => {
-  // const {carts} = useCart();
+
   const dispatch = useDispatch()
 
   const products = useSelector((state:any)=>{
@@ -53,11 +40,6 @@ dispatch(removeProduct(itemId));
 
 
 
-
-  // Local state to manage the cart
-  // const [cart, setCart] = useState<CartItem[]>(carts as unknown as CartItem[]);
-
-  // Handle quantity changes
   const handleQuantityChange = (id: number, newQuantity: number) => {
  
     if (newQuantity < 1) {

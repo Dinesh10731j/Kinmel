@@ -37,7 +37,7 @@ const e_sewaIntegration = async (products: any[]) => {
     } else {
       throw new Error('Payment URL not found in response');
     }
-  } catch (error: any) {
+  } catch (error:any) {
     console.error('Payment initiation failed:', error.response ? error.response.data : error.message);
     throw error;
   }
